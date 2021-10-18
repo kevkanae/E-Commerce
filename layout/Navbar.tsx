@@ -1,41 +1,42 @@
-import { Text, Flex, IconButton, Button, useColorMode } from "@chakra-ui/react";
+import { Text, Flex, IconButton, useColorMode, Button } from "@chakra-ui/react";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { BiCart } from "react-icons/bi";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
-      h={["24vh", "12vh"]}
+      h="12vh"
       w="100vw"
-      p="2.1rem"
-      direction={["column", "row", "row"]}
+      p={4}
+      direction="row"
       align="center"
-      justify={["center", "space-between"]}
+      justify="space-between"
       className="nav"
     >
-      <Text textAlign={["center", "start"]} w={["100%", "44%", "42%"]}>
-        Use|Kart
-      </Text>
       <Flex
-        w={["100%", "56%", "49%"]}
-        pt={[4, 0]}
+        w="50%"
         align="center"
-        justify="end"
+        justify="space-between"
         className="nav__items"
       >
-        <Text w={["33%", "21%"]} textAlign="center" mr="1.4rem">
-          <a href="mailto:kevkanae777@gmail.com">Contact</a>
+        <Text fontFamily="Pacifico" fontSize="2xl" textAlign="start">
+          Use • Kart
         </Text>
-        <Text w={["33%", "21%"]} textAlign="center">
-          <a href="https://github.com/kevkanae/Chat-App">Contribute</a>
-        </Text>
+      </Flex>
+      <Flex
+        w={["46%", "35%", "25%", "17%"]}
+        align="center"
+        justify="space-between"
+        className="nav__items"
+      >
+        <Button variant="secondary">Login</Button>
+        <IconButton aria-label="Cart" icon={<BiCart />} variant="secondary" />
         <IconButton
-          w={["21%", "14%"]}
-          variant="secondary"
-          ml="2.4rem"
-          icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          onClick={toggleColorMode}
           aria-label="Theme Switcher"
+          icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+          variant="primary"
+          onClick={toggleColorMode}
         />
       </Flex>
     </Flex>
