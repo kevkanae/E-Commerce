@@ -6,9 +6,9 @@ const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
-      h="12vh"
+      h="10vh"
       w="100vw"
-      p={4}
+      px={4}
       direction="row"
       align="center"
       justify="space-between"
@@ -30,7 +30,9 @@ const Navbar = () => {
         justify="space-between"
         className="nav__items"
       >
-        <Button variant="secondary">Login</Button>
+        <Button letterSpacing={1} variant="secondary">
+          Login
+        </Button>
         <IconButton aria-label="Cart" icon={<BiCart />} variant="secondary" />
         <IconButton
           aria-label="Theme Switcher"

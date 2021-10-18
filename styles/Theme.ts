@@ -12,7 +12,7 @@ export const theme = extendTheme({
     global: (props: any) => ({
       body: {
         color: mode("#000", "#fff")(props),
-        bg: mode("white", "black")(props),
+        bg: mode("whitee", "blackk")(props),
         lineHeight: "1.4rem",
         boxSizing: "border-box",
       },
@@ -22,8 +22,8 @@ export const theme = extendTheme({
     body: "Poppins",
   },
   colors: {
-    white: "#F9F9F9",
-    black: "#3F4756",
+    whitee: "#F9F9F9",
+    blackk: "#3F4756",
     gray: "#A3ABBD",
     alpha: "#B9D2FF",
     beta: "#F4B6C4",

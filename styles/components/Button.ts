@@ -17,5 +17,12 @@ export const ButtonStyles = {
         boxShadow: "md",
       },
     }),
+    tertiary: (props: Theme) => ({
+      bg: "whitee",
+      _hover: {
+        bg: mode(darken("whitee", 7), darken("white", 20))(props),
+        boxShadow: "sm",
+      },
+    }),
   },
 };
