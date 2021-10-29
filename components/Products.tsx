@@ -8,22 +8,41 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
+import Link from "next/link";
 import { ProductList } from "../utils/Products";
 import Rating from "./Rating";
 
 const ProductAddToCart = () => {
   return (
-    <SimpleGrid columns={3} spacing={7} h="80vh" w="100%" overflowY="scroll">
+    <SimpleGrid
+      columns={[1, 2, 3, 3, 4]}
+      spacing={7}
+      h="80vh"
+      w="100%"
+      overflowY="scroll"
+      overflowX="hidden"
+    >
       {ProductList.map((x: any, i: number) => (
         <Flex key={i} p={7} align="center" justify="center">
           <Box bg="white" color="blackk" maxW="sm" rounded="md" shadow="md">
-            <Image src={x.image} alt={`Picture of ${x.name}`} roundedTop="md" />
+            <Link href={`item/${x.slug}`} passHref>
+              <Image
+                _hover={{
+                  cursor: "pointer",
+                  shadow: "md",
+                }}
+                src={x.image}
+                alt={`Picture of ${x.name}`}
+                roundedTop="md"
+              />
+            </Link>
             <Box p={7}>
               <Flex mt={1} justify="space-between" align="center">
                 <Text
                   fontSize="xl"
                   fontWeight={700}
                   lineHeight="tight"
+                  width="40%"
                   isTruncated
                 >
                   {x.name}
@@ -45,7 +64,11 @@ const ProductAddToCart = () => {
               </Flex>
 
               <Flex mt={3} justify="space-between" align="center">
-                <Rating rating={x.rating} numReviews={x.numReviews} />
+                <Rating
+                  rating={x.rating}
+                  numReviews={x.numReviews}
+                  flag={true}
+                />
                 <Text as="span" color={"gray.600"} fontSize="2xl">
                   ₹{x.price.toFixed(2)}
                 </Text>

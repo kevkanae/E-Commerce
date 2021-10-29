@@ -13,7 +13,7 @@ export const theme = extendTheme({
       body: {
         color: mode("#000", "#fff")(props),
         bg: mode("whitee", "blackk")(props),
-        lineHeight: "1.4rem",
+        lineHeight: "1.5rem",
         boxSizing: "border-box",
       },
     }),

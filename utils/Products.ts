@@ -2,8 +2,8 @@ import { ProductType } from "../interfaces/Products";
 
 export const ProductList: ProductType = [
   {
-    name: "Free Shirt",
-    slug: "free-shirt",
+    name: "Checkered Shirt",
+    slug: "01A",
     category: "Shirts",
     image: "/items/shirt1.jpg",
     isFeatured: true,
@@ -16,7 +16,7 @@ export const ProductList: ProductType = [
   },
   {
     name: "Fit Shirt",
-    slug: "fit-shirt",
+    slug: "02B",
     category: "Shirts",
     image: "/items/shirt2.jpg",
     isFeatured: true,
@@ -29,7 +29,7 @@ export const ProductList: ProductType = [
   },
   {
     name: "Slim Shirt",
-    slug: "slim-shirt",
+    slug: "03C",
     category: "Shirts",
     image: "/items/shirt3.jpg",
     price: 90,
@@ -42,7 +42,7 @@ export const ProductList: ProductType = [
   },
   {
     name: "Golf Pants",
-    slug: "golf-pants",
+    slug: "04D",
     category: "Pants",
     image: "/items/pants1.jpg",
     price: 90,
@@ -55,7 +55,7 @@ export const ProductList: ProductType = [
   },
   {
     name: "Fit Pants",
-    slug: "fit-pants",
+    slug: "05E",
     category: "Pants",
     isFeatured: false,
     image: "/items/pants2.jpg",
@@ -68,7 +68,7 @@ export const ProductList: ProductType = [
   },
   {
     name: "Classic Pants",
-    slug: "classic-pants",
+    slug: "06F",
     category: "Pants",
     isFeatured: false,
     image: "/items/pants3.jpg",

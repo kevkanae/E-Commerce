@@ -1,4 +1,5 @@
 export type RatingProps = {
-  rating: number;
-  numReviews: number;
+  rating: number | any;
+  numReviews: number | any;
+  flag: boolean | any;
 };
