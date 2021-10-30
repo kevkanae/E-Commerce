@@ -15,15 +15,16 @@ import Rating from "./Rating";
 const ProductAddToCart = () => {
   return (
     <SimpleGrid
-      columns={[1, 2, 3, 3, 4]}
+      columns={[1, 2, 2, 3, 4]}
+      p={7}
       spacing={7}
       h="80vh"
-      w="100%"
+      w="100vw"
       overflowY="scroll"
       overflowX="hidden"
     >
       {ProductList.map((x: any, i: number) => (
-        <Flex key={i} p={7} align="center" justify="center">
+        <Flex key={i} align="center" justify="center">
           <Box bg="white" color="blackk" maxW="sm" rounded="md" shadow="md">
             <Link href={`item/${x.slug}`} passHref>
               <Image
