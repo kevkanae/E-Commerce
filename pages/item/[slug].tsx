@@ -21,6 +21,7 @@ const ItemPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex h="100vh" w="100vw" align="center" direction="column">
+      {/* Nav */}
       <Flex h="12vh" w="full" align="center" justify="space-between" px={4}>
         <Text fontFamily="Pacifico" fontSize="2xl" textAlign="start">
           Use • Kart
@@ -29,15 +30,30 @@ const ItemPage = () => {
           <Button variant="primary">Go Back</Button>
         </Link>
       </Flex>
-      <Flex h="84vh" w="full" p={3} align="center" justify="space-between">
-        <Box h="full" w="35vw">
+      {/* Body */}
+      <Flex
+        h="84vh"
+        w="full"
+        direction={["column", "row"]}
+        overflowY={["scroll", "hidden"]}
+        p={3}
+        align="center"
+        justify="space-between"
+      >
+        <Box h={["77vh", "full"]} w={["90vw", "35vw"]} p={3}>
           <Image
             borderRadius="md"
             src={currentItem?.image}
             alt={currentItem?.name}
           />
         </Box>
-        <Flex direction="column" h="full" w="32vw" textAlign="center">
+        <Flex
+          direction="column"
+          h={["77vh", "full"]}
+          w={["90vw", "32vw"]}
+          p={3}
+          textAlign="center"
+        >
           <Text fontWeight={600} fontSize="xl">
             {currentItem?.name}
           </Text>
@@ -62,10 +78,11 @@ const ItemPage = () => {
         </Flex>
         <Flex
           direction="column"
-          w="28vw"
+          w={["90vw", "28vw"]}
           alignSelf="flex-start"
           shadow="md"
           borderRadius={7}
+          mt={[2, 0]}
           p={3}
           bgColor="white"
         >
