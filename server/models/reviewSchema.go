@@ -5,9 +5,10 @@ import (
 )
 
 type Reviews struct {
-	User      string             `bson:"user,omitempty"`
-	Name      string             `bson:"name,omitempty"`
-	Rating    int                `bson:"rating,omitempty"`
-	Comment   string             `bson:"comment,omitempty"`
-	TimeStamp primitive.DateTime `bson:"timeStamp,omitempty"`
+	ID        primitive.ObjectID `bson:"_id"`
+	User      string
+	Name      string
+	Rating    int
+	Comment   string
+	TimeStamp primitive.Timestamp
 }

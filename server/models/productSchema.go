@@ -5,18 +5,18 @@ import (
 )
 
 type Product struct {
-	ID            primitive.ObjectID `bson:"_id,omitempty"`
-	Name          string             `bson:"name,omitempty"`
-	Slug          string             `bson:"slug,omitempty"`
-	Image         string             `bson:"image,omitempty"`
-	Price         int                `bson:"price,omitempty"`
-	Brand         string             `bson:"brand,omitempty"`
-	Rating        int                `bson:"rating,omitempty"`
-	NumReviews    int                `bson:"numReviews,omitempty"`
-	CountInStock  int                `bson:"countInStock,omitempty"`
-	Description   string             `bson:"description,omitempty"`
-	Reviews       []Reviews          `bson:"reviews,omitempty"`
-	FeaturedImage string             `bson:"featuredImage,omitempty"`
-	IsFeatured    bool               `bson:"isFeatured,omitempty"`
-	TimeStamp     primitive.DateTime `bson:"timeStamp,omitempty"`
+	ID            primitive.ObjectID `bson:"_id"`
+	Name          string
+	Slug          string
+	Image         string
+	Price         int
+	Brand         string
+	Rating        int
+	NumReviews    int
+	CountInStock  int
+	Description   string
+	Reviews       []Reviews
+	FeaturedImage string
+	IsFeatured    bool
+	TimeStamp     primitive.Timestamp
 }
