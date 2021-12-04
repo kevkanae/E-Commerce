@@ -12,7 +12,8 @@ import Link from "next/link";
 import { ProductList } from "../utils/Products";
 import Rating from "./Rating";
 
-const ProductAddToCart = () => {
+const 
+ProductAddToCart = () => {
   return (
     <SimpleGrid
       columns={[1, 2, 2, 3, 4]}
