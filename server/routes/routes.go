@@ -14,6 +14,7 @@ func SetupRouter() *gin.Engine {
 	{
 		v1.GET("/products", controllers.GetProducts)
 		v1.POST("/register", controllers.Register)
+		v1.POST("/login", controllers.Login)
 	}
 
 	return server

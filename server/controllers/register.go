@@ -23,13 +23,13 @@ func Register(c *gin.Context) {
 	utils.ConnectToMongoDB()
 	coll := utils.Client.Database("ecom").Collection("users")
 	var result models.User
-	res := coll.FindOne(context.TODO(), bson.M{"email": email}).Decode(&result)
+	err := coll.FindOne(context.TODO(), bson.M{"email": email}).Decode(&result)
 
-	if res == mongo.ErrNoDocuments {
+	if err == mongo.ErrNoDocuments {
 		fmt.Println("User Doesn't Exist")
 
-		hashedPass, err := utils.Hash([]byte(password))
-		if err != nil {
+		hashedPass, hashError := utils.Hash([]byte(password))
+		if hashError != nil {
 			fmt.Println("Couldn't Hash Password")
 		}
 		createUser(&name, &email, &username, string(hashedPass), coll, c)
@@ -61,8 +61,11 @@ func createUser(newName *string, newEmail *string, newUserID *string, newPasswor
 		})
 	} else {
 		fmt.Println("Insert Success")
+		token, _ := utils.GenerateJWT(*newEmail)
 		c.JSON(200, gin.H{
-			"Status": "New User Created",
+			"Message": "New User Created",
+			"Status":  "Sign Up Successful",
+			"Token":   token,
 		})
 	}
 }
