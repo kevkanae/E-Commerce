@@ -8,17 +8,17 @@ import {
   Button,
   FormControl,
   FormLabel,
-  FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
 const Login = () => {
   return (
-    <Box w={"100vw"} h={"100vh"} backgroundColor={"#eee"}>
+    <Box w={"100vw"} h={"100vh"} backgroundColor={"pink"} position={"relative"}>
       <Box
         display={"flex"}
         h={"100%"}
         w={"100%"}
         boxShadow={"0 .1rem .2rem rgba(0,0,0,.4)"}
+        bg={"transparent"}
       >
         <Box
           w="50%"
@@ -26,15 +26,15 @@ const Login = () => {
           display={"grid"}
           placeItems={"center"}
           backgroundColor={"white"}
-          position={"relative"}
+          // position={"relative"}
           overflow={"hidden"}
         >
-          <Image
+          {/* <Image
             position={"absolute"}
             top={"-20%"}
             alt="curve-svg"
             src={"/upperC.svg"}
-          />
+          /> */}
           <Box
             zIndex={2}
             w={"80%"}
@@ -44,7 +44,7 @@ const Login = () => {
             p={4}
           >
             <Text mt={"1rem"} fontFamily="Pacifico" fontSize="2xl" pb={4}>
-              Use . Kart
+              Log-IN
             </Text>
 
             <Text pb={2} fontSize={".8rem"}>
@@ -56,7 +56,7 @@ const Login = () => {
                 borderRadius={"none"}
                 borderLeft="2px solid rgb(144, 143, 234)"
                 required
-                w={"md"}
+                // w={"md"}
                 id="email"
                 type="email"
                 placeholder="Email"
@@ -69,7 +69,7 @@ const Login = () => {
               </FormHelperText>
               <FormLabel htmlFor="password">Password</FormLabel>
               <Input
-                w={"md"}
+                // w={"md"}
                 display={"block"}
                 borderLeft="2px solid rgb(144, 143, 234)"
                 required
@@ -103,23 +103,33 @@ const Login = () => {
               </Text>
             </HStack>
           </Box>
-          <Image
-            bottom={"0"}
-            position={"absolute"}
-            alt="curve-svg"
-            src={"/lowerC.svg"}
-          />
         </Box>
         <Box
           w="50%"
-          display={"grid"}
+          display={"flex"}
           placeItems={"center"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          style={{
+            columnGap: "2rem",
+          }}
           h={"100%"}
           backgroundColor={"white"}
         >
-          <Image w={"50%"} alt="shopping" src="/login-svg.svg" />
+          <Text mt={"1rem"} fontFamily="Pacifico" fontSize="4xl" pb={4}>
+            Use.Kart
+          </Text>
+          <Image zIndex={2} w={"50%"} alt="shopping" src="/login-svg.svg" />
         </Box>
       </Box>
+      <Image
+        bottom={"0"}
+        w="100%"
+        position={"absolute"}
+        alt="curve-svg"
+        src={"/lowerC.svg"}
+        // zIndex={"-1"}
+      />
     </Box>
   );
 };
