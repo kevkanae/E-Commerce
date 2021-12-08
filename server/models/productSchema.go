@@ -8,10 +8,11 @@ type Product struct {
 	ID            primitive.ObjectID `bson:"_id"`
 	Name          string
 	Slug          string
+	Category      string
 	Image         string
-	Price         int
+	Price         float64
 	Brand         string
-	Rating        int
+	Rating        float64
 	NumReviews    int
 	CountInStock  int
 	Description   string
