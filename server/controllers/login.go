@@ -14,7 +14,8 @@ import (
 func Login(c *gin.Context) {
 	email := c.PostForm("email")
 	password := c.PostForm("password")
-
+	print(email)
+	print(password)
 	//DB Access
 	utils.ConnectToMongoDB()
 	coll := utils.Client.Database("ecom").Collection("users")

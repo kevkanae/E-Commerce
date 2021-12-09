@@ -4,11 +4,15 @@ import { theme } from "../styles/Theme";
 import "../styles/main.scss";
 import "@fontsource/poppins";
 import "@fontsource/pacifico";
+import { Provider } from "react-redux";
+import { store } from "../redux/Store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </ChakraProvider>
   );
 }
