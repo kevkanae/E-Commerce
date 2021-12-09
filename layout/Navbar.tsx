@@ -1,7 +1,7 @@
 import { Text, Flex, IconButton, useColorMode, Button } from "@chakra-ui/react";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { BiCart } from "react-icons/bi";
-
+import Link from "next/link";
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
@@ -31,7 +31,7 @@ const Navbar = () => {
         className="nav__items"
       >
         <Button letterSpacing={1} variant="secondary">
-          Login
+          <Link href="/login">Login</Link>
         </Button>
         <IconButton aria-label="Cart" icon={<BiCart />} variant="secondary" />
         <IconButton
