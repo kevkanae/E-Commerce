@@ -40,4 +40,8 @@ func Login(c *gin.Context) {
 			"Token":  token,
 		})
 	}
+
+	//Close Connection to DB
+	var ctx context.Context
+	defer utils.Client.Disconnect(ctx)
 }
