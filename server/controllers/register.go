@@ -63,9 +63,10 @@ func createUser(newName *string, newEmail *string, newUserID *string, newPasswor
 		fmt.Println("Insert Success")
 		token, _ := utils.GenerateJWT(*newEmail)
 		c.JSON(200, gin.H{
-			"Message": "New User Created",
-			"Status":  "Sign Up Successful",
-			"Token":   token,
+			"Message":  "New User Created",
+			"Status":   "Sign Up Successful",
+			"Token":    token,
+			"Username": *newUserID,
 		})
 	}
 }

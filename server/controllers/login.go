@@ -35,8 +35,9 @@ func Login(c *gin.Context) {
 	} else {
 		token, _ := utils.GenerateJWT(email)
 		c.JSON(200, gin.H{
-			"Status": "Login Success",
-			"Token":  token,
+			"Status":   "Login Success",
+			"Token":    token,
+			"Username": result.Username,
 		})
 	}
 
