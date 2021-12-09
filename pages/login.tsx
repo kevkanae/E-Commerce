@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Image,
@@ -10,7 +10,54 @@ import {
   FormLabel,
   FormHelperText,
 } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
+// import { userSelector, clearState, userSlice } from "../redux/reducers/user";
+import { loginUser } from "../redux/services/UserLogin.service";
+import { RootState, store } from "../redux/Store";
+
+// import { useGetUserLoggedInQuery } from "../redux/services/UserLogin.service";
+
+interface inputData {
+  email: string;
+  password: string;
+}
 const Login = () => {
+  // const { data, error, isLoading } = useGetUserLoggedInQuery({
+  //   email: "kanae@gmail.com",
+  //   password: "yolo",
+  // });
+
+  const [formdata, setFormData] = useState<inputData>({
+    email: "",
+    password: "",
+  });
+  const onChangeData = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((data) => {
+      return {
+        ...data,
+        [ev.target.id]: ev.target.value,
+      };
+    });
+  };
+  const { email, isError, isFetching, isSuccess } = useSelector(
+    (state: RootState) => state.user
+  );
+  console.log(email, isError, isFetching, isSuccess);
+
+  const onSubmitForm = (ev: React.SyntheticEvent) => {
+    ev.preventDefault();
+
+    store.dispatch(
+      loginUser({
+        email: formdata.email,
+        password: formdata.password,
+      })
+    );
+  };
+  useEffect(() => {
+    console.log(email);
+  }, [isFetching, isSuccess, email]);
+
   return (
     <Box w={"100vw"} h={"100vh"} backgroundColor={"pink"} position={"relative"}>
       <Box
@@ -44,48 +91,58 @@ const Login = () => {
             p={4}
           >
             <Text mt={"1rem"} fontFamily="Pacifico" fontSize="2xl" pb={4}>
-              Log-IN
+              Log-In
             </Text>
 
             <Text pb={2} fontSize={".8rem"}>
               Welcome back,please log in to continue
             </Text>
-            <FormControl>
-              <FormLabel htmlFor="email">Email address</FormLabel>
-              <Input
-                borderRadius={"none"}
-                borderLeft="2px solid rgb(144, 143, 234)"
-                required
-                // w={"md"}
-                id="email"
-                type="email"
-                placeholder="Email"
-                _focus={{
-                  borderLeft: "2px solid rgb(30, 27, 162 )",
-                }}
-              />
-              <FormHelperText fontSize={".7rem"}>
-                {"We'll never share your email."}
-              </FormHelperText>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <Input
-                // w={"md"}
-                display={"block"}
-                borderLeft="2px solid rgb(144, 143, 234)"
-                required
-                id="password"
-                type="password"
-                borderRadius={"none"}
-                placeholder="password"
-                _focus={{
-                  borderLeft: "2px solid rgb(30, 27, 162 )",
-                }}
-              />
+            <form onSubmit={onSubmitForm}>
+              <FormControl>
+                <FormLabel htmlFor="email">Email address</FormLabel>
+                <Input
+                  borderRadius={"none"}
+                  borderLeft="2px solid rgb(144, 143, 234)"
+                  required
+                  // w={"md"}
+                  id="email"
+                  type="email"
+                  onChange={onChangeData}
+                  placeholder=""
+                  _focus={{
+                    borderLeft: "2px solid rgb(30, 27, 162 )",
+                  }}
+                />
+                <FormHelperText fontSize={".7rem"}>
+                  {"We'll never share your email."}
+                </FormHelperText>
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <Input
+                  // w={"md"}
+                  display={"block"}
+                  borderLeft="2px solid rgb(144, 143, 234)"
+                  required
+                  onChange={onChangeData}
+                  id="password"
+                  type="password"
+                  borderRadius={"none"}
+                  placeholder="password"
+                  _focus={{
+                    borderLeft: "2px solid rgb(30, 27, 162 )",
+                  }}
+                />
 
-              <Button mx={"auto"} my={2} type="submit" bg={"blue.100"}>
-                Sign Up
-              </Button>
-            </FormControl>
+                <Button
+                  isLoading={isFetching}
+                  mx={"auto"}
+                  my={2}
+                  type="submit"
+                  bg={"blue.100"}
+                >
+                  Sign Up
+                </Button>
+              </FormControl>
+            </form>
             <Text textAlign={"center"} className="login__or">
               OR{" "}
             </Text>
