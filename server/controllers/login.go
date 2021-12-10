@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"fmt"
+	"go.mongodb.org/mongo-driver/mongo"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kevkanae/e-com-use-kart/server/models"
@@ -14,22 +15,21 @@ import (
 func Login(c *gin.Context) {
 	email := c.PostForm("email")
 	password := c.PostForm("password")
-	print(email)
-	print(password)
+
 	//DB Access
 	utils.ConnectToMongoDB()
 	coll := utils.Client.Database("ecom").Collection("users")
 	var result models.User
 	err := coll.FindOne(context.TODO(), bson.M{"email": email}).Decode(&result)
 	if err != nil {
-		fmt.Println("User Not Found")
+		fmt.Println(utils.Wrap(err, "User Doesn't Exist"))
 		c.JSON(200, gin.H{
-			"Status": "User Not Found",
+			"Status": "User Doesn't Exist",
 		})
 	} else {
 		hashErr := bcrypt.CompareHashAndPassword([]byte(result.Password), []byte(password))
 		if hashErr != nil {
-			fmt.Println("Password Incorrect")
+			fmt.Println(utils.Wrap(hashErr, "Password Incorrect"))
 			c.JSON(200, gin.H{
 				"Status": "Password Incorrect",
 			})
@@ -45,5 +45,10 @@ func Login(c *gin.Context) {
 
 	//Close Connection to DB
 	var ctx context.Context
-	defer utils.Client.Disconnect(ctx)
+	defer func(Client *mongo.Client, ctx context.Context) {
+		err := Client.Disconnect(ctx)
+		if err != nil {
+			fmt.Println(utils.Wrap(err, "Mongo Client Disconnect Error"))
+		}
+	}(utils.Client, ctx)
 }

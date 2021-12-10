@@ -26,11 +26,11 @@ func Register(c *gin.Context) {
 	err := coll.FindOne(context.TODO(), bson.M{"email": email}).Decode(&result)
 
 	if err == mongo.ErrNoDocuments {
-		fmt.Println("User Doesn't Exist")
+		fmt.Println(utils.Wrap(err, "User Doesn't Exist"))
 
-		hashedPass, hashError := utils.Hash([]byte(password))
+		hashedPass, hashError := utils.HashPassword([]byte(password))
 		if hashError != nil {
-			fmt.Println("Couldn't Hash Password")
+			fmt.Println(utils.Wrap(hashError, "Couldn't Hash Password"))
 		}
 		createUser(&name, &email, &username, string(hashedPass), coll, c)
 	} else {
@@ -42,7 +42,12 @@ func Register(c *gin.Context) {
 
 	//Close Connection to DB
 	var ctx context.Context
-	defer utils.Client.Disconnect(ctx)
+	defer func(Client *mongo.Client, ctx context.Context) {
+		err := Client.Disconnect(ctx)
+		if err != nil {
+			fmt.Println(utils.Wrap(err, "Mongo Client Disconnect Error"))
+		}
+	}(utils.Client, ctx)
 }
 
 func createUser(newName *string, newEmail *string, newUserID *string, newPassword string, collection *mongo.Collection, c *gin.Context) {
@@ -55,7 +60,7 @@ func createUser(newName *string, newEmail *string, newUserID *string, newPasswor
 	}
 	_, err := collection.InsertOne(context.TODO(), userModel)
 	if err != nil {
-		fmt.Println("Insert Error")
+		fmt.Println(utils.Wrap(err, "Insert to DB Failed"))
 		c.JSON(200, gin.H{
 			"Status": "Insert to DB Failed",
 		})

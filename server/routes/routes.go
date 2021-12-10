@@ -9,6 +9,8 @@ import (
 func SetupRouter() *gin.Engine {
 	server := gin.Default()
 	server.Use(cors.Default())
+	server.Use(gin.Logger())
+	server.Use(gin.Recovery())
 	v1 := server.Group("/v1")
 	{
 		v1.GET("/products", controllers.GetProducts, AuthMiddleware())
