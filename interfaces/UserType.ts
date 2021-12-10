@@ -1,8 +1,8 @@
 export interface User {
-  username: String;
-  name: String;
-  email: String;
-  password: String;
+  username: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
 export interface loginResp {

@@ -26,20 +26,21 @@ func Login(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"Status": "User Not Found",
 		})
-	}
-	hashErr := bcrypt.CompareHashAndPassword([]byte(result.Password), []byte(password))
-	if hashErr != nil {
-		fmt.Println("Password Incorrect")
-		c.JSON(200, gin.H{
-			"Status": "Password Incorrect",
-		})
 	} else {
-		token, _ := utils.GenerateJWT(email)
-		c.JSON(200, gin.H{
-			"Status":   "Login Success",
-			"Token":    token,
-			"Username": result.Username,
-		})
+		hashErr := bcrypt.CompareHashAndPassword([]byte(result.Password), []byte(password))
+		if hashErr != nil {
+			fmt.Println("Password Incorrect")
+			c.JSON(200, gin.H{
+				"Status": "Password Incorrect",
+			})
+		} else {
+			token, _ := utils.GenerateJWT(email)
+			c.JSON(200, gin.H{
+				"Status":   "Login Success",
+				"Token":    token,
+				"Username": result.Username,
+			})
+		}
 	}
 
 	//Close Connection to DB
