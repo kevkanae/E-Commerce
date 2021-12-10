@@ -2,7 +2,11 @@ import { Text, Flex, IconButton, useColorMode, Button } from "@chakra-ui/react";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { BiCart } from "react-icons/bi";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/Store";
+
 const Navbar = () => {
+  const { isSuccess } = useSelector((state: RootState) => state.user);
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
@@ -31,7 +35,11 @@ const Navbar = () => {
         className="nav__items"
       >
         <Button letterSpacing={1} variant="secondary">
-          <Link href="/login">Login</Link>
+          {isSuccess ? (
+            <Button>Logout</Button>
+          ) : (
+            <Link href="/login">Login</Link>
+          )}
         </Button>
         <IconButton aria-label="Cart" icon={<BiCart />} variant="secondary" />
         <IconButton

@@ -65,20 +65,17 @@ export const loginUser = createAsyncThunk(
       formdata.append("email", email);
       formdata.append("password", password);
       const response = await axios.post(BASE_URL + "login", formdata);
-      // const response = await fetch(BASE_URL + "login", {
-      //   method: "POST",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: formdata,
-      // });
       let data = await response.data;
       console.log("response", data);
-      if (response.status === 200 && data.status === "Login Success") {
-        localStorage.setItem("token", data.token);
-        return data;
+      if (response.status === 200 && data.Status === "Login Success") {
+        localStorage.setItem("token", data.Token);
+        return {
+          ...data,
+          email: email,
+        };
       } else {
+        console.log(data);
+
         return thunkAPI.rejectWithValue(data);
       }
     } catch (e: any) {

@@ -1,15 +1,16 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { userSlice, userSliceReducer } from "../redux/reducers/user";
-
+import { productAPi } from "./API/productAPI";
 export const store = configureStore({
-  reducer: {
-    // [loginUser.reducerPath]: loginUser.reducer,
+  reducer: combineReducers({
     user: userSliceReducer,
+    [productAPi.reducerPath]: productAPi.reducer,
+  }),
+  // default middleware provided by rtk which enable the superpower of refetching the query on internet reconnection
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(productAPi.middleware);
   },
-  // middleware: (getDefaultMiddleware) => {
-  //   return getDefaultMiddleware().concat(loginUser.middleware);
-  // },
 });
 
 setupListeners(store.dispatch);

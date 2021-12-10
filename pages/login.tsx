@@ -11,22 +11,15 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
-// import { userSelector, clearState, userSlice } from "../redux/reducers/user";
 import { loginUser } from "../redux/services/UserLogin.service";
 import { RootState, store } from "../redux/Store";
-
-// import { useGetUserLoggedInQuery } from "../redux/services/UserLogin.service";
+import Router from "next/router";
 
 interface inputData {
   email: string;
   password: string;
 }
 const Login = () => {
-  // const { data, error, isLoading } = useGetUserLoggedInQuery({
-  //   email: "kanae@gmail.com",
-  //   password: "yolo",
-  // });
-
   const [formdata, setFormData] = useState<inputData>({
     email: "",
     password: "",
@@ -39,10 +32,9 @@ const Login = () => {
       };
     });
   };
-  const { email, isError, isFetching, isSuccess } = useSelector(
+  const { email, isError, isFetching, isSuccess, errorMessage } = useSelector(
     (state: RootState) => state.user
   );
-  console.log(email, isError, isFetching, isSuccess);
 
   const onSubmitForm = (ev: React.SyntheticEvent) => {
     ev.preventDefault();
@@ -55,8 +47,8 @@ const Login = () => {
     );
   };
   useEffect(() => {
-    console.log(email);
-  }, [isFetching, isSuccess, email]);
+    if (isSuccess) Router.push("/");
+  }, [isSuccess]);
 
   return (
     <Box w={"100vw"} h={"100vh"} backgroundColor={"pink"} position={"relative"}>
@@ -68,7 +60,7 @@ const Login = () => {
         bg={"transparent"}
       >
         <Box
-          w="50%"
+          w={["100%", "100%", "50%"]}
           h={"100%"}
           display={"grid"}
           placeItems={"center"}
@@ -76,12 +68,6 @@ const Login = () => {
           // position={"relative"}
           overflow={"hidden"}
         >
-          {/* <Image
-            position={"absolute"}
-            top={"-20%"}
-            alt="curve-svg"
-            src={"/upperC.svg"}
-          /> */}
           <Box
             zIndex={2}
             w={"80%"}
@@ -131,7 +117,7 @@ const Login = () => {
                     borderLeft: "2px solid rgb(30, 27, 162 )",
                   }}
                 />
-
+                {isError && <FormHelperText>{errorMessage}</FormHelperText>}
                 <Button
                   isLoading={isFetching}
                   mx={"auto"}
@@ -163,7 +149,7 @@ const Login = () => {
         </Box>
         <Box
           w="50%"
-          display={"flex"}
+          display={["none", "none", "flex"]}
           placeItems={"center"}
           flexDirection={"column"}
           justifyContent={"center"}
@@ -185,7 +171,6 @@ const Login = () => {
         position={"absolute"}
         alt="curve-svg"
         src={"/lowerC.svg"}
-        // zIndex={"-1"}
       />
     </Box>
   );
