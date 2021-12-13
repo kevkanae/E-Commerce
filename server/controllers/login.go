@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"fmt"
+	"github.com/kevkanae/e-com-use-kart/server/services"
 	"go.mongodb.org/mongo-driver/mongo"
 
 	"github.com/gin-gonic/gin"
@@ -35,9 +36,9 @@ func Login(c *gin.Context) {
 			})
 		} else {
 			token, _ := utils.GenerateJWT(email)
+			services.CookieSet(c, token)
 			c.JSON(200, gin.H{
 				"Status":   "Login Success",
-				"Token":    token,
 				"Username": result.Username,
 			})
 		}

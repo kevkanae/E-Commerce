@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -14,12 +15,12 @@ import (
 var Client *mongo.Client
 
 func ConnectToMongoDB() {
-	//.env Variable
-	MongoURI := "mongodb+srv://kevkanae:crysis123@cluster0.etamm.mongodb.net/ecom?retryWrites=true&w=majority"
+	//env.go Variable
+	//MongoURI := "mongodb+srv://kevkanae:crysis123@cluster0.etamm.mongodb.net/ecom?retryWrites=true&w=majority"
 
 	//Connect to MongoClient
 	var err error
-	Client, err = mongo.NewClient(options.Client().ApplyURI(MongoURI))
+	Client, err = mongo.NewClient(options.Client().ApplyURI(os.Getenv("MONGOURI")))
 	if err != nil {
 		fmt.Println("Error Connecting to MongoClient", err)
 		log.Fatal(err)

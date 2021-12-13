@@ -7,6 +7,10 @@ import (
 )
 
 func main() {
+
+	//SetENV
+	ENV()
+
 	//Database
 	utils.ConnectToMongoDB()
 
