@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { User } from "../../interfaces/UserType";
-import { loginUser } from "../services/UserLogin.service";
-import { signupUser } from "../services/UserSignIn.service";
+import { loginUser } from "../services/UserLogin.services";
+import { signupUser } from "../services/UserSignIn.services";
 import type { RootState } from "../Store";
 
 interface initials {
@@ -10,12 +10,14 @@ interface initials {
   isFetching: boolean;
   isSuccess: boolean;
   isError: boolean;
+  isAuthenticated: boolean;
   errorMessage: string;
 }
 const initialState: initials = {
   username: "",
   email: "",
   isFetching: false,
+  isAuthenticated: false,
   isSuccess: false,
   isError: false,
   errorMessage: "",
@@ -36,15 +38,15 @@ export const userSlice = createSlice({
     [loginUser.fulfilled as any]: (state: any, { payload }: any) => {
       state.email = payload.email;
       state.username = payload.Username;
+      state.isAuthenticated = payload.isAuthenticated;
       state.isFetching = false;
       state.isSuccess = true;
       return state;
     },
     [loginUser.rejected as any]: (state: any, { payload }: any) => {
-      console.log("payload", payload);
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.Status;
+      state.isAuthenticated = false;
     },
     [loginUser.pending as any]: (state: any) => {
       state.isFetching = true;
@@ -52,6 +54,7 @@ export const userSlice = createSlice({
     [signupUser.fulfilled as any]: (state, { payload }) => {
       console.log("payload", payload);
       state.isFetching = false;
+      state.isAuthenticated = payload.isAuthenticated;
       state.isSuccess = true;
       state.email = payload.user.email;
       state.username = payload.user.name;
