@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
 
 const Navbar = () => {
-  const { isSuccess } = useSelector((state: RootState) => state.user);
+  const { isAuthenticated } = useSelector((state: RootState) => state.user);
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
@@ -35,8 +35,14 @@ const Navbar = () => {
         className="nav__items"
       >
         <Button letterSpacing={1} variant="secondary">
-          {isSuccess ? (
-            <Button>Logout</Button>
+          {isAuthenticated ? (
+            <Button
+              onClick={() => {
+                localStorage.removeItem("token");
+              }}
+            >
+              Logout
+            </Button>
           ) : (
             <Link href="/login">Login</Link>
           )}

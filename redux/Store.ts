@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { userSlice, userSliceReducer } from "../redux/reducers/user";
 import { productAPi } from "./API/productAPI";
+import { rtkQueryErrorLogger } from "./middleware/middleware.error";
 export const store = configureStore({
   reducer: combineReducers({
     user: userSliceReducer,
@@ -9,7 +10,10 @@ export const store = configureStore({
   }),
   // default middleware provided by rtk which enable the superpower of refetching the query on internet reconnection
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(productAPi.middleware);
+    return getDefaultMiddleware().concat(
+      productAPi.middleware
+      // rtkQueryErrorLogger
+    );
   },
 });
 

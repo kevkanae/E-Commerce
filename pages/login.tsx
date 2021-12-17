@@ -11,7 +11,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser } from "../redux/services/UserLogin.service";
+import { loginUser } from "../redux/services/UserLogin.services";
 import { RootState, store } from "../redux/Store";
 import Router from "next/router";
 
@@ -32,9 +32,14 @@ const Login = () => {
       };
     });
   };
-  const { email, isError, isFetching, isSuccess, errorMessage } = useSelector(
-    (state: RootState) => state.user
-  );
+  const {
+    email,
+    isError,
+    isFetching,
+    isSuccess,
+    errorMessage,
+    isAuthenticated,
+  } = useSelector((state: RootState) => state.user);
 
   const onSubmitForm = (ev: React.SyntheticEvent) => {
     ev.preventDefault();
@@ -47,8 +52,8 @@ const Login = () => {
     );
   };
   useEffect(() => {
-    if (isSuccess) Router.push("/");
-  }, [isSuccess]);
+    if (isAuthenticated) Router.push("/");
+  }, [isAuthenticated]);
 
   return (
     <Box w={"100vw"} h={"100vh"} backgroundColor={"pink"} position={"relative"}>

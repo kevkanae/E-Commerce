@@ -71,16 +71,20 @@ export const loginUser = createAsyncThunk(
         localStorage.setItem("token", data.Token);
         return {
           ...data,
+          Username: response.data.Username,
           email: email,
+          isAuthenticated: true,
         };
       } else {
         console.log(data);
-
-        return thunkAPI.rejectWithValue(data);
+        return thunkAPI.rejectWithValue({
+          ...data,
+          statusCode: response.status,
+        });
       }
     } catch (e: any) {
       console.log("Error", e.response.data);
-      thunkAPI.rejectWithValue(e.response.data);
+      return thunkAPI.rejectWithValue(e);
     }
   }
 );
