@@ -9,21 +9,22 @@ import (
 func SetupRouter() *gin.Engine {
 	server := gin.Default()
 
+	//CORS
 	config := cors.DefaultConfig()
-	config.AllowHeaders = []string{"Authorization"}
+	config.AllowHeaders = []string{"Authorization", "Origin", "X-Requested-With", "Content-Type", "Accept"}
 	config.AllowAllOrigins = true
-
 	server.Use(cors.New(config))
 
-	server.Use(gin.Logger())
+	//GIN Extras
 	server.Use(gin.Recovery())
+
+	//Routes
 	v1 := server.Group("/v1")
 	{
-		v1.GET("/products", controllers.GetProducts)
-		//v1.GET("/auth", controllers.AuthState(), AuthMiddleware())
-		//v1.GET("/auth", controllers.AddToCart(), AuthMiddleware())
 		v1.POST("/register", controllers.Register)
 		v1.POST("/login", controllers.Login)
+		v1.GET("/products", controllers.GetProducts)
+		v1.POST("/addcart", AuthMiddleware(), controllers.AddToCart)
 	}
 
 	return server

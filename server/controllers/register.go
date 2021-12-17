@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"fmt"
+	"github.com/kevkanae/e-com-use-kart/server/services"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -67,10 +68,10 @@ func createUser(newName *string, newEmail *string, newUserID *string, newPasswor
 	} else {
 		fmt.Println("Insert Success")
 		token, _ := utils.GenerateJWT(*newEmail)
+		services.CookieSet(c, token)
 		c.JSON(200, gin.H{
 			"Message":  "New User Created",
 			"Status":   "Sign Up Successful",
-			"Token":    token,
 			"Username": *newUserID,
 		})
 	}
