@@ -34,6 +34,7 @@ export const userSlice = createSlice({
       return state;
     },
   },
+
   extraReducers: {
     [loginUser.fulfilled as any]: (state: any, { payload }: any) => {
       state.email = payload.email;
