@@ -6,48 +6,69 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kevkanae/e-com-use-kart/server/utils"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type RequestBody struct {
-	Arr []string
+type SaveToCart struct {
+	ProductId string `json:"productId"`
+	Timestamp string
+	Count     int
 }
 
 func AddToCart(c *gin.Context) {
-	var req RequestBody
-	type ObjectID struct {
-		ID string
+	var requestBody SaveToCart
+
+	if err := c.BindJSON(&requestBody); err != nil {
+		fmt.Println(utils.Wrap(err, "RequestBody Read Error"))
 	}
-	err := c.BindJSON(&req)
-	if err != nil {
-		fmt.Println(utils.Wrap(err, "Error in Request Body"))
-	}
-	fmt.Println(req.Arr)
+
 	//Connect to DB
 	utils.ConnectToMongoDB()
 
-	for i := 0; i < len(req.Arr); i++ {
-		oneDoc := ObjectID{
-			ID: req.Arr[i],
+	// Check if Product is already present
+	var result SaveToCart
+	itemColl := utils.Client.Database("ecom").Collection("cart")
+	findErr := itemColl.FindOne(context.TODO(), bson.M{"productid": requestBody.ProductId}).Decode(&result)
+
+	//If Product isnt in the cart
+	if findErr == mongo.ErrNoDocuments {
+		fmt.Println(utils.Wrap(findErr, "Couldnt Find Product"))
+
+		//Save Object ID to Cart
+		cartModel := SaveToCart{
+			ProductId: requestBody.ProductId,
+			Timestamp: requestBody.Timestamp,
+			Count:     1,
 		}
-		_, addErr := utils.Client.Database("ecom").Collection("cart").InsertOne(context.TODO(), oneDoc)
-		if addErr != nil {
-			fmt.Println(utils.Wrap(addErr, "Insert to DB Failed"))
-			return
+		cartColl := utils.Client.Database("ecom").Collection("cart")
+		_, err := cartColl.InsertOne(context.TODO(), cartModel)
+		if err != nil {
+			fmt.Println(utils.Wrap(err, "Insert to DB Failed"))
+			c.JSON(200, gin.H{
+				"Status": "Insert to DB Failed",
+			})
 		}
 
+	} else {
+		//Product is present
+		cartColl := utils.Client.Database("ecom").Collection("cart")
+		filter := bson.M{"productid": requestBody.ProductId}
+		update := bson.M{
+			"$set": bson.M{
+				"count": result.Count + 1,
+			},
+		}
+		_, err := cartColl.UpdateOne(context.TODO(), filter, update)
+		if err != nil {
+			fmt.Println(utils.Wrap(err, "Update to DB Failed"))
+			c.JSON(200, gin.H{
+				"Status": "Update to DB Failed",
+			})
+		}
 	}
-
 	c.JSON(200, gin.H{
 		"Status": "Success",
 	})
 
-	//Close Connection to DB
-	var ctx context.Context
-	defer func(Client *mongo.Client, ctx context.Context) {
-		err := Client.Disconnect(ctx)
-		if err != nil {
-			fmt.Println(utils.Wrap(err, "Mongo Client Disconnect Error"))
-		}
-	}(utils.Client, ctx)
 }
