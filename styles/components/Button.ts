@@ -25,4 +25,17 @@ export const ButtonStyles = {
       },
     }),
   },
+  noStyle: (props: Theme) => ({
+    bg: "whitee",
+    _hover: {
+      bg: mode(darken("whitee", 7), darken("white", 20))(props),
+      boxShadow: "sm",
+      outline: "none",
+      border: "none",
+    },
+    _focus: {
+      outline: "none",
+      border: "none",
+    },
+  }),
 };

@@ -7,13 +7,8 @@ export const productAPi = createApi({
   // basequery can be configured to set header for token and some other things
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    // mode:""
-    // prepareHeaders: (headers: Headers, { getState }) => {
-    //   const token = localStorage.getItem("token");
-    //   if (token !== null) headers.set("Authorization", `Bearer ${token}`);
-    //   return headers;
-    // },
   }),
+
   endpoints: (builder) => ({
     // reducer created by createAPI
     // takes input the query data process and manages the results state on ots own
@@ -24,6 +19,7 @@ export const productAPi = createApi({
           method: "GET",
         };
       },
+      // transformResponse: (response: { data: ProductType[] }) => response.data,
     }),
   }),
 });

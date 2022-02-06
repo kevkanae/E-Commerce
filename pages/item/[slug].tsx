@@ -7,18 +7,35 @@ import {
   Link as ATag,
   SimpleGrid,
   useDisclosure,
+  HStack,
+  IconButton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ProductList } from "../../utils/Products";
 import Rating from "../../components/Rating";
 import Reviews from "../../components/Reviews";
+import { CarouselItem } from "../../components/carousleItem";
+import { CarouselBody } from "../../components/CarouselBody";
+import { useState } from "react";
+import { BsShop } from "react-icons/bs";
+import { BiCartAlt } from "react-icons/bi";
 
 const ItemPage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const currentItem = ProductList.find((x) => x.slug === slug);
+  const [quantity, setquantity] = useState<number>(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const onIncQuantity = () => {
+    if (quantity >= 10) return;
+    setquantity((q) => q + 1);
+  };
+  const onDecQuantity = () => {
+    if (quantity <= 1) return;
+    setquantity((q) => q - 1);
+  };
   return (
     <Flex h="100vh" w="100vw" align="center" direction="column">
       {/* Nav */}
@@ -31,7 +48,100 @@ const ItemPage = () => {
         </Link>
       </Flex>
       {/* Body */}
-      <Flex
+      <Flex w="full">
+        <Box width={"30%"} padding={"20px"}>
+          <CarouselBody>
+            <CarouselItem height={400} width={10}>
+              <Box height={"100%"} width={"100%"} position={"relative"}>
+                <Image
+                  height={"100%"}
+                  width={"100%"}
+                  objectFit={"fill"}
+                  alt="shopping"
+                  src="/hero.png"
+                />
+                <Box
+                  position={"absolute"}
+                  top={"10px"}
+                  width={"100%"}
+                  height={"100%"}
+                >
+                  <Button>jije</Button>
+                </Box>
+              </Box>
+            </CarouselItem>
+            <CarouselItem height={400} width={10}>
+              {/* {" "} */}
+              <Image
+                height={"100%"}
+                width={"100%"}
+                objectFit={"fill"}
+                alt="shopping"
+                src="/hero.png"
+              />
+            </CarouselItem>
+            <CarouselItem height={400} width={10}>
+              <Image
+                height={"100%"}
+                width={"100%"}
+                objectFit={"fill"}
+                alt="shopping"
+                src="/hero.png"
+              />
+            </CarouselItem>
+          </CarouselBody>
+        </Box>
+        <Box width={"70%"} padding={"20px"}>
+          <Text fontSize={"1.4rem"} fontWeight={"600"}>
+            Sona Armless Chair
+          </Text>
+          <Text mt="1rem">$400.00</Text>
+          <Text>Available : In Stock</Text>
+          <Text
+            style={{
+              textAlign: "justify",
+              textJustify: "inter-word",
+            }}
+            mt={"1rem"}
+            fontSize={".9rem"}
+            fontWeight={"500"}
+          >
+            Versatile elegance for dining room, office or living room. This
+            seating solution offers great appeal. Bamboo chairs combine premium
+            quality materials with unique high-style design, with the advanced
+            product engineering and packaging reinforcement, each product is
+            designed, manufactured and packaged with shipping in mind.
+          </Text>
+          <Box mt={"1rem"}>
+            <Text fontSize={".8rem"}>Quantity</Text>
+            <HStack mt="1rem">
+              <Box
+                borderRadius={"3px"}
+                border={"2px solid #231a02"}
+                p={"2px 8px"}
+                cursor={"pointer"}
+                onClick={onDecQuantity}
+              >
+                -
+              </Box>
+              <Text>{quantity}</Text>
+              <Box
+                cursor={"pointer"}
+                borderRadius={"3px"}
+                border={"2px solid #231a02"}
+                p={"2px 8px"}
+                onClick={onIncQuantity}
+              >
+                +
+              </Box>
+            </HStack>
+            <Button mt="1rem" variant={"secondary"} leftIcon={<BiCartAlt />}>
+              Add to Cart
+            </Button>
+          </Box>
+        </Box>
+      </Flex>
+      {/* <Flex
         h="84vh"
         w="full"
         direction={["column", "row"]}
@@ -109,7 +219,7 @@ const ItemPage = () => {
             Add to Cart
           </Button>
         </Flex>
-      </Flex>
+      </Flex> */}
       <Reviews isOpen={isOpen} onClose={onClose} />
     </Flex>
   );

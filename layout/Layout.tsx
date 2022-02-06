@@ -11,6 +11,7 @@ const Layout: React.FC = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
+
       <>{children}</>
       <Footer />
     </>

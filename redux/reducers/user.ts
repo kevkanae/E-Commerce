@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { User } from "../../interfaces/UserType";
+import { productAPi } from "../API/productAPI";
 import { loginUser } from "../services/UserLogin.services";
 import { signupUser } from "../services/UserSignIn.services";
 import type { RootState } from "../Store";
@@ -13,11 +14,19 @@ interface initials {
   isAuthenticated: boolean;
   errorMessage: string;
 }
+
+const isAuth = async () => {
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    const item = localStorage.getItem("isAuth");
+    return item;
+  }
+};
 const initialState: initials = {
   username: "",
   email: "",
   isFetching: false,
-  isAuthenticated: false,
+  isAuthenticated: Boolean(isAuth()),
   isSuccess: false,
   isError: false,
   errorMessage: "",
@@ -33,6 +42,15 @@ export const userSlice = createSlice({
       state.isFetching = false;
       return state;
     },
+    userLogOut: (state) => {
+      localStorage.setItem("isAuth", "false");
+      state.isAuthenticated = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.isFetching = false;
+      return state;
+    },
+    // ...productAPi.reducer,
   },
 
   extraReducers: {
@@ -40,6 +58,7 @@ export const userSlice = createSlice({
       state.email = payload.email;
       state.username = payload.Username;
       state.isAuthenticated = payload.isAuthenticated;
+      localStorage.setItem("isAuth", "true");
       state.isFetching = false;
       state.isSuccess = true;
       return state;
@@ -71,7 +90,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { clearState } = userSlice.actions;
+export const { clearState, userLogOut } = userSlice.actions;
 
 export const userSelector = (state: RootState) => state.user;
 

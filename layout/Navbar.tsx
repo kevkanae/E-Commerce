@@ -2,12 +2,14 @@ import { Text, Flex, IconButton, useColorMode, Button } from "@chakra-ui/react";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { BiCart } from "react-icons/bi";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
+import { clearState, userLogOut } from "../redux/reducers/user";
 
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.user);
   const { colorMode, toggleColorMode } = useColorMode();
+  const dispatch = useDispatch();
   return (
     <Flex
       h="10vh"
@@ -17,6 +19,10 @@ const Navbar = () => {
       align="center"
       justify="space-between"
       className="nav"
+      position={"fixed"}
+      top={0}
+      zIndex={4}
+      backgroundColor={"white"}
     >
       <Flex
         w="50%"
@@ -38,7 +44,7 @@ const Navbar = () => {
           {isAuthenticated ? (
             <Button
               onClick={() => {
-                localStorage.removeItem("token");
+                dispatch(userLogOut());
               }}
             >
               Logout
