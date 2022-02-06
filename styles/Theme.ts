@@ -15,6 +15,7 @@ export const theme = extendTheme({
         bg: mode("whitee", "blackk")(props),
         lineHeight: "1.5rem",
         boxSizing: "border-box",
+        overflowX: "hidden",
       },
     }),
   },
