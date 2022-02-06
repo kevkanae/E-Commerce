@@ -9,11 +9,13 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
+  useToast,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../redux/services/UserLogin.services";
 import { RootState, store } from "../redux/Store";
 import Router from "next/router";
+import AlertDail from "../components/ErrorModal";
 
 interface inputData {
   email: string;
@@ -55,8 +57,11 @@ const Login = () => {
     if (isAuthenticated) Router.push("/");
   }, [isAuthenticated]);
 
+  const toast = useToast();
+
   return (
     <Box w={"100vw"} h={"100vh"} backgroundColor={"pink"} position={"relative"}>
+      {isError && <AlertDail message="login is not successfull"></AlertDail>}
       <Box
         display={"flex"}
         h={"100%"}
