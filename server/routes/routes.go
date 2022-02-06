@@ -21,10 +21,17 @@ func SetupRouter() *gin.Engine {
 	//Routes
 	v1 := server.Group("/v1")
 	{
+		//Auth
 		v1.POST("/register", controllers.Register)
 		v1.POST("/login", controllers.Login)
+
+		//Products
 		v1.GET("/products", controllers.GetProducts)
+		v1.GET("/:productid", AuthMiddleware(), controllers.GetSingleProduct)
+
+		//Cart
 		v1.POST("/addcart", AuthMiddleware(), controllers.AddToCart)
+		v1.GET("/getcart", AuthMiddleware(), controllers.GetCart)
 	}
 
 	return server
