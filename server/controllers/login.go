@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"fmt"
+
 	"github.com/kevkanae/e-com-use-kart/server/services"
 	"go.mongodb.org/mongo-driver/mongo"
 
@@ -18,8 +19,8 @@ func Login(c *gin.Context) {
 	password := c.PostForm("password")
 
 	//DB Access
-	utils.ConnectToMongoDB()
-	coll := utils.Client.Database("ecom").Collection("users")
+	services.ConnectToMongoDB()
+	coll := services.Client.Database("ecom").Collection("users")
 	var result models.User
 	err := coll.FindOne(context.TODO(), bson.M{"email": email}).Decode(&result)
 	if err != nil {
@@ -35,7 +36,7 @@ func Login(c *gin.Context) {
 				"Status": "Password Incorrect",
 			})
 		} else {
-			token, _ := utils.GenerateJWT(email)
+			token, _ := services.GenerateJWT(email)
 			services.CookieSet(c, token)
 			c.JSON(200, gin.H{
 				"Status":   "Login Success",
@@ -51,5 +52,5 @@ func Login(c *gin.Context) {
 		if err != nil {
 			fmt.Println(utils.Wrap(err, "Mongo Client Disconnect Error"))
 		}
-	}(utils.Client, ctx)
+	}(services.Client, ctx)
 }

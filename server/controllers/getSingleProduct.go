@@ -6,17 +6,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kevkanae/e-com-use-kart/server/models"
+	"github.com/kevkanae/e-com-use-kart/server/services"
 	"github.com/kevkanae/e-com-use-kart/server/utils"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
-
-type RequestBody struct {
-	ProductId string `json:"productId"`
-	Timestamp string
-	Count     int
-}
 
 func GetSingleProduct(c *gin.Context) {
 	var ctx context.Context
@@ -28,11 +23,11 @@ func GetSingleProduct(c *gin.Context) {
 	}
 
 	//Connect to DB
-	utils.ConnectToMongoDB()
+	services.ConnectToMongoDB()
 
 	//Retrieve Product Data
 	var result models.Product
-	col := utils.Client.Database("ecom").Collection("items")
+	col := services.Client.Database("ecom").Collection("items")
 	findErr := col.FindOne(context.TODO(), bson.M{"_id": objectId}).Decode(&result)
 	if findErr == mongo.ErrNoDocuments {
 		fmt.Println(utils.Wrap(findErr, "Couldn't Fetch Document"))
@@ -53,5 +48,5 @@ func GetSingleProduct(c *gin.Context) {
 		if err != nil {
 			fmt.Println(utils.Wrap(err, "Mongo Client Disconnect Error"))
 		}
-	}(utils.Client, ctx)
+	}(services.Client, ctx)
 }

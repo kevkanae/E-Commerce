@@ -3,8 +3,9 @@ package controllers
 import (
 	"context"
 	"fmt"
-	"github.com/kevkanae/e-com-use-kart/server/services"
 	"time"
+
+	"github.com/kevkanae/e-com-use-kart/server/services"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kevkanae/e-com-use-kart/server/models"
@@ -21,8 +22,8 @@ func Register(c *gin.Context) {
 	password := c.PostForm("password")
 
 	//DB Access
-	utils.ConnectToMongoDB()
-	coll := utils.Client.Database("ecom").Collection("users")
+	services.ConnectToMongoDB()
+	coll := services.Client.Database("ecom").Collection("users")
 	var result models.User
 	err := coll.FindOne(context.TODO(), bson.M{"email": email}).Decode(&result)
 
@@ -48,7 +49,7 @@ func Register(c *gin.Context) {
 		if err != nil {
 			fmt.Println(utils.Wrap(err, "Mongo Client Disconnect Error"))
 		}
-	}(utils.Client, ctx)
+	}(services.Client, ctx)
 }
 
 func createUser(newName *string, newEmail *string, newUserID *string, newPassword string, collection *mongo.Collection, c *gin.Context) {
@@ -67,7 +68,7 @@ func createUser(newName *string, newEmail *string, newUserID *string, newPasswor
 		})
 	} else {
 		fmt.Println("Insert Success")
-		token, _ := utils.GenerateJWT(*newEmail)
+		token, _ := services.GenerateJWT(*newEmail)
 		services.CookieSet(c, token)
 		c.JSON(200, gin.H{
 			"Message":  "New User Created",

@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kevkanae/e-com-use-kart/server/models"
+	"github.com/kevkanae/e-com-use-kart/server/services"
 	"github.com/kevkanae/e-com-use-kart/server/utils"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -15,9 +16,9 @@ func GetCart(c *gin.Context) {
 	var ctx context.Context
 
 	//Connect to DB
-	utils.ConnectToMongoDB()
+	services.ConnectToMongoDB()
 	var res models.Product
-	col, err := utils.Client.Database("ecom").Collection("cart").Find(context.TODO(), bson.D{})
+	col, err := services.Client.Database("ecom").Collection("cart").Find(context.TODO(), bson.D{})
 	if err != nil {
 		fmt.Println(utils.Wrap(err, "DB Fetch Error"))
 	}
@@ -41,5 +42,5 @@ func GetCart(c *gin.Context) {
 		if err != nil {
 			fmt.Println(utils.Wrap(err, "Mongo Client Disconnect Error"))
 		}
-	}(utils.Client, ctx)
+	}(services.Client, ctx)
 }

@@ -8,7 +8,7 @@ type WrappedError struct {
 }
 
 func (w *WrappedError) Error() string {
-	return fmt.Sprintf("%s: %v", w.Message, w.Err)
+	return fmt.Sprintf("\n %s: %v \n", w.Message, w.Err)
 }
 
 func Wrap(err error, info string) *WrappedError {
