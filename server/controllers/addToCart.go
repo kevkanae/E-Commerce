@@ -3,7 +3,6 @@ package controllers
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -14,17 +13,17 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type Product struct {
+type cartProduct struct {
 	ProductId string
 	Timestamp int64
 	Count     int
 }
 type Cart struct {
 	User        string
-	ProductCart []Product
+	ProductCart []cartProduct
 }
 
-func (cartArray *Cart) AddItem(item Product) {
+func (cartArray *Cart) AddItem(item cartProduct) {
 	cartArray.ProductCart = append(cartArray.ProductCart, item)
 }
 
@@ -41,15 +40,7 @@ func AddToCart(c *gin.Context) {
 	}
 
 	//Get User Email
-	cookie, cookieErr := c.Cookie("Eat_My_Cookie")
-	if cookieErr != nil {
-		fmt.Println(utils.Wrap(cookieErr, "Couldn't Find Cookie"))
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"Status":  "Unauthorized",
-			"Message": "Couldnt Find Cookie",
-		})
-	}
-	claims := utils.GetClaims(cookie)
+	claims := utils.GetClaims(c)
 	userEmail := claims["email"].(string)
 
 	//Connect to DB
@@ -65,7 +56,7 @@ func AddToCart(c *gin.Context) {
 		fmt.Println(utils.Wrap(findErr, "Couldnt Find User's Cart"))
 
 		// Create Product
-		productModel := &Product{
+		productModel := &cartProduct{
 			ProductId: requestBody.ProductId,
 			Timestamp: time.Now().Unix(),
 			Count:     1,
@@ -94,7 +85,7 @@ func AddToCart(c *gin.Context) {
 		fmt.Println(utils.Wrap(findErr, "User Cart Found"))
 		//User already has a cart
 		//Check if product is already present
-		var result2 Product
+		var result2 cartProduct
 		cartColl := services.Client.Database("ecom").Collection("cart")
 		productFindErr := cartColl.FindOne(context.TODO(), bson.M{"user": userEmail, "productcart.productid": requestBody.ProductId}).Decode(&result2)
 
@@ -105,7 +96,7 @@ func AddToCart(c *gin.Context) {
 			filter := bson.M{"user": userEmail}
 
 			// Create Product
-			productModel := &Product{
+			productModel := &cartProduct{
 				ProductId: requestBody.ProductId,
 				Timestamp: time.Now().Unix(),
 				Count:     1,
@@ -153,7 +144,7 @@ func AddToCart(c *gin.Context) {
 			type AggregationResult struct {
 				ID          primitive.ObjectID `bson:"_id"`
 				User        string             `bson:"user"`
-				ProductCart Product            `bson:"productcart"`
+				ProductCart cartProduct        `bson:"productcart"`
 			}
 			var aggregationResult []AggregationResult
 			if err = showSpecificProduct.All(context.TODO(), &aggregationResult); err != nil {
@@ -180,5 +171,14 @@ func AddToCart(c *gin.Context) {
 				})
 			}
 		}
+
+		//Close Connection to DB
+		var ctx context.Context
+		defer func(Client *mongo.Client, ctx context.Context) {
+			err := Client.Disconnect(ctx)
+			if err != nil {
+				fmt.Println(utils.Wrap(err, "Mongo Client Disconnect Error"))
+			}
+		}(services.Client, ctx)
 	}
 }

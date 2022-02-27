@@ -13,7 +13,7 @@ func GenerateJWT(email string) (string, error) {
 
 	claims := &jwt.MapClaims{
 		"authorized": true,
-		"expiry":     time.Now().Add(time.Hour * 1).Unix(),
+		"expiry":     time.Now().Add(time.Hour * 24).UnixMilli(),
 		"email":      email,
 	}
 

@@ -32,6 +32,7 @@ func SetupRouter() *gin.Engine {
 		//Cart
 		v1.POST("/addcart", AuthMiddleware(), controllers.AddToCart)
 		v1.GET("/getcart", AuthMiddleware(), controllers.GetCart)
+		v1.PATCH("/updatecart", AuthMiddleware(), controllers.UpdateCart)
 	}
 
 	return server
