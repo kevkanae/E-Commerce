@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/kevkanae/e-com-use-kart/server/models"
 	"github.com/kevkanae/e-com-use-kart/server/services"
+	"github.com/kevkanae/e-com-use-kart/server/structs"
 	"github.com/kevkanae/e-com-use-kart/server/utils"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -28,7 +29,7 @@ func GetCart(c *gin.Context) {
 	services.ConnectToMongoDB()
 
 	// Check if User has a cart
-	var result Cart
+	var result structs.Cart
 	itemColl := services.Client.Database("ecom").Collection("cart")
 	findErr := itemColl.FindOne(context.TODO(), bson.M{"user": userEmail}).Decode(&result)
 
@@ -42,7 +43,7 @@ func GetCart(c *gin.Context) {
 	}
 
 	// Retrieve Cart Data
-	var product Cart
+	var product structs.Cart
 	cartColl := services.Client.Database("ecom").Collection("cart")
 	productFindErr := cartColl.FindOne(context.TODO(), bson.M{"user": userEmail}).Decode(&product)
 

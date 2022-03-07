@@ -10,15 +10,12 @@ import (
 
 func main() {
 
-	//SetENV
-	ENV()
-
 	//Database
 	services.ConnectToMongoDB()
 
 	//Gin Server
 	server := routes.SetupRouter()
-	err := server.Run()
+	err := server.Run(services.ENV("PORT"))
 	if err != nil {
 		fmt.Println(utils.Wrap(err, "Couldn't Start Gin Server"))
 		return

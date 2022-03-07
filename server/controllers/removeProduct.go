@@ -11,9 +11,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func UpdateCart(c *gin.Context) {
-
-	var requestBody structs.UpdateCartReqBody
+func RemoveProduct(c *gin.Context) {
+	var requestBody structs.DeleteProductFromCartReqBody
 
 	if err := c.BindJSON(&requestBody); err != nil {
 		fmt.Println(utils.Wrap(err, "Request Body Read Error"))
@@ -28,14 +27,6 @@ func UpdateCart(c *gin.Context) {
 
 	//Check if product exists
 	helpers.DoesProductExist(c, requestBody.ProductId, userEmail)
-
-	if requestBody.Update == "inc" {
-		//Increment Quantity
-		helpers.UpdateValue(c, userEmail, requestBody.ProductId, "Increment")
-	} else {
-		//Decrement Quantity
-		helpers.UpdateValue(c, userEmail, requestBody.ProductId, "Decrement")
-	}
 
 	//Close Connection to DB
 	var ctx context.Context
