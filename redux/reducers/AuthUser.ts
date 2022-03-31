@@ -1,8 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { User } from "../../interfaces/UserType";
-import { productAPi } from "../API/productAPI";
-import { loginUser } from "../services/UserLogin.services";
-import { signupUser } from "../services/UserSignIn.services";
+import { createSlice } from "@reduxjs/toolkit";
+import { loginUser } from "../services/user/Login.services";
+import { signupUser } from "../services/user/SignIn.services";
 import type { RootState } from "../Store";
 
 interface initials {
@@ -95,18 +93,3 @@ export const { clearState, userLogOut } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;
 
 export const userSliceReducer = userSlice.reducer;
-
-// [fetchUserBytoken.pending]: (state) => {
-//   state.isFetching = true;
-// },
-// [fetchUserBytoken.fulfilled]: (state, { payload }) => {
-//   state.isFetching = false;
-//   state.isSuccess = true;
-//   state.email = payload.email;
-//   state.username = payload.name;
-// },
-// [fetchUserBytoken.rejected]: (state) => {
-//   console.log("fetchUserBytoken");
-//   state.isFetching = false;
-//   state.isError = true;
-// },

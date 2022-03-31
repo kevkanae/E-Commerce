@@ -8,16 +8,10 @@ import {
 import React from "react";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
-import { clearState } from "../redux/reducers/user";
+import { clearState } from "../redux/reducers/AuthUser";
 
 const AlertDail = ({ message }: { message: string }) => {
   const [isOpen, setisOpen] = React.useState<boolean>(false);
-  // React.useEffect(() => {
-  //   setisOpen(false);
-  //   return () => {
-  //     setisOpen(false);
-  //   };
-  // }, []);
   const dispatch = useDispatch();
   return ReactDOM.createPortal(
     <Alert

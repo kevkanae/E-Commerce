@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { userSlice, userSliceReducer } from "../redux/reducers/user";
-import { addToCart } from "./API/addToCartApi";
-import { productAPi } from "./API/productAPI";
-import { rtkQueryErrorLogger } from "./middleware/middleware.error";
+import { userSliceReducer } from "./reducers/AuthUser";
+import { addToCart } from "./API/AddToCart";
+import { productAPi } from "./API/GetProducts";
+
 export const store = configureStore({
   reducer: combineReducers({
     user: userSliceReducer,

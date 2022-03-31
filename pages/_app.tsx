@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import { theme } from "../styles/Theme";
+import { theme } from "../utils/Theme";
 import "../styles/main.scss";
 import "@fontsource/poppins";
 import "@fontsource/pacifico";

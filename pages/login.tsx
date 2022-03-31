@@ -11,8 +11,8 @@ import {
   FormHelperText,
   useToast,
 } from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux";
-import { loginUser } from "../redux/services/UserLogin.services";
+import { useSelector } from "react-redux";
+import { loginUser } from "../redux/services/user/Login.services";
 import { RootState, store } from "../redux/Store";
 import Router from "next/router";
 import AlertDail from "../components/ErrorModal";
@@ -34,14 +34,9 @@ const Login = () => {
       };
     });
   };
-  const {
-    email,
-    isError,
-    isFetching,
-    isSuccess,
-    errorMessage,
-    isAuthenticated,
-  } = useSelector((state: RootState) => state.user);
+  const { isError, isFetching, errorMessage, isAuthenticated } = useSelector(
+    (state: RootState) => state.user
+  );
 
   const onSubmitForm = (ev: React.SyntheticEvent) => {
     ev.preventDefault();

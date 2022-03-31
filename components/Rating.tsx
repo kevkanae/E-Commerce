@@ -1,10 +1,10 @@
-import { RatingProps } from "../interfaces/Rating";
-import { Box, Text } from "@chakra-ui/react";
+import { IRating } from "../interfaces/Rating";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
-const Rating = ({ rating, numReviews, flag }: RatingProps) => {
+const Rating = ({ rating, numReviews, flag }: IRating) => {
   return (
-    <Box d="flex" align="center" color="gamma">
+    <Flex align="center" color="gamma">
       {Array(5)
         .fill(7)
         .map((_, i) => {
@@ -20,7 +20,7 @@ const Rating = ({ rating, numReviews, flag }: RatingProps) => {
       <Box as="span" ml="2" color="gray.600" fontSize="sm">
         {flag ? <Text>{numReviews}</Text> : <Text>{numReviews} Reviews</Text>}
       </Box>
-    </Box>
+    </Flex>
   );
 };
 

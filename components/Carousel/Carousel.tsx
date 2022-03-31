@@ -1,7 +1,7 @@
 import { Box, Button, Image } from "@chakra-ui/react";
 import React from "react";
 import { CarouselBody } from "./CarouselBody";
-import { CarouselItem } from "./carousleItem";
+import { CarouselItem } from "./CarouselItem";
 
 export const Carousel = () => {
   return (

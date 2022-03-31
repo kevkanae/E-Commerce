@@ -12,19 +12,14 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { ProductList } from "../../utils/Products";
-import Rating from "../../components/Rating";
 import Reviews from "../../components/Reviews";
-import { CarouselItem } from "../../components/carousleItem";
 import { CarouselBody } from "../../components/CarouselBody";
 import { useState } from "react";
-import { BsShop } from "react-icons/bs";
 import { BiCartAlt } from "react-icons/bi";
+import { CarouselItem } from "../../components/carousleItem";
 
 const ItemPage = () => {
   const router = useRouter();
-  const { slug } = router.query;
-  const currentItem = ProductList.find((x) => x.slug === slug);
   const [quantity, setquantity] = useState<number>(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -36,6 +31,7 @@ const ItemPage = () => {
     if (quantity <= 1) return;
     setquantity((q) => q - 1);
   };
+
   return (
     <Flex h="100vh" w="100vw" align="center" direction="column">
       {/* Nav */}

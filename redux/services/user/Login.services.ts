@@ -1,62 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { loginResp } from "../../interfaces/UserType";
-import { BASE_URL } from "../../utils/constant";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASE_URL } from "../../../utils/Constants";
 import axios from "axios";
 
 interface inputData {
   email: string;
   password: string;
 }
-// export const loginUser = createApi({
-//   reducerPath: "user",
-//   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
-//   endpoints: (builder) => ({
-//     getUserLoggedIn: builder.query<loginResp, inputData>({
-//       query: (data) => {
-//         var formdata = new FormData();
-//         formdata.append("email", data.email);
-//         formdata.append("password", data.password);
-//         return {
-//           url: "/login",
-//           method: "POST",
-//           body: formdata,
-//         };
-//       },
-//     }),
-//   }),
-// });
-// export const { useGetUserLoggedInQuery } = loginUser;
-// export const signupUser = createAsyncThunk(
-//   "users/signupUser",
-//   async ({ email, password }: Partial<User>, thunkAPI) => {
-//     try {
-//       const response = await fetch(BASE_URL + "register", {
-//         method: "POST",
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           email,
-//           password,
-//         }),
-//       });
-//       let data = await response.json();
-//       console.log("data", data);
 
-//       if (response.status === 200) {
-//         localStorage.setItem("token", data.token);
-//         return { ...data, username: name, email: email };
-//       } else {
-//         return thunkAPI.rejectWithValue(data);
-//       }
-//     } catch (e: any) {
-//       console.log("Error", e.response.data);
-//       return thunkAPI.rejectWithValue(e.response.data);
-//     }
-//   }
-// );
 export const loginUser = createAsyncThunk(
   "users/login",
   async ({ email, password }: inputData, thunkAPI) => {

@@ -1,12 +1,5 @@
-import {
-  BackgroundProps,
-  Box,
-  Colors,
-  RecursiveProperty,
-  ResponsiveValue,
-} from "@chakra-ui/react";
-import { Union } from "@chakra-ui/styled-system/dist/declarations/src/utils";
-import React, { Children, ReactElement } from "react";
+import { Box } from "@chakra-ui/react";
+import React from "react";
 
 export const IconBody = ({ bg, children }: { bg: string; children: any }) => {
   return (

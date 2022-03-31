@@ -1,11 +1,11 @@
-export interface User {
+export interface IUser {
   username: string;
   name: string;
   email: string;
   password: string;
 }
 
-export interface loginResp {
+export interface ILoginResponse {
   status: string;
   token: string;
 }

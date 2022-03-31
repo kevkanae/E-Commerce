@@ -4,7 +4,7 @@ import { BiCart } from "react-icons/bi";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
-import { clearState, userLogOut } from "../redux/reducers/user";
+import { userLogOut } from "../redux/reducers/AuthUser";
 
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.user);
@@ -22,7 +22,7 @@ const Navbar = () => {
       position={"fixed"}
       top={0}
       zIndex={4}
-      backgroundColor={"white"}
+      backgroundColor={colorMode === "light" ? "white" : "blackk"}
     >
       <Flex
         w="50%"
@@ -31,7 +31,7 @@ const Navbar = () => {
         className="nav__items"
       >
         <Text fontFamily="Pacifico" fontSize="2xl" textAlign="start">
-          Use • Kart
+          X • Kart
         </Text>
       </Flex>
       <Flex

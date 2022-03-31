@@ -1,17 +1,8 @@
-import {
-  Text,
-  Flex,
-  IconButton,
-  useColorMode,
-  Button,
-  Box,
-  Divider,
-} from "@chakra-ui/react";
+import { Text, Flex, Divider } from "@chakra-ui/react";
 import { BsTwitter } from "react-icons/bs";
 import { FiFacebook, FiInstagram } from "react-icons/fi";
-import { useDispatch } from "react-redux";
 import { IconBody } from "../components/IconBody";
-import { clearState } from "../redux/reducers/user";
+import { clearState } from "../redux/reducers/AuthUser";
 import { store } from "../redux/Store";
 const Footer = () => {
   const onClick = () => {

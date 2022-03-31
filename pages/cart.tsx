@@ -8,22 +8,12 @@ import {
   IconButton,
   Button,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { BiHeartCircle } from "react-icons/bi";
+import React from "react";
 import { FiDelete } from "react-icons/fi";
-import { Quantity } from "../components/quantity";
+import { Quantity } from "../components/Quantity";
 import Navbar from "../layout/Navbar";
-// import { useState } from "react";
+
 const Cart = () => {
-  // const [quantity, setquantity] = useState<number>(1);
-  // const onIncQuantity = () => {
-  //   if (quantity >= 10) return;
-  //   setquantity((q) => q + 1);
-  // };
-  // const onDecQuantity = () => {
-  //   if (quantity <= 1) return;
-  //   setquantity((q) => q - 1);
-  // };
   return (
     <Box>
       <Navbar />
@@ -65,13 +55,6 @@ const Cart = () => {
                           $299,43
                         </Box>
                         <Box fontWeight={"300"}> Quantity : 2 </Box>
-                        {/* <Box mt={"0"} color={"blue.600"}>
-                    $299,43
-                  </Box>
-                  <Box mt={"0"} color={"blue.600"}>
-                    {" "}
-                    Quantity : 2{" "}
-                  </Box> */}
                       </VStack>
                       <HStack
                         h={"full"}

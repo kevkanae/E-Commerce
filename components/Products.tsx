@@ -11,19 +11,13 @@ import {
 import { useEffect } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import Link from "next/link";
-import { ProductList } from "../utils/Products";
 import Rating from "./Rating";
-import { useGetProductsQuery } from "../redux/API/productAPI";
-import { Carousel } from "./carousel";
-import { ProductType } from "../interfaces/Products";
-import { addToCart } from "../redux/API/addToCartApi";
+import { useGetProductsQuery } from "../redux/API/GetProducts";
+import { IProduct } from "../interfaces/Product";
+import { Carousel } from "./Carousel/Carousel";
 
 const ProductAddToCart = () => {
-  const { isError, isFetching, isSuccess, data } = useGetProductsQuery({});
-  interface addToCartDataType {
-    arr: [];
-  }
-  // const { result } = addToCart.useAddToCartQuery();
+  const { isError, isFetching, data } = useGetProductsQuery({});
 
   useEffect(() => {
     console.log(data);
@@ -64,7 +58,7 @@ const ProductAddToCart = () => {
               <Button bg={"alpha"}>Refresh</Button>
             </Flex>
           ) : (
-            (data as ProductType[]).map((x: any, i: number) => (
+            (data as IProduct[]).map((x: any, i: number) => (
               <Flex key={i} align="center" justify="center">
                 <Box
                   bg="white"

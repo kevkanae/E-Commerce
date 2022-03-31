@@ -1,4 +1,4 @@
-export type ProductType = {
+export type IProduct = {
   name: string;
   slug: string;
   category: string;

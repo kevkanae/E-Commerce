@@ -1,7 +1,6 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { Box, Button, IconButton } from "@chakra-ui/react";
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import React, { ReactChildren } from "react";
+import { IconButton } from "@chakra-ui/react";
+import React from "react";
 import { useSwipeable } from "react-swipeable";
 
 export const CarouselBody = ({ children }: { children: any }) => {

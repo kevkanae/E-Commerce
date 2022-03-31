@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { User } from "../../interfaces/UserType";
-import { BASE_URL } from "../../utils/constant";
+import { IUser } from "../../../interfaces/User";
+import { BASE_URL } from "../../../utils/Constants";
 export const signupUser = createAsyncThunk(
   "users/signupUser",
-  async ({ username, name, email, password }: User, thunkAPI) => {
+  async ({ username, name, email, password }: IUser, thunkAPI) => {
     try {
       let formdata: FormData = new FormData();
 

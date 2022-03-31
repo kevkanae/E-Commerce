@@ -1,31 +1,8 @@
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
+// Abstracts
+@import "abstract/mixins";
+@import "abstract/resets";
+@import "abstract/scrollbar";
 
-::-webkit-scrollbar {
-  width: 7px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 1.4rem;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-  border-radius: 1.4rem;
-}
-
-@import "login";
-@import "carousel";
+// Components
+@import "components/carousel";
+@import "components/login";

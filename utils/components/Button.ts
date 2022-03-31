@@ -1,4 +1,4 @@
-import { Theme } from "../../node_modules/@chakra-ui/theme/dist/types";
+import { Theme } from "@chakra-ui/react";
 import { mode, darken, whiten } from "@chakra-ui/theme-tools";
 
 export const ButtonStyles = {

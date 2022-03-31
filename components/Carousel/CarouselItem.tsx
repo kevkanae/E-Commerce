@@ -1,8 +1,3 @@
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import React, { useEffect, useState } from "react";
-
-// import "./Carousel.css";
-
 export const CarouselItem = ({
   children,
   width,

@@ -1,10 +1,7 @@
 import {
   Flex,
-  Box,
-  Image,
   Text,
   Button,
-  Link as ATag,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -13,9 +10,9 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { ReviewModalProps } from "../interfaces/ReviewModal";
+import { IReviewModal } from "../interfaces/ReviewModal";
 
-const Reviews = ({ isOpen, onClose }: ReviewModalProps) => {
+const Reviews = ({ isOpen, onClose }: IReviewModal) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { BASE_URL } from "../../utils/constant";
-import { ProductType } from "../../interfaces/Products";
-import { RootState } from "../Store";
+import { BASE_URL } from "../../utils/Constants";
+import { IProduct } from "../../interfaces/Product";
+
 export const productAPi = createApi({
   reducerPath: "products",
   // basequery can be configured to set header for token and some other things
@@ -12,14 +12,14 @@ export const productAPi = createApi({
   endpoints: (builder) => ({
     // reducer created by createAPI
     // takes input the query data process and manages the results state on ots own
-    getProducts: builder.query<Array<ProductType>, any>({
+    getProducts: builder.query<Array<IProduct>, any>({
       query: () => {
         return {
           url: "products",
           method: "GET",
         };
       },
-      // transformResponse: (response: { data: ProductType[] }) => response.data,
+      // transformResponse: (response: { data: IProduct[] }) => response.data,
     }),
   }),
 });
