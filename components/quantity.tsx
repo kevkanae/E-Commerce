@@ -1,7 +1,7 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-export const Quantity = () => {
+const Quantity = () => {
   const [quantity, setquantity] = useState<number>(1);
   const onIncQuantity = () => {
     if (quantity >= 10) return;
@@ -11,20 +11,14 @@ export const Quantity = () => {
     if (quantity <= 1) return;
     setquantity((q) => q - 1);
   };
+
   return (
     <HStack>
-      <Box
-        borderRadius={"3px"}
-        border={"2px solid #231a02"}
-        p={"2px 8px"}
-        // cursor={"pointer"}
-        // onClick={onDecQuantity}
-      >
+      <Box borderRadius={"3px"} border={"2px solid #231a02"} p={"2px 8px"}>
         -
       </Box>
       <Text>{quantity}</Text>
       <Box
-        // cursor={"pointer"}
         borderRadius={"3px"}
         border={"2px solid #231a02"}
         p={"2px 8px"}
@@ -35,3 +29,5 @@ export const Quantity = () => {
     </HStack>
   );
 };
+
+export default Quantity;
