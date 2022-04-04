@@ -2,13 +2,14 @@ package services
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt"
 )
 
 func GenerateJWT(email string) (string, error) {
-	var mySigningKey = []byte(ENV("KONNICHIWA"))
+	var mySigningKey = []byte(os.Getenv("KONNICHIWA"))
 
 	claims := &jwt.MapClaims{
 		"authorized": true,

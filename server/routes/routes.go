@@ -7,6 +7,7 @@ import (
 )
 
 func SetupRouter() *gin.Engine {
+
 	server := gin.Default()
 
 	//CORS
@@ -25,7 +26,7 @@ func SetupRouter() *gin.Engine {
 	v1 := server.Group("/v1")
 	{
 		//Default
-		v1.GET("/",controllers.DefaultRoute)
+		v1.GET("/", controllers.DefaultRoute)
 
 		//Auth
 		v1.POST("/register", controllers.Register)

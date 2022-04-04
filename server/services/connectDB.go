@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -16,7 +17,7 @@ var Client *mongo.Client
 func ConnectToMongoDB() {
 	//Connect to MongoClient
 	var err error
-	Client, err = mongo.NewClient(options.Client().ApplyURI(ENV("MONGOURI")))
+	Client, err = mongo.NewClient(options.Client().ApplyURI(os.Getenv("MONGOURI")))
 	if err != nil {
 		fmt.Println("Error Connecting to MongoClient", err)
 		log.Fatal(err)
