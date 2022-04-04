@@ -1,13 +1,16 @@
 export type IProduct = {
-  name: string;
-  slug: string;
-  category: string;
-  image: string;
-  isFeatured: boolean;
-  price: number;
-  brand: string;
-  rating: number;
-  numReviews: number;
-  countInStock: number;
-  description: string;
-}[];
+  Brand: string;
+  Category: string;
+  CountInStock: number;
+  Description: string;
+  FeaturedImage: string;
+  ID: string;
+  Image: string;
+  IsFeatured: true;
+  Name: string;
+  NumReviews: number;
+  Price: number;
+  Rating: number;
+  Reviews: any;
+  Slug: string;
+};

@@ -1,24 +1,27 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { BASE_URL } from "../../utils/Constants";
 
-interface addToCartResType {
+interface IAddToCartResType {
   Status: string;
 }
 
-interface addToCartDataType {
-  arr: [];
+interface IAddToCartDataType {
+  productId: string;
+  quantity: number;
+  timeStamp: number;
 }
 
 export const addToCart = createApi({
   reducerPath: "addToCart",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    credentials: "include",
   }),
   endpoints: (builder) => ({
-    addToCart: builder.query<addToCartResType, addToCartDataType>({
+    addToCart: builder.mutation<IAddToCartResType, IAddToCartDataType>({
       query: (body) => {
         return {
-          url: "addtocart",
+          url: "addcart",
           method: "POST",
           body: body,
         };
@@ -27,4 +30,4 @@ export const addToCart = createApi({
   }),
 });
 
-export const { useLazyAddToCartQuery } = addToCart;
+export const { useAddToCartMutation } = addToCart;

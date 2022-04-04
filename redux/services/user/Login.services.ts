@@ -14,6 +14,7 @@ export const loginUser = createAsyncThunk(
       var formdata = new FormData();
       formdata.append("email", email);
       formdata.append("password", password);
+      axios.defaults.withCredentials = true;
       const response = await axios.post(BASE_URL + "login", formdata);
       let data = await response.data;
       console.log("response", data);

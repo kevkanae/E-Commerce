@@ -5,6 +5,7 @@ export const getCart = createApi({
   reducerPath: "getCart",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    credentials: "include",
   }),
   endpoints: (builder) => ({
     getCart: builder.query<any, any>({

@@ -13,6 +13,7 @@ export const signupUser = createAsyncThunk(
       formdata.append("email", email);
       formdata.append("password", password);
 
+      axios.defaults.withCredentials = true;
       const response = await axios.post(BASE_URL + "register", formdata);
 
       let data = await response.data();

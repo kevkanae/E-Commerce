@@ -4,24 +4,40 @@ import {
   Image,
   Text,
   Button,
-  Link as ATag,
-  SimpleGrid,
   useDisclosure,
   HStack,
-  IconButton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Reviews from "../../components/Reviews";
-import { CarouselBody } from "../../components/CarouselBody";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiCartAlt } from "react-icons/bi";
-import { CarouselItem } from "../../components/carousleItem";
+import { CarouselBody } from "../../components/Carousel/CarouselBody";
+import { CarouselItem } from "../../components/Carousel/CarouselItem";
+import { useGetProductsQuery } from "../../redux/API/GetProducts";
+import { IProduct } from "../../interfaces/Product";
+import { useAddToCartMutation } from "../../redux/API/AddToCart";
 
 const ItemPage = () => {
   const router = useRouter();
+  const [id, setID] = useState("");
   const [quantity, setquantity] = useState<number>(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { slug } = router.query;
+
+  //API Fetch and Post
+  const { isError, isFetching, data } = useGetProductsQuery({});
+  const [addToCart, { isLoading }] = useAddToCartMutation();
+  //Get the ProductID from router parameter
+  useEffect(() => {
+    if (!isError && !isFetching) {
+      data?.filter((x: IProduct) => {
+        if (x.Slug === slug) {
+          setID(x.ID);
+        }
+      });
+    }
+  }, []);
 
   const onIncQuantity = () => {
     if (quantity >= 10) return;
@@ -30,6 +46,15 @@ const ItemPage = () => {
   const onDecQuantity = () => {
     if (quantity <= 1) return;
     setquantity((q) => q - 1);
+  };
+  const handleCartAdd = async () => {
+    let postData = {
+      productId: id,
+      quantity: quantity,
+      timeStamp: Date.now(),
+    };
+    //Reducer
+    await addToCart(postData);
   };
 
   return (
@@ -131,7 +156,12 @@ const ItemPage = () => {
                 +
               </Box>
             </HStack>
-            <Button mt="1rem" variant={"secondary"} leftIcon={<BiCartAlt />}>
+            <Button
+              mt="1rem"
+              variant={"secondary"}
+              leftIcon={<BiCartAlt />}
+              onClick={handleCartAdd}
+            >
               Add to Cart
             </Button>
           </Box>

@@ -58,7 +58,7 @@ const ProductAddToCart = () => {
               <Button bg={"alpha"}>Refresh</Button>
             </Flex>
           ) : (
-            (data as IProduct[]).map((x: any, i: number) => (
+            data?.map((x: IProduct, i: number) => (
               <Flex key={i} align="center" justify="center">
                 <Box
                   bg="white"
