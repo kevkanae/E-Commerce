@@ -3,6 +3,7 @@ package helpers
 import (
 	"context"
 	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/kevkanae/e-com-use-kart/server/services"
 	"github.com/kevkanae/e-com-use-kart/server/structs"
@@ -10,8 +11,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
-
-
 
 func SelectParticularproductFromCart(userEmail string, id string) []structs.AggregationResult {
 	matchUser := bson.D{{
@@ -42,7 +41,7 @@ func SelectParticularproductFromCart(userEmail string, id string) []structs.Aggr
 }
 
 func UpdateValue(c *gin.Context, userEmail string, id string, updateType string) {
-
+	fmt.Println("Updating Product QTY")
 	aggRes := SelectParticularproductFromCart(userEmail, id)
 
 	// Update Value
@@ -59,18 +58,18 @@ func UpdateValue(c *gin.Context, userEmail string, id string, updateType string)
 			"productcart.$.count": newQTYCount,
 		},
 	}
-
+	fmt.Println("Updating DB")
 	cartColl := services.Client.Database("ecom").Collection("cart")
 	_, incrementErr := cartColl.UpdateOne(context.TODO(), filter, update)
 	if incrementErr != nil {
-		fmt.Println(utils.Wrap(incrementErr, "QTY Increment Failed"))
+		fmt.Println(utils.Wrap(incrementErr, "QTY Update Failed"))
 		c.JSON(200, gin.H{
 			"Status": "QTY " + updateType + " Failed",
 		})
-	} else {
-		c.JSON(200, gin.H{
-			"Status":  "Success",
-			"Message": "QTY " + updateType + " Success",
-		})
 	}
+	c.JSON(200, gin.H{
+		"Status":  "Success",
+		"Message": "QTY " + updateType + " Success",
+	})
+
 }

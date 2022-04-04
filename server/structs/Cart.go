@@ -4,7 +4,7 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type AddCartReqBody struct {
 	ProductId string `json:"productId"`
-	Quantity  string `json:"quantity"`
+	Quantity  int    `json:"quantity"`
 	Timestamp int    `json:"timeStamp"`
 }
 

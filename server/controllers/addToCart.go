@@ -3,9 +3,10 @@ package controllers
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/kevkanae/e-com-use-kart/server/helpers"
 	"github.com/kevkanae/e-com-use-kart/server/structs"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kevkanae/e-com-use-kart/server/services"
@@ -64,7 +65,7 @@ func AddToCart(c *gin.Context) {
 			})
 		}
 	} else {
-		fmt.Println(utils.Wrap(findErr, "User Cart Found"))
+		fmt.Println("User Cart Found")
 		//User already has a cart
 		//Check if product is already present
 		var result2 structs.CartDB
@@ -103,7 +104,7 @@ func AddToCart(c *gin.Context) {
 
 		} else {
 			// Increment quantity count of product
-			fmt.Println(utils.Wrap(findErr, "Incrementing Product QTY"))
+
 			helpers.UpdateValue(c, userEmail, requestBody.ProductId, "Increment")
 
 		}
