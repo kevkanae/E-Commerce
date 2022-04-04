@@ -6,6 +6,9 @@ import {
   Button,
   useDisclosure,
   HStack,
+  toast,
+  ToastMessage,
+  MenuButton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -27,7 +30,7 @@ const ItemPage = () => {
 
   //API Fetch and Post
   const { isError, isFetching, data } = useGetProductsQuery({});
-  const [addToCart, { isLoading }] = useAddToCartMutation();
+  const [addToCart, mutation] = useAddToCartMutation();
   //Get the ProductID from router parameter
   useEffect(() => {
     if (!isError && !isFetching) {
@@ -38,6 +41,12 @@ const ItemPage = () => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    // console.log(mutation.data);
+    //TEMP CODE DELETE THIS
+    if (mutation.isSuccess) alert("Added to cart");
+  }, [mutation]);
 
   const onIncQuantity = () => {
     if (quantity >= 10) return;

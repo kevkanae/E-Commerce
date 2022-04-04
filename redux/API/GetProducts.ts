@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { BASE_URL } from "../../utils/Constants";
 import { IProduct } from "../../interfaces/Product";
 
-export const productAPi = createApi({
+export const productAPI = createApi({
   reducerPath: "products",
   // basequery can be configured to set header for token and some other things
   baseQuery: fetchBaseQuery({
@@ -25,4 +25,4 @@ export const productAPi = createApi({
 });
 
 // is returned by rtk query createAPI method which is basically a Hook.
-export const { useGetProductsQuery } = productAPi;
+export const { useGetProductsQuery } = productAPI;
