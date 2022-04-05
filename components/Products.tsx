@@ -67,7 +67,7 @@ const ProductAddToCart = () => {
                   rounded="md"
                   shadow="md"
                 >
-                  <Link href={`item/${x.Slug}`} passHref>
+                  <Link href={`item/${x.ID}`} passHref>
                     <Image
                       _hover={{
                         cursor: "pointer",
