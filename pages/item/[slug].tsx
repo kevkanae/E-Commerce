@@ -6,7 +6,6 @@ import {
   Button,
   useDisclosure,
   HStack,
-  toast,
   ToastMessage,
   useColorMode,
   Spinner,

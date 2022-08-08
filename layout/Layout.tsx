@@ -2,7 +2,11 @@ import Head from "next/head";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-const Layout: React.FC = ({ children }) => {
+interface BaseLayoutProps {
+  children?: React.ReactNode;
+}
+
+const Layout: React.FC<BaseLayoutProps> = ({ children }) => {
   return (
     <>
       <Head>

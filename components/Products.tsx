@@ -4,6 +4,7 @@ import {
   Image,
   Text,
   Button,
+  IconButton,
   Tooltip,
   SimpleGrid,
   Spinner,
@@ -42,9 +43,7 @@ const ProductAddToCart = () => {
           columns={[1, 2, 2, 3, 4]}
           p={7}
           spacing={7}
-          // h="80vh"
           w="100vw"
-          // overflowY="scroll"
           overflowX="hidden"
         >
           {isError ? (
@@ -85,7 +84,7 @@ const ProductAddToCart = () => {
                         fontWeight={700}
                         lineHeight="tight"
                         width="40%"
-                        isTruncated
+                        noOfLines={1}
                       >
                         {x.Name}
                       </Text>
@@ -97,11 +96,11 @@ const ProductAddToCart = () => {
                         fontSize="md"
                         p={2}
                       >
-                        <Button variant="tertiary">
-                          <span>
-                            <FiShoppingCart />
-                          </span>
-                        </Button>
+                        <IconButton
+                          variant="tertiary"
+                          aria-label="Search database"
+                          icon={<FiShoppingCart />}
+                        />
                       </Tooltip>
                     </Flex>
 

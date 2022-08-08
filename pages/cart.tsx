@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { FiDelete } from "react-icons/fi";
-import Quantity from "../components/Quantity";
+import Quantity from "../components/ChangeQuantity";
 import Navbar from "../layout/Navbar";
 
 const Cart = () => {

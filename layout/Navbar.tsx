@@ -5,11 +5,14 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/Store";
 import { userLogOut } from "../redux/reducers/AuthUser";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.user);
   const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
+  const router = useRouter();
+
   return (
     <Flex
       h="10vh"
@@ -40,19 +43,26 @@ const Navbar = () => {
         justify="space-between"
         className="nav__items"
       >
-        <Button letterSpacing={1} variant="secondary">
-          {isAuthenticated ? (
-            <Button
-              onClick={() => {
-                dispatch(userLogOut());
-              }}
-            >
-              Logout
-            </Button>
-          ) : (
-            <Link href="/login">Login</Link>
-          )}
-        </Button>
+        {isAuthenticated ? (
+          <Button
+            onClick={() => {
+              dispatch(userLogOut());
+            }}
+            letterSpacing={1}
+            variant="secondary"
+          >
+            Logout
+          </Button>
+        ) : (
+          <Button
+            letterSpacing={1}
+            variant="secondary"
+            onClick={() => router.push("/login")}
+          >
+            Login
+          </Button>
+        )}
+
         <IconButton aria-label="Cart" icon={<BiCart />} variant="secondary" />
         <IconButton
           aria-label="Theme Switcher"
