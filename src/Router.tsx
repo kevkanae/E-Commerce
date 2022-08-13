@@ -6,7 +6,7 @@ const Feed = React.lazy(() => import("./pages/Feed"));
 const Login = React.lazy(() => import("./pages/Login"));
 const Signup = React.lazy(() => import("./pages/Signup"));
 
-function App() {
+function Router() {
   return (
     <BrowserRouter>
       <React.Suspense fallback={<h1>Loading...</h1>}>
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default Router;
