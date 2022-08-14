@@ -27,7 +27,10 @@ const Footer = () => {
           <Text
             mt="24vh"
             fontWeight={600}
-            fontSize="2.1rem"
+            fontSize={{
+              base: "1.4rem",
+              md: "2.1rem",
+            }}
             cursor="pointer"
             _hover={{
               filter: "drop-shadow(0 0 2em #646cffaa)",
@@ -40,10 +43,21 @@ const Footer = () => {
             </Text>
             KART
           </Text>
-          <Text>© Copyright {new Date().getFullYear()} - Kevin D Goveas</Text>
+          <Text
+            fontSize={{
+              base: "0.75rem",
+              md: "0.875rem",
+            }}
+          >
+            © Copyright {new Date().getFullYear()} - Kevin D Goveas
+          </Text>
         </Flex>
         <Flex
-          w="70%"
+          w={{
+            base: "84%",
+            md: "70%",
+          }}
+          borderRadius="0.25rem"
           h="49vh"
           bg="whitesmoke"
           position="absolute"
@@ -51,7 +65,11 @@ const Footer = () => {
           top="35%"
           transform="translate(-50%,-50%)"
           zIndex={777}
-        ></Flex>
+          align="center"
+          justify="center"
+        >
+          Carousel
+        </Flex>
       </Flex>
     </>
   );

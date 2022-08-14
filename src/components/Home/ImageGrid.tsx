@@ -1,10 +1,14 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import BG from "../../assets/bg.jpg";
 
-const HoverGrid = () => {
+const ImageGrid = () => {
   return (
     <>
       <Flex
+        display={{
+          base: "none",
+          md: "flex",
+        }}
         h="100vh"
         w="full"
         align="center"
@@ -77,4 +81,4 @@ const HoverGrid = () => {
     </>
   );
 };
-export default HoverGrid;
+export default ImageGrid;

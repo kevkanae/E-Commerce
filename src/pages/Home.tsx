@@ -1,14 +1,14 @@
 import React from "react";
 import Landing from "../components/Home/Landing";
 
-const HoverGrid = React.lazy(() => import("../components/Home/HoverGrid"));
+const ImageGrid = React.lazy(() => import("../components/Home/ImageGrid"));
 const Footer = React.lazy(() => import("../components/Home/Footer"));
 
 const Home = () => {
   return (
     <>
       <Landing />
-      <HoverGrid />
+      <ImageGrid />
       <Footer />
     </>
   );
