@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { useOutlet } from "react-router-dom";
 import { scrollBarStyles } from "../utils/Theme";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar/Navbar";
 
 const Layout = () => {
   const outlet = useOutlet();

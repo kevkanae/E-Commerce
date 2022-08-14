@@ -33,6 +33,7 @@ const Footer = () => {
               filter: "drop-shadow(0 0 2em #646cffaa)",
             }}
             onClick={() => navigate("/")}
+            letterSpacing={2}
           >
             <Text as="span" color="teal.600">
               X

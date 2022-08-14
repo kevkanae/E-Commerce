@@ -1,8 +1,12 @@
-import { Avatar, Flex, HStack, Text } from "@chakra-ui/react";
+import { Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import MobileNavbar from "./MobileNavbar";
+import DesktopNavbar from "./DesktopNavbar";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { onOpen, isOpen, onClose } = useDisclosure();
+
   return (
     <Flex
       w="100%"
@@ -19,30 +23,23 @@ const Navbar = () => {
     >
       <Text
         fontWeight={600}
-        fontSize="1.4rem"
+        fontSize={"1.4rem"}
         cursor="pointer"
+        onClick={() => navigate("/", { replace: true })}
+        letterSpacing={2}
+        transition="0.3s cubic-bezier(0.47, 0, 0.745, 0.715)"
         _hover={{
-          filter: "drop-shadow(0 0 2em #646cffaa)",
+          color: "teal.400",
         }}
-        onClick={() => navigate("/")}
       >
         <Text as="span" color="teal.600">
           X
         </Text>
         KART
       </Text>
-      <HStack spacing="4.9rem">
-        <Text cursor="pointer" onClick={() => navigate("/category")}>
-          Category
-        </Text>
-        <Text cursor="pointer" onClick={() => navigate("/feed")}>
-          Shop
-        </Text>
-        <Text cursor="pointer" onClick={() => navigate("/contact")}>
-          Contact Us
-        </Text>
-        <Avatar name="" src="" size="sm" />
-      </HStack>
+
+      <MobileNavbar onClose={onClose} onOpen={onOpen} isOpen={isOpen} />
+      <DesktopNavbar />
     </Flex>
   );
 };
