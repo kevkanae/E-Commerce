@@ -1,11 +1,8 @@
-import { Text } from "@chakra-ui/react";
+import { Menu, MenuButton, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import CategoryMenuList from "./CategoryMenuList";
 
 const NavLinkData = [
-  {
-    title: "Category",
-    path: "/category",
-  },
   {
     title: "Shop",
     path: "/feed",
@@ -20,6 +17,21 @@ const NavLinks = () => {
   const navigate = useNavigate();
   return (
     <>
+      <Menu>
+        <MenuButton
+          as={Text}
+          cursor="pointer"
+          transition="0.2s cubic-bezier(0.47, 0, 0.745, 0.715)"
+          _hover={{
+            color: "teal.800",
+            textShadow: "0.1rem 0.1rem 0.05rem #B2D8D8",
+          }}
+        >
+          Category
+        </MenuButton>
+        <CategoryMenuList />
+      </Menu>
+      {/* ================ */}
       {NavLinkData.map((obj, i) => (
         <Text
           key={i}

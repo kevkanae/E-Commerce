@@ -1,4 +1,12 @@
-import { Avatar, HStack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  HStack,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import NavLinks from "./NavLinks";
 
 const DesktopNavbar = () => {
@@ -13,7 +21,18 @@ const DesktopNavbar = () => {
         }}
       >
         <NavLinks />
-        <Avatar name="" src="" size="sm" />
+        <Menu>
+          <MenuButton>
+            <Avatar name="My Name" src="https://picsum.photos/777" />
+          </MenuButton>
+          <MenuList>
+            <MenuItem>A</MenuItem>
+            <MenuItem>B</MenuItem>
+            <MenuItem>C</MenuItem>
+            <MenuDivider />
+            <MenuItem>Logout</MenuItem>
+          </MenuList>
+        </Menu>
       </HStack>
     </>
   );
