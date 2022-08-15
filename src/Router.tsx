@@ -1,15 +1,18 @@
-import React from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./layout/Layout";
+import Loader from "./layout/Loader";
 import Home from "./pages/Home";
-const Feed = React.lazy(() => import("./pages/Feed"));
-const Login = React.lazy(() => import("./pages/Login"));
-const Signup = React.lazy(() => import("./pages/Signup"));
+
+//Lazy Imports
+const Feed = lazy(() => import("./pages/Feed"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
 
 function Router() {
   return (
     <BrowserRouter>
-      <React.Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
@@ -18,7 +21,7 @@ function Router() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
-      </React.Suspense>
+      </Suspense>
     </BrowserRouter>
   );
 }
