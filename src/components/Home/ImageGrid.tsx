@@ -18,7 +18,7 @@ const ImageGrid = () => {
         <Box h="77vh" w="48%" mr={3}>
           <Image
             borderRadius="0.4rem"
-            src={BG}
+            src="https://picsum.photos/777"
             alt=""
             h="full"
             w="full"
@@ -36,7 +36,7 @@ const ImageGrid = () => {
           <Box h="37vh" w="full">
             <Image
               borderRadius="0.4rem"
-              src={BG}
+              src="https://picsum.photos/777"
               alt=""
               h="full"
               w="full"
@@ -47,7 +47,7 @@ const ImageGrid = () => {
           <Box h="37vh" w="full">
             <Image
               borderRadius="0.4rem"
-              src={BG}
+              src="https://picsum.photos/777"
               alt=""
               h="full"
               w="full"

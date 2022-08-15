@@ -1,11 +1,19 @@
-import { Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Flex, FlexProps, Text, useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import MobileNavbar from "./MobileNavbar";
 import DesktopNavbar from "./DesktopNavbar";
+import { usePathName } from "../../services/usePathname.Hook";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const path = usePathName();
+
+  const FlexboxProps: FlexProps = {
+    position: path === "/" ? "absolute" : "static",
+    bg: path === "/" ? "white.50" : "white.100",
+    backdropFilter: path === "/" ? "blur(0.2rem)" : "none",
+  };
 
   return (
     <Flex
@@ -17,9 +25,7 @@ const Navbar = () => {
       px={5}
       zIndex={777}
       //Glassmorphism
-      position="absolute"
-      bg="white.50"
-      backdropFilter="blur(0.2rem)"
+      {...FlexboxProps}
     >
       <Text
         fontWeight={600}
