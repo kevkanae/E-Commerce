@@ -28,10 +28,21 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthData: { // root type
+    email?: string | null; // String
+    name?: string | null; // String
+    username?: string | null; // String
+  }
+  AuthResponse: { // root type
+    data?: NexusGenRootTypes['AuthData'] | null; // AuthData
+    error: boolean; // Boolean!
+    message: string; // String!
+  }
+  Mutation: {};
   Query: {};
   User: { // root type
-    _id?: string | null; // String
     email?: string | null; // String
+    id?: number | null; // Int
     name?: string | null; // String
     password?: string | null; // String
     username?: string | null; // String
@@ -49,12 +60,26 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthData: { // field return type
+    email: string | null; // String
+    name: string | null; // String
+    username: string | null; // String
+  }
+  AuthResponse: { // field return type
+    data: NexusGenRootTypes['AuthData'] | null; // AuthData
+    error: boolean; // Boolean!
+    message: string; // String!
+  }
+  Mutation: { // field return type
+    login: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
+    signup: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
+  }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    getAllUsers: Array<NexusGenRootTypes['User'] | null>; // [User]!
   }
   User: { // field return type
-    _id: string | null; // String
     email: string | null; // String
+    id: number | null; // Int
     name: string | null; // String
     password: string | null; // String
     username: string | null; // String
@@ -62,12 +87,26 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthData: { // field return type name
+    email: 'String'
+    name: 'String'
+    username: 'String'
+  }
+  AuthResponse: { // field return type name
+    data: 'AuthData'
+    error: 'Boolean'
+    message: 'String'
+  }
+  Mutation: { // field return type name
+    login: 'AuthResponse'
+    signup: 'AuthResponse'
+  }
   Query: { // field return type name
-    ok: 'Boolean'
+    getAllUsers: 'User'
   }
   User: { // field return type name
-    _id: 'String'
     email: 'String'
+    id: 'Int'
     name: 'String'
     password: 'String'
     username: 'String'
@@ -75,6 +114,17 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    signup: { // args
+      email: string; // String!
+      name: string; // String!
+      password: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
