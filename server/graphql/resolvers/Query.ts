@@ -1,4 +1,4 @@
-import { extendType, list, nonNull, queryType } from "nexus";
+import { list, nonNull, queryType } from "nexus";
 import { prisma } from "../../index";
 
 export const Query = queryType({
