@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import { compare, hash } from "bcrypt";
 import { mutationType, nonNull, stringArg } from "nexus";
 import { prisma } from "../../index";
+import { setCookie } from "../../utils/setCookie";
 import { AuthResponse } from "../types/Auth";
 
 export const Mutation = mutationType({
@@ -36,6 +37,7 @@ export const Mutation = mutationType({
               ...obj,
             },
           });
+          const token = setCookie(args.email, ctx.res);
           return {
             message: "Signup Successful",
             data: {
@@ -67,7 +69,6 @@ export const Mutation = mutationType({
             email: args.email,
           },
         });
-        console.log(emailExists);
 
         if (emailExists.length === 0) {
           return {
@@ -76,6 +77,7 @@ export const Mutation = mutationType({
           };
         } else {
           if (await compare(args.password, emailExists[0].password)) {
+            const token = setCookie(args.email, ctx.res);
             return {
               message: "Login Successful",
               data: {
