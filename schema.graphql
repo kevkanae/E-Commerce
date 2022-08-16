@@ -2,7 +2,14 @@
 ### Do not make changes to this file directly
 
 
+type AuthData {
+  email: String
+  name: String
+  username: String
+}
+
 type AuthResponse {
+  data: AuthData
   error: Boolean!
   message: String!
 }
