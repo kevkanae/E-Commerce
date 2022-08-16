@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import express from "express";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
+import { schema } from "./schema";
 
 export const prisma = new PrismaClient();
 
@@ -15,18 +16,7 @@ async function main() {
     res.send("Welcome to XKart API");
   });
 
-  const apolloServer = new ApolloServer({
-    typeDefs: `
-      type Query{
-        data: String!
-      }
-    `,
-    resolvers: {
-      Query: {
-        data: () => "hello world",
-      },
-    },
-  });
+  const apolloServer = new ApolloServer({ schema });
 
   await apolloServer.start();
   apolloServer.applyMiddleware({ app });

@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id        BigInt   @id @default(autoincrement()) @map("_id")
+  id        Int      @id @default(autoincrement()) @map("_id")
   name      String   @db.VarChar(24)
   username  String   @db.VarChar(24)
   email     String   @db.VarChar(24)
