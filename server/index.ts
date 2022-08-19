@@ -1,17 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import "dotenv/config";
 import express from "express";
-import cors from "cors";
-import { ApolloServer } from "apollo-server-express";
-import { schema } from "./schema";
+import { apolloServer } from "./server";
 import cookieParser from "cookie-parser";
+import { PrismaClient } from "@prisma/client";
 
 export const prisma = new PrismaClient();
 
 async function main() {
   const app = express();
-
-  //Remove from prod
-  app.set("trust proxy", true);
 
   app.use(express.json());
   app.use(cookieParser());
@@ -20,11 +16,6 @@ async function main() {
     res.send("Welcome to XKart API");
   });
 
-  const apolloServer = new ApolloServer({
-    schema,
-    context: ({ req, res }: any) => ({ req, res }),
-    introspection: true, //remove during prod
-  });
   await apolloServer.start();
   apolloServer.applyMiddleware({
     app,
@@ -34,7 +25,7 @@ async function main() {
     },
   });
 
-  app.listen(8080, () => {
+  app.listen(process.env.PORT! || 8080, () => {
     console.log("Server Connected :)");
   });
 }

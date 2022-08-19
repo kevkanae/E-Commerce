@@ -31,6 +31,7 @@ export interface NexusGenObjects {
   AuthData: { // root type
     email?: string | null; // String
     name?: string | null; // String
+    token?: string | null; // String
     username?: string | null; // String
   }
   AuthResponse: { // root type
@@ -63,6 +64,7 @@ export interface NexusGenFieldTypes {
   AuthData: { // field return type
     email: string | null; // String
     name: string | null; // String
+    token: string | null; // String
     username: string | null; // String
   }
   AuthResponse: { // field return type
@@ -90,6 +92,7 @@ export interface NexusGenFieldTypeNames {
   AuthData: { // field return type name
     email: 'String'
     name: 'String'
+    token: 'String'
     username: 'String'
   }
   AuthResponse: { // field return type name

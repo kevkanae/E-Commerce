@@ -5,6 +5,7 @@
 type AuthData {
   email: String
   name: String
+  token: String
   username: String
 }
 
