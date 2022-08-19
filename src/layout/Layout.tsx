@@ -1,14 +1,15 @@
 import { Flex } from "@chakra-ui/react";
-import { useOutlet } from "react-router-dom";
-import { scrollBarStyles } from "../utils/Theme";
 import Navbar from "./Navbar/Navbar";
 
-const Layout = () => {
-  const outlet = useOutlet();
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+const Layout = ({ children }: LayoutProps) => {
   return (
     <Flex w="full" direction="column" position="relative" overflowY="auto">
       <Navbar />
-      {outlet}
+      {children}
     </Flex>
   );
 };

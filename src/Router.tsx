@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoutes from "./layout/ProtectedRoutes";
 import { lazy, Suspense } from "react";
-import Layout from "./layout/Layout";
 import Loader from "./layout/Loader";
 import Home from "./pages/Home";
 
@@ -15,7 +15,7 @@ function Router() {
     <BrowserRouter>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route element={<Layout />}>
+          <Route element={<ProtectedRoutes />}>
             <Route path="/" element={<Home />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/contact" element={<Contact />} />
