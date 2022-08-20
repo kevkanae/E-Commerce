@@ -8,12 +8,12 @@ import { createClient, Provider } from "urql";
 
 const client = createClient({
   url: "http://localhost:8080/graphql",
-  fetchOptions: () => {
-    const token = getToken();
-    return {
-      headers: { authorization: token ? `Bearer ${token}` : "" },
-    };
-  },
+  // fetchOptions: () => {
+  //   const token = getToken();
+  //   return {
+  //     headers: { authorization: token ? `Bearer ${token}` : "" },
+  //   };
+  // },
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

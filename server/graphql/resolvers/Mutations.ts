@@ -24,18 +24,21 @@ export const Mutation = mutationType({
           },
         });
 
+        const newUsername = `${args.name.split(" ")[0]}${
+          Math.floor(Math.random() * 20) + 1
+        }`;
+
         if (emailExists.length === 0) {
           //Hash Password
           const hashedPassword = await hash(args.password, 12);
 
           //Insert Data
+
           await prisma.user.create({
             data: {
               ...{
                 name: args.name,
-                username: `${args.name.split(" ")[0]}${
-                  Math.floor(Math.random() * 20) + 1
-                }`,
+                username: newUsername,
                 email: args.email,
                 password: hashedPassword,
                 createdAt: new Date().toISOString(),
@@ -53,9 +56,9 @@ export const Mutation = mutationType({
             message: "Signup Successful",
             data: {
               token: token,
-              email: emailExists[0].email,
-              name: emailExists[0].name,
-              username: emailExists[0].username,
+              email: args.email,
+              name: args.name,
+              username: newUsername,
             },
             error: false,
           };
@@ -63,6 +66,11 @@ export const Mutation = mutationType({
           return {
             message: "User Exists",
             error: true,
+            data: {
+              email: args.email,
+              name: args.name,
+              username: newUsername,
+            },
           };
         }
       },

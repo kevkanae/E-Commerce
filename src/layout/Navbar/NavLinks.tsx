@@ -23,8 +23,7 @@ const NavLinks = () => {
           cursor="pointer"
           transition="0.2s cubic-bezier(0.47, 0, 0.745, 0.715)"
           _hover={{
-            color: "teal.800",
-            textShadow: "0.1rem 0.1rem 0.05rem #B2D8D8",
+            color: "teal.600",
           }}
         >
           Category
@@ -39,8 +38,7 @@ const NavLinks = () => {
           onClick={() => navigate(`${obj.path}`, { replace: true })}
           transition="0.2s cubic-bezier(0.47, 0, 0.745, 0.715)"
           _hover={{
-            color: "teal.800",
-            textShadow: "0.1rem 0.1rem 0.05rem #B2D8D8",
+            color: "teal.600",
           }}
         >
           {obj.title}

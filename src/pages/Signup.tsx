@@ -1,10 +1,14 @@
 import { Flex } from "@chakra-ui/react";
+import Navbar from "../layout/Navbar/Navbar";
 
 const Signup = () => {
   return (
-    <Flex w="100vw" h="100vh" overflowY="auto">
-      Signup
-    </Flex>
+    <>
+      <Navbar />
+      <Flex w="full" position="relative" h="100vh">
+        Signup
+      </Flex>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ const Landing = () => {
 
   return (
     <>
-      <Box w="full" position="relative" minH="100vh">
+      <Box w="full" position="relative" h="100vh">
         <Image
           src={BG}
           alt="Background"
