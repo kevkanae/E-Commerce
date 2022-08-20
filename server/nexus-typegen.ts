@@ -103,6 +103,7 @@ export interface NexusGenFieldTypes {
     message: string; // String!
   }
   Query: { // field return type
+    getAllProducts: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
     getAllUsers: Array<NexusGenRootTypes['User'] | null>; // [User]!
     getSomeProducts: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
   }
@@ -145,6 +146,7 @@ export interface NexusGenFieldTypeNames {
     message: 'String'
   }
   Query: { // field return type name
+    getAllProducts: 'ProductResponse'
     getAllUsers: 'User'
     getSomeProducts: 'ProductResponse'
   }

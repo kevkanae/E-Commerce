@@ -36,6 +36,7 @@ type ProductResponse {
 }
 
 type Query {
+  getAllProducts: ProductResponse
   getAllUsers: [User]!
   getSomeProducts: ProductResponse
 }

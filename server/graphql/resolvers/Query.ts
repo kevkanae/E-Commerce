@@ -30,16 +30,22 @@ export const Query = queryType({
       },
     });
 
-    // t.field("getAllProducts", {
-    //   type: ProductResponse,
-    //   resolve: (parent, args,ctx:IContext) => {
-    //     const isAuth = AuthMiddleware(ctx)
-    //     // if(isAuth){
-    //     //   return isAuth
-    //     // } else{
-    //     //   return prisma.products.findMany();
-    //     // }
-    //   },
-    // });
+    t.field("getAllProducts", {
+      type: ProductResponse,
+      resolve: async (parent, args, ctx: IContext) => {
+        const isAuth = AuthMiddleware(ctx);
+        if (isAuth) {
+          return { ...isAuth, data: [] };
+        } else {
+          const data = await prisma.products.findMany();
+
+          return {
+            message: "SUCCESS",
+            error: false,
+            data: data,
+          };
+        }
+      },
+    });
   },
 });
