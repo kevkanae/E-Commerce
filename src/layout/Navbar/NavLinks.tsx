@@ -30,7 +30,6 @@ const NavLinks = () => {
         </MenuButton>
         <CategoryMenuList />
       </Menu>
-      {/* ================ */}
       {NavLinkData.map((obj, i) => (
         <Text
           key={i}

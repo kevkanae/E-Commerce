@@ -19,6 +19,7 @@ function Router() {
             <Route path="/feed" element={<Feed />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
+
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
