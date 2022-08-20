@@ -15,3 +15,13 @@ model User {
   password  String   @db.VarChar(140)
   createdAt DateTime @db.Date
 }
+
+model products {
+  id        Int     @id @map("_id")
+  name      String
+  image_url String
+  price     Int
+  rating    Float?  @db.Real
+  category  String?
+}
+

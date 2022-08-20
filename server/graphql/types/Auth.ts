@@ -3,6 +3,7 @@ import { objectType } from "nexus";
 const AuthData = objectType({
   name: "AuthData",
   definition(t) {
+    t.string("token");
     t.string("email");
     t.string("name");
     t.string("username");
