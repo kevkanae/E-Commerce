@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import { compare, hash } from "bcrypt";
 import { mutationType, nonNull, stringArg } from "nexus";
 import { prisma } from "../../index";
+
 import { IContext } from "../../interface/context";
 import { accessToken } from "../../utils/accessToken";
 import { refreshToken } from "../../utils/refreshToken";
@@ -24,7 +25,7 @@ export const Mutation = mutationType({
           },
         });
 
-        const newUsername = `${args.name.split(" ")[0]}${
+        const newUsername: string = `${args.name.split(" ")[0]}${
           Math.floor(Math.random() * 20) + 1
         }`;
 
@@ -33,7 +34,6 @@ export const Mutation = mutationType({
           const hashedPassword = await hash(args.password, 12);
 
           //Insert Data
-
           await prisma.user.create({
             data: {
               ...{
@@ -54,18 +54,18 @@ export const Mutation = mutationType({
 
           return {
             message: "Signup Successful",
+            error: false,
             data: {
               token: token,
               email: args.email,
               name: args.name,
               username: newUsername,
             },
-            error: false,
           };
         } else {
           return {
             message: "User Exists",
-            error: true,
+            error: false,
             data: {
               email: args.email,
               name: args.name,
@@ -82,6 +82,7 @@ export const Mutation = mutationType({
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
+
       resolve: async (_parent, args, ctx: IContext) => {
         let emailExists: User[] = [];
         emailExists = await prisma.user.findMany({
@@ -107,7 +108,7 @@ export const Mutation = mutationType({
               message: "Login Successful",
               data: {
                 token: token,
-                email: emailExists[0].email,
+                email: args.email,
                 name: emailExists[0].name,
                 username: emailExists[0].username,
               },

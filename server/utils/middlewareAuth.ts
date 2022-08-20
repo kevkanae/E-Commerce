@@ -13,7 +13,7 @@ export const AuthMiddleware = (ctx: IContext) => {
 
   try {
     const token = auth.split(" ")[1];
-    const payload = verify(token, process.env.ACCESS_TOKEN!);
+    const payload = verify(token, process.env.ACCESS_KEY!);
     ctx.payload = payload as any;
 
     return null;
