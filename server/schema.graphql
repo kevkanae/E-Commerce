@@ -20,8 +20,24 @@ type Mutation {
   signup(email: String!, name: String!, password: String!): AuthResponse
 }
 
+type ProductData {
+  category: String
+  id: Int
+  image_url: String
+  name: String
+  price: Int
+  rating: Float
+}
+
+type ProductResponse {
+  data: [ProductData]!
+  error: Boolean!
+  message: String!
+}
+
 type Query {
   getAllUsers: [User]!
+  getSomeProducts: ProductResponse
 }
 
 type User {

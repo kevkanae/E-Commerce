@@ -40,6 +40,19 @@ export interface NexusGenObjects {
     message: string; // String!
   }
   Mutation: {};
+  ProductData: { // root type
+    category?: string | null; // String
+    id?: number | null; // Int
+    image_url?: string | null; // String
+    name?: string | null; // String
+    price?: number | null; // Int
+    rating?: number | null; // Float
+  }
+  ProductResponse: { // root type
+    data: Array<NexusGenRootTypes['ProductData'] | null>; // [ProductData]!
+    error: boolean; // Boolean!
+    message: string; // String!
+  }
   Query: {};
   User: { // root type
     email?: string | null; // String
@@ -76,8 +89,22 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
     signup: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
   }
+  ProductData: { // field return type
+    category: string | null; // String
+    id: number | null; // Int
+    image_url: string | null; // String
+    name: string | null; // String
+    price: number | null; // Int
+    rating: number | null; // Float
+  }
+  ProductResponse: { // field return type
+    data: Array<NexusGenRootTypes['ProductData'] | null>; // [ProductData]!
+    error: boolean; // Boolean!
+    message: string; // String!
+  }
   Query: { // field return type
     getAllUsers: Array<NexusGenRootTypes['User'] | null>; // [User]!
+    getSomeProducts: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
   }
   User: { // field return type
     email: string | null; // String
@@ -104,8 +131,22 @@ export interface NexusGenFieldTypeNames {
     login: 'AuthResponse'
     signup: 'AuthResponse'
   }
+  ProductData: { // field return type name
+    category: 'String'
+    id: 'Int'
+    image_url: 'String'
+    name: 'String'
+    price: 'Int'
+    rating: 'Float'
+  }
+  ProductResponse: { // field return type name
+    data: 'ProductData'
+    error: 'Boolean'
+    message: 'String'
+  }
   Query: { // field return type name
     getAllUsers: 'User'
+    getSomeProducts: 'ProductResponse'
   }
   User: { // field return type name
     email: 'String'
