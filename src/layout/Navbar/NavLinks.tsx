@@ -20,6 +20,7 @@ const NavLinks = () => {
       <Menu>
         <MenuButton
           as={Text}
+          fontWeight={500}
           cursor="pointer"
           transition="0.2s cubic-bezier(0.47, 0, 0.745, 0.715)"
           _hover={{
@@ -33,6 +34,7 @@ const NavLinks = () => {
       {NavLinkData.map((obj, i) => (
         <Text
           key={i}
+          fontWeight={500}
           cursor="pointer"
           onClick={() => navigate(`${obj.path}`, { replace: true })}
           transition="0.2s cubic-bezier(0.47, 0, 0.745, 0.715)"

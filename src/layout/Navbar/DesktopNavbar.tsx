@@ -7,9 +7,12 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
+import { useToken } from "../../services/useToken.Hook";
 import NavLinks from "./NavLinks";
 
 const DesktopNavbar = () => {
+  const token: string | null = useToken();
+
   return (
     <>
       <HStack
@@ -21,18 +24,20 @@ const DesktopNavbar = () => {
         }}
       >
         <NavLinks />
-        <Menu>
-          <MenuButton>
-            <Avatar name="My Name" src="https://picsum.photos/777" />
-          </MenuButton>
-          <MenuList>
-            <MenuItem>A</MenuItem>
-            <MenuItem>B</MenuItem>
-            <MenuItem>C</MenuItem>
-            <MenuDivider />
-            <MenuItem>Logout</MenuItem>
-          </MenuList>
-        </Menu>
+        {token && (
+          <Menu>
+            <MenuButton>
+              <Avatar name="My Name" src="https://picsum.photos/777" />
+            </MenuButton>
+            <MenuList>
+              <MenuItem>A</MenuItem>
+              <MenuItem>B</MenuItem>
+              <MenuItem>C</MenuItem>
+              <MenuDivider />
+              <MenuItem>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+        )}
       </HStack>
     </>
   );
