@@ -1,5 +1,4 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import BG from "../../assets/bg.jpg";
 import { BsBoxArrowInUpRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +9,7 @@ const Landing = () => {
     <>
       <Box w="full" position="relative" h="100vh">
         <Image
-          src={BG}
+          src="https://ucarecdn.com/80a5fddd-1f17-442f-8d8b-7c5fe06bfbc3/-/preview/-/quality/smart/"
           alt="Background"
           h="77vh"
           w="full"

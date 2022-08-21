@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Image,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Image, Text } from "@chakra-ui/react";
 import { useQuery } from "urql";
 import { IGetSomeProductsQuery } from "../../interfaces/Product/IGetSomeProducts";
 import Loader from "../../layout/Loader";
