@@ -9,19 +9,18 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement()) @map("_id")
-  name      String   @db.VarChar(24)
-  username  String   @db.VarChar(24)
-  email     String   @db.VarChar(24)
-  password  String   @db.VarChar(140)
+  name      String
+  username  String
+  email     String
+  password  String
   createdAt DateTime @db.Date
 }
 
-model products {
-  id        Int     @id @map("_id")
+model Products {
+  id        Int    @id @default(autoincrement()) @map("_id")
   name      String
   image_url String
   price     Int
-  rating    Float?  @db.Real
-  category  String?
+  rating    Float  @db.Real
+  category  String
 }
-
