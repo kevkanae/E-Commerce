@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProtectedRoutes from "./layout/ProtectedRoutes";
 import { lazy, Suspense } from "react";
 import Loader from "./layout/Loader";
 import Home from "./pages/Home";
+import Layout from "./layout/Layout";
+import ProtectedRoutes from "./shared/ProtectedRoutes";
 
 //Lazy Imports
 const Feed = lazy(() => import("./pages/Feed"));
@@ -19,10 +20,9 @@ function Router() {
             <Route path="/feed" element={<Feed />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
-
           <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
