@@ -5,15 +5,17 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "./index.css";
 import { theme } from "./utils/Theme";
 import { createClient, Provider } from "urql";
+import { useToken } from "./services/useToken.Hook";
 
 const client = createClient({
   url: "http://localhost:8080/graphql",
-  // fetchOptions: () => {
-  //   const token = getToken();
-  //   return {
-  //     headers: { authorization: token ? `Bearer ${token}` : "" },
-  //   };
-  // },
+  fetchOptions: () => {
+    const token = useToken();
+    return {
+      credentials: "include",
+      headers: { authorization: token ? `Bearer ${token}` : "" },
+    };
+  },
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
