@@ -48,8 +48,8 @@ export interface NexusGenObjects {
     price?: number | null; // Int
     rating?: number | null; // Float
   }
-  ProductResponse: { // root type
-    data: Array<NexusGenRootTypes['ProductData'] | null>; // [ProductData]!
+  ProductsResponse: { // root type
+    data?: Array<NexusGenRootTypes['ProductData'] | null> | null; // [ProductData]
     error: boolean; // Boolean!
     message: string; // String!
   }
@@ -97,15 +97,16 @@ export interface NexusGenFieldTypes {
     price: number | null; // Int
     rating: number | null; // Float
   }
-  ProductResponse: { // field return type
-    data: Array<NexusGenRootTypes['ProductData'] | null>; // [ProductData]!
+  ProductsResponse: { // field return type
+    data: Array<NexusGenRootTypes['ProductData'] | null> | null; // [ProductData]
     error: boolean; // Boolean!
     message: string; // String!
   }
   Query: { // field return type
-    getAllProducts: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
+    getAllProducts: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
     getAllUsers: Array<NexusGenRootTypes['User'] | null>; // [User]!
-    getSomeProducts: NexusGenRootTypes['ProductResponse'] | null; // ProductResponse
+    getOneProduct: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
+    getSomeProducts: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
   }
   User: { // field return type
     email: string | null; // String
@@ -140,15 +141,16 @@ export interface NexusGenFieldTypeNames {
     price: 'Int'
     rating: 'Float'
   }
-  ProductResponse: { // field return type name
+  ProductsResponse: { // field return type name
     data: 'ProductData'
     error: 'Boolean'
     message: 'String'
   }
   Query: { // field return type name
-    getAllProducts: 'ProductResponse'
+    getAllProducts: 'ProductsResponse'
     getAllUsers: 'User'
-    getSomeProducts: 'ProductResponse'
+    getOneProduct: 'ProductsResponse'
+    getSomeProducts: 'ProductsResponse'
   }
   User: { // field return type name
     email: 'String'
@@ -169,6 +171,11 @@ export interface NexusGenArgTypes {
       email: string; // String!
       name: string; // String!
       password: string; // String!
+    }
+  }
+  Query: {
+    getOneProduct: { // args
+      productID: number; // Int!
     }
   }
 }

@@ -29,16 +29,17 @@ type ProductData {
   rating: Float
 }
 
-type ProductResponse {
-  data: [ProductData]!
+type ProductsResponse {
+  data: [ProductData]
   error: Boolean!
   message: String!
 }
 
 type Query {
-  getAllProducts: ProductResponse
+  getAllProducts: ProductsResponse
   getAllUsers: [User]!
-  getSomeProducts: ProductResponse
+  getOneProduct(productID: Int!): ProductsResponse
+  getSomeProducts: ProductsResponse
 }
 
 type User {

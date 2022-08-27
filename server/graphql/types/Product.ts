@@ -1,4 +1,4 @@
-import { list, nonNull, objectType } from "nexus";
+import { list, nonNull, nullable, objectType } from "nexus";
 
 export const ProductData = objectType({
   name: "ProductData",
@@ -12,11 +12,11 @@ export const ProductData = objectType({
   },
 });
 
-export const ProductResponse = objectType({
-  name: "ProductResponse",
+export const ProductsResponse = objectType({
+  name: "ProductsResponse",
   definition(t) {
     t.nonNull.string("message");
-    t.field("data", { type: nonNull(list(ProductData)) });
+    t.field("data", { type: list(ProductData) });
     t.nonNull.boolean("error");
   },
 });
