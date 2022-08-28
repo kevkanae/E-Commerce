@@ -1,11 +1,13 @@
-import { useQuery } from "urql";
-
-export const SignInQuery = `mutation Login($name: String!, $email: String!, $password: String!) {
-    signup(name: $name, email: $email, password: $password) {
+export const Loginquery = ` mutation Mutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      message
       data {
         token
+        email
+        name
+        username
       }
-      message
       error
     }
-  }`;
+  }  
+`;

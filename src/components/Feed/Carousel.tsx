@@ -23,19 +23,19 @@ const Carousel = () => {
   };
   const slides = [
     {
-      img: "https://images.pexels.com/photos/2599537/pexels-photo-2599537.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      img: "https://images.pexels.com/photos/3944405/pexels-photo-3944405.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
-      img: "https://images.pexels.com/photos/2714581/pexels-photo-2714581.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      img: "https://images.pexels.com/photos/6634175/pexels-photo-6634175.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
-      img: "https://images.pexels.com/photos/2878019/pexels-photo-2878019.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+      img: "https://images.pexels.com/photos/6956803/pexels-photo-6956803.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
-      img: "https://images.pexels.com/photos/1142950/pexels-photo-1142950.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      img: "https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
-      img: "https://images.pexels.com/photos/3124111/pexels-photo-3124111.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      img: "https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -56,10 +56,7 @@ const Carousel = () => {
   return (
     <Flex
       w="full"
-      bg="#edf3f8"
-      _dark={{
-        bg: "#3e3e3e",
-      }}
+      bg="transparent"
       p={10}
       alignItems="center"
       justifyContent="center"
@@ -78,6 +75,7 @@ const Carousel = () => {
                 {sid + 1} / {slidesCount}
               </Text>
               <Image
+                objectFit={"cover"}
                 src={slide.img}
                 alt="carousel image"
                 boxSize="full"

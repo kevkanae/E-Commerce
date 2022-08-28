@@ -1,11 +1,33 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Input, Button, chakra } from "@chakra-ui/react";
 
-interface IForms {
+interface IForms<T> {
   isSignup: boolean;
+  form: T;
+  setForm: any;
+  authHandler: any;
+  fetching: boolean;
 }
+interface IFormData {
+  name?: string;
+  email: string;
+  password: string;
+}
+const Forms = <T,>({
+  isSignup,
+  setForm,
+  authHandler,
+  fetching,
+}: IForms<T>): JSX.Element => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm((data: IFormData) => {
+      return {
+        ...data,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
 
-const Forms = ({ isSignup }: IForms) => {
   return (
     <>
       <chakra.form>
@@ -20,6 +42,7 @@ const Forms = ({ isSignup }: IForms) => {
               mb={4}
               name="name"
               type="text"
+              onChange={onChange}
             />
           </>
         )}
@@ -33,6 +56,7 @@ const Forms = ({ isSignup }: IForms) => {
           mb={4}
           name="email"
           type="email"
+          onChange={onChange}
         />
 
         <chakra.label color={"text"} htmlFor="password" fontWeight={600}>
@@ -43,12 +67,15 @@ const Forms = ({ isSignup }: IForms) => {
           color={"heading"}
           mb={4}
           name="password"
-          type="text"
+          type="password"
+          onChange={onChange}
         />
         <Button
           rightIcon={<ArrowForwardIcon />}
-          bg={"tertiary"}
+          bg={"button"}
           textColor={"buttonText"}
+          onClick={authHandler}
+          isLoading={fetching}
         >
           {isSignup ? "Signup" : "Login"}
         </Button>

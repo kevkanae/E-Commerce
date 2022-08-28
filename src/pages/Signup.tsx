@@ -6,6 +6,7 @@ import {
   chakra,
   Image,
   IconButton,
+  useToast,
 } from "@chakra-ui/react";
 import Forms from "../components/Auth/Forms";
 import { useNavigate } from "react-router-dom";
@@ -14,11 +15,62 @@ import { FcGoogle } from "react-icons/fc";
 import { CustomDivider } from "../components/Auth/Divider";
 import Card from "../assets/auth/addtocart.png";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 import { useMutation } from "urql";
-import { SignInQuery } from "../query/Login";
+import { ISignUp } from "../interfaces/Auth";
+import { SignUpQuery } from "../query/SignUp";
+
+interface IFormData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 const Signup = () => {
+  const toast = useToast();
   const navigate = useNavigate();
-  const [loginRes, login] = useMutation(SignInQuery);
+  const [form, setForm] = useState<IFormData>({
+    name: "",
+    email: "",
+    password: "",
+  });
+  /*
+  code for Signup
+  */
+  const [signInRes, signIn] = useMutation<ISignUp>(SignUpQuery);
+  const { data, fetching, error } = signInRes;
+  const handleSignUp = async () => {
+    signIn(form).then((_) => {
+      if (error) {
+        toast({
+          title: "Something went wrong..",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        if (data?.signup.message === "User Exists") {
+          toast({
+            title: "User Exists",
+            description: "Please login using password",
+            status: "warning",
+            duration: 9000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "Account created.",
+            description: "We've created your account for you.",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+          localStorage.setItem("ACCESS_KEY", data?.signup.data.token as string);
+        }
+      }
+    });
+  };
+
   return (
     <>
       <Flex
@@ -59,7 +111,7 @@ const Signup = () => {
           >
             <IconButton
               borderRadius={"100%"}
-              bg="tertiary"
+              bg="button"
               aria-label="Call Sage"
               fontSize="20px"
               icon={<ArrowBackIcon color={"buttonText"} />}
@@ -86,7 +138,13 @@ const Signup = () => {
               If you are not a member you can signup here
             </Text>
             <chakra.div mb={"1rem"}>
-              <Forms isSignup={true} />
+              <Forms<IFormData>
+                fetching={fetching}
+                authHandler={handleSignUp}
+                form={form}
+                setForm={setForm}
+                isSignup={true}
+              />
             </chakra.div>
             <CustomDivider />
             <Button
@@ -106,15 +164,16 @@ const Signup = () => {
                   color: "teal.600",
                   cursor: "pointer",
                 }}
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/login")}
               >
                 Already have an account
               </Text>
               <Button
-                bg="tertiary"
+                bg="button"
                 fontSize={"sm"}
                 color={"buttonText"}
                 leftIcon={<AiOutlineUser />}
+                onClick={() => navigate("/login")}
               >
                 Login
               </Button>
