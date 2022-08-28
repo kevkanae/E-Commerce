@@ -1,3 +1,4 @@
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Input, Button, chakra } from "@chakra-ui/react";
 
 interface IForms {
@@ -10,23 +11,47 @@ const Forms = ({ isSignup }: IForms) => {
       <chakra.form>
         {isSignup && (
           <>
-            <chakra.label htmlFor="name" fontWeight={600}>
+            <chakra.label color={"text"} htmlFor="name" fontWeight={600}>
               Name
             </chakra.label>
-            <Input mb={4} name="name" type="text" />
+            <Input
+              borderWidth={"2px"}
+              color={"heading"}
+              mb={4}
+              name="name"
+              type="text"
+            />
           </>
         )}
 
-        <chakra.label htmlFor="email" fontWeight={600}>
+        <chakra.label color={"text"} htmlFor="email" fontWeight={600}>
           Email
         </chakra.label>
-        <Input mb={4} name="email" type="email" />
+        <Input
+          borderWidth={"2px"}
+          color={"heading"}
+          mb={4}
+          name="email"
+          type="email"
+        />
 
-        <chakra.label htmlFor="password" fontWeight={600}>
+        <chakra.label color={"text"} htmlFor="password" fontWeight={600}>
           Password
         </chakra.label>
-        <Input mb={4} name="password" type="text" />
-        <Button></Button>
+        <Input
+          borderWidth={"2px"}
+          color={"heading"}
+          mb={4}
+          name="password"
+          type="text"
+        />
+        <Button
+          rightIcon={<ArrowForwardIcon />}
+          bg={"tertiary"}
+          textColor={"buttonText"}
+        >
+          {isSignup ? "Signup" : "Login"}
+        </Button>
       </chakra.form>
     </>
   );

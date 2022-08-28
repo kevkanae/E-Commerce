@@ -8,15 +8,17 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import Forms from "../components/Auth/Forms";
-import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineUser, AiOutlineUserAdd } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { CustomDivider } from "../components/Auth/Divider";
 import Card from "../assets/auth/addtocart.png";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useMutation } from "urql";
+import { SignInQuery } from "../query/Login";
 const Signup = () => {
   const navigate = useNavigate();
+  const [loginRes, login] = useMutation(SignInQuery);
   return (
     <>
       <Flex
@@ -25,25 +27,6 @@ const Signup = () => {
         h={["auto", "auto", "auto", "100vh"]}
         overflowY="auto"
       >
-        {/* <Flex
-          position="relative"
-          h="full"
-          w="48%"
-          align="center"
-          justify="center"
-          bg="gray.100"
-        >
-          <Flex h="210px" w="210px" bg="teal.500" borderRadius="50%"></Flex>
-          <Flex
-            position="absolute"
-            h="48vh"
-            w="full"
-            bg="white.50"
-            bottom={0}
-            left={0}
-            backdropFilter="blur(0.7rem)"
-          />
-        </Flex> */}
         <Flex
           display={["none", "none", "none", "flex"]}
           h="full"
