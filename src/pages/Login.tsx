@@ -6,19 +6,54 @@ import {
   Divider,
   Image,
   IconButton,
+  useToast,
 } from "@chakra-ui/react";
 import Forms from "../components/Auth/Forms";
-import { IoIosArrowBack, IoMdAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { CustomDivider } from "../components/Auth/Divider";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import Card from "../assets/auth/laptop-gift.png";
-
-import { BsBack } from "react-icons/bs";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { Loginquery } from "../query/Login";
+import { useMutation } from "urql";
+import { useState } from "react";
+import { ILogin } from "../interfaces/Auth";
+
+interface IFormData {
+  email: string;
+  password: string;
+}
 const Login = () => {
+  const toast = useToast();
   const navigate = useNavigate();
+  const [form, setForm] = useState<IFormData>({
+    email: "",
+    password: "",
+  });
+
+  const [loginRes, login] = useMutation<ILogin>(Loginquery);
+  const { data, fetching, error } = loginRes;
+  const handleLogin = async () => {
+    login(form).then((_) => {
+      if (data?.login.error) {
+        toast({
+          title: data?.login.message,
+          status: "warning",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: data?.login.message,
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+        localStorage.setItem("ACCESS_KEY", data?.login.data.token as string);
+      }
+    });
+  };
   return (
     <Flex w="100vw" h={["100%", "100%", "100%", "100vh"]} overflowY="auto">
       <Flex
@@ -43,7 +78,7 @@ const Login = () => {
         >
           <IconButton
             borderRadius={"100%"}
-            bg="tertiary"
+            bg="button"
             aria-label="Call Sage"
             fontSize="20px"
             icon={<ArrowBackIcon color={"buttonText"} />}
@@ -70,7 +105,13 @@ const Login = () => {
             If you are already a member you can login here
           </Text>
           <chakra.div mb={"1rem"}>
-            <Forms isSignup={false} />
+            <Forms<IFormData>
+              fetching={fetching}
+              form={form}
+              setForm={setForm}
+              authHandler={handleLogin}
+              isSignup={false}
+            />
           </chakra.div>
           <CustomDivider />
           <Button
@@ -95,10 +136,11 @@ const Login = () => {
               Don't have an Account?
             </Text>
             <Button
-              bg="tertiary"
+              bg="button"
               fontSize={"sm"}
               color={"buttonText"}
               leftIcon={<AiOutlineUserAdd />}
+              onClick={() => navigate("/signup")}
             >
               Register
             </Button>

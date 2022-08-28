@@ -7,7 +7,7 @@ const Landing = () => {
 
   return (
     <>
-      <Box w="full" position="relative" h="100vh">
+      <Box w="full" position="relative" bg={"background.pri"} h="100vh">
         <Image
           src="https://ucarecdn.com/80a5fddd-1f17-442f-8d8b-7c5fe06bfbc3/-/preview/-/quality/smart/"
           alt="Background"
@@ -42,16 +42,18 @@ const Landing = () => {
             }}
             fontWeight={700}
             lineHeight={1.4}
+            color="button"
             letterSpacing={1}
           >
             Wear the <br />
-            <Text as="span" color="teal.800">
+            <Text as="span" color="heading">
               Best
             </Text>
           </Text>
 
           <Flex
-            bg="gray.200"
+            bg="button"
+            color={"buttonText"}
             fontSize={{
               base: "1.2rem",
               md: "2.1rem",

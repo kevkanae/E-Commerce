@@ -1,5 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import Carousel from "../Feed/Carousel";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Footer = () => {
         align="center"
         direction="column-reverse"
         position="relative"
+        bg={"background.pri"}
       >
         <Flex
           bg="black"
@@ -59,7 +61,6 @@ const Footer = () => {
           }}
           borderRadius="0.25rem"
           h="49vh"
-          bg="whitesmoke"
           position="absolute"
           left="50%"
           top="35%"
@@ -68,7 +69,7 @@ const Footer = () => {
           align="center"
           justify="center"
         >
-          Carousel
+          <Carousel />
         </Flex>
       </Flex>
     </>

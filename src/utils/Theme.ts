@@ -38,11 +38,10 @@ export const theme = extendTheme({
     },
     heading:"#fffffe",
     text:"#94a1b2",
-    button:"#7f5af0",
+    button:"#2cb67d",
     buttonText:"#fffffe",
     main:"#fffffe",
     secondary:"#72757e",
-    tertiary:"#2cb67d",
     stroke:'#010101',
   },
 });
