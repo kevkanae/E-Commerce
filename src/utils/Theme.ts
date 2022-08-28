@@ -30,4 +30,19 @@ export const theme = extendTheme({
     body: `'Poppins', sans-serif`,
   },
   breakpoints,
+  colors:{
+    lightback:"#242629",
+    background:{
+      pri:"#16161a",
+      sec:"#242629"
+    },
+    heading:"#fffffe",
+    text:"#94a1b2",
+    button:"#7f5af0",
+    buttonText:"#fffffe",
+    main:"#fffffe",
+    secondary:"#72757e",
+    tertiary:"#2cb67d",
+    stroke:'#010101',
+  },
 });
