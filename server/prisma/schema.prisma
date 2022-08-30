@@ -8,20 +8,45 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement()) @map("_id")
-  name      String
-  username  String
-  email     String
-  password  String
-  createdAt DateTime @db.Date
+  id           Int            @id @default(autoincrement()) @map("_id")
+  name         String
+  username     String
+  email        String
+  password     String
+  createdAt    DateTime       @db.Date
+  ShoppingCart ShoppingCart[]
 }
 
 model Products {
-  id        Int    @id @default(autoincrement()) @map("_id")
+  id        Int         @id @default(autoincrement()) @map("_id")
   name      String
   image_url String
   price     Int
-  rating    Float  @db.Real
+  rating    Float       @db.Real
   category  String
+  CartItems CartItems[]
 }
 
+model ShoppingCart {
+  id        Int         @id @default(autoincrement()) @map("_id")
+  userID    Int
+  createdAt DateTime    @db.Date
+  User      User        @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "UserID_FK")
+  CartItems CartItems[]
+
+  @@index([id], map: "fki_ShoppingCartUserID")
+  @@index([userID], map: "fki_S")
+}
+
+model CartItems {
+  createdDate    DateTime     @db.Date
+  quantity       Int
+  productID      Int
+  shoppingCartID Int
+  id             Int          @id @default(autoincrement()) @map("_id")
+  Products       Products     @relation(fields: [productID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CartItemsProductID")
+  ShoppingCart   ShoppingCart @relation(fields: [shoppingCartID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CartItemsShoppingCartID")
+
+  @@index([productID], map: "fki_CartItemsProductID")
+  @@index([shoppingCartID], map: "fki_CartItemsShoppingCartID")
+}

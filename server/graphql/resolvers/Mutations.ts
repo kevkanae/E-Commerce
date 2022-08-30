@@ -1,11 +1,12 @@
 import { User } from "@prisma/client";
 import { compare, hash } from "bcrypt";
-import { mutationType, nonNull, stringArg } from "nexus";
+import { intArg, mutationType, nonNull, stringArg } from "nexus";
 import { prisma } from "../../index";
-
 import { IContext } from "../../interface/context";
 import { accessToken } from "../../utils/accessToken";
+import { AuthMiddleware } from "../../utils/middlewareAuth";
 import { refreshToken } from "../../utils/refreshToken";
+import { CartResponse } from "../rootSchema";
 import { AuthResponse } from "../types/Auth";
 
 export const Mutation = mutationType({
@@ -122,6 +123,121 @@ export const Mutation = mutationType({
               },
               error: true,
             };
+          }
+        }
+      },
+    });
+
+    t.field("addToCart", {
+      type: CartResponse,
+      args: {
+        productID: nonNull(intArg()),
+      },
+
+      resolve: async (_parent, args, ctx: IContext) => {
+        const isAuth = AuthMiddleware(ctx);
+        if (isAuth) {
+          return { ...isAuth, data: [] };
+        } else {
+          // Get Product ID
+          const product = await prisma.products.findMany({
+            where: {
+              id: args.productID,
+            },
+          });
+
+          //Get User ID
+          const user = await prisma.user.findMany({
+            where: {
+              email: ctx.payload!.email,
+            },
+          });
+
+          if (product.length > 0 && user.length > 0) {
+            //Check if Cart Exists for the User
+            const cartExists = await prisma.shoppingCart.findMany({
+              where: {
+                userID: user[0].id,
+              },
+            });
+
+            if (cartExists.length > 0) {
+              //Check if Product Exists in Cart Items
+              const productExists = await prisma.cartItems.findMany({
+                where: {
+                  productID: product[0].id,
+                },
+              });
+
+              if (productExists.length > 0) {
+                //Increment Quantity
+                const oldCartItem = await prisma.cartItems.update({
+                  where: {
+                    id: productExists[0].id,
+                  },
+                  data: {
+                    quantity: productExists[0].quantity + 1,
+                  },
+                });
+
+                return {
+                  message: "Added to Cart Successfully",
+                  error: false,
+                };
+              } else {
+                //Add to Cart Items
+                const cartItem = await prisma.cartItems.create({
+                  data: {
+                    quantity: 1,
+                    createdDate: new Date().toISOString(),
+                    productID: product[0].id,
+                    shoppingCartID: cartExists[0].id,
+                  },
+                });
+
+                return {
+                  message: "Added to Cart Successfully",
+                  error: false,
+                };
+              }
+            } else {
+              //Create a new cart
+              console.log(typeof user[0].id);
+
+              const newCart = await prisma.shoppingCart.create({
+                data: {
+                  userID: user[0].id,
+                  createdAt: new Date().toISOString(),
+                },
+              });
+
+              //Add to Cart Items
+              const cartItem = await prisma.cartItems.create({
+                data: {
+                  quantity: 1,
+                  createdDate: new Date().toISOString(),
+                  productID: product[0].id,
+                  shoppingCartID: newCart.id,
+                },
+              });
+
+              return {
+                message: "Added to Cart Successfully",
+                error: false,
+              };
+            }
+          } else {
+            if (product.length <= 0) {
+              return {
+                message: "Product doesn't Exist in DB",
+                error: true,
+              };
+            } else {
+              return {
+                message: "Server Error",
+                error: true,
+              };
+            }
           }
         }
       },

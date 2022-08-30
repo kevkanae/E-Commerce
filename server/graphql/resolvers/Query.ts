@@ -33,18 +33,13 @@ export const Query = queryType({
     t.field("getAllProducts", {
       type: ProductsResponse,
       resolve: async (parent, args, ctx: IContext) => {
-        const isAuth = AuthMiddleware(ctx);
-        if (isAuth) {
-          return { ...isAuth, data: [] };
-        } else {
-          const data = await prisma.products.findMany();
+        const data = await prisma.products.findMany();
 
-          return {
-            message: "SUCCESS",
-            error: false,
-            data: data,
-          };
-        }
+        return {
+          message: "SUCCESS",
+          error: false,
+          data: data,
+        };
       },
     });
 
@@ -54,29 +49,29 @@ export const Query = queryType({
         productID: nonNull(intArg()),
       },
       resolve: async (parent, args, ctx: IContext) => {
-        const isAuth = AuthMiddleware(ctx);
-        if (isAuth) {
-          return { ...isAuth, data: [] };
-        } else {
-          const data = await prisma.products.findMany({
-            where: {
-              id: args.productID,
-            },
-          });
+        // const isAuth = AuthMiddleware(ctx);
+        // if (isAuth) {
+        //   return { ...isAuth, data: [] };
+        // } else {
+        const data = await prisma.products.findMany({
+          where: {
+            id: args.productID,
+          },
+        });
 
-          if (data.length > 0) {
-            return {
-              message: "SUCCESS",
-              error: false,
-              data: data,
-            };
-          } else {
-            return {
-              message: "Product doesn't Exist in DB",
-              error: true,
-            };
-          }
+        if (data.length > 0) {
+          return {
+            message: "SUCCESS",
+            error: false,
+            data: data,
+          };
+        } else {
+          return {
+            message: "Product doesn't Exist in DB",
+            error: true,
+          };
         }
+        // }
       },
     });
   },

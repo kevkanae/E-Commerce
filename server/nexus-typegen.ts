@@ -39,6 +39,10 @@ export interface NexusGenObjects {
     error: boolean; // Boolean!
     message: string; // String!
   }
+  CartResponse: { // root type
+    error: boolean; // Boolean!
+    message: string; // String!
+  }
   Mutation: {};
   ProductData: { // root type
     category?: string | null; // String
@@ -85,7 +89,12 @@ export interface NexusGenFieldTypes {
     error: boolean; // Boolean!
     message: string; // String!
   }
+  CartResponse: { // field return type
+    error: boolean; // Boolean!
+    message: string; // String!
+  }
   Mutation: { // field return type
+    addToCart: NexusGenRootTypes['CartResponse'] | null; // CartResponse
     login: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
     signup: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
   }
@@ -129,7 +138,12 @@ export interface NexusGenFieldTypeNames {
     error: 'Boolean'
     message: 'String'
   }
+  CartResponse: { // field return type name
+    error: 'Boolean'
+    message: 'String'
+  }
   Mutation: { // field return type name
+    addToCart: 'CartResponse'
     login: 'AuthResponse'
     signup: 'AuthResponse'
   }
@@ -163,6 +177,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addToCart: { // args
+      productID: number; // Int!
+    }
     login: { // args
       email: string; // String!
       password: string; // String!
