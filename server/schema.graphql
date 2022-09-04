@@ -15,7 +15,24 @@ type AuthResponse {
   message: String!
 }
 
+type CartProductData {
+  brand: String
+  category: String
+  id: Int
+  image_url: String
+  name: String
+  price: Int
+  quantity: Int
+  rating: Float
+}
+
 type CartResponse {
+  error: Boolean!
+  message: String!
+}
+
+type GetCartResponse {
+  data: [CartProductData]
   error: Boolean!
   message: String!
 }
@@ -23,10 +40,12 @@ type CartResponse {
 type Mutation {
   addToCart(productID: Int!): CartResponse
   login(email: String!, password: String!): AuthResponse
+  modifyQuantity(isInc: Boolean!, productID: Int!): CartResponse
   signup(email: String!, name: String!, password: String!): AuthResponse
 }
 
 type ProductData {
+  brand: String
   category: String
   id: Int
   image_url: String
@@ -44,6 +63,7 @@ type ProductsResponse {
 type Query {
   getAllProducts: ProductsResponse
   getAllUsers: [User]!
+  getCartByID: GetCartResponse
   getOneProduct(productID: Int!): ProductsResponse
   getSomeProducts: ProductsResponse
 }

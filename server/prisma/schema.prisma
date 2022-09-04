@@ -24,6 +24,7 @@ model Products {
   price     Int
   rating    Float       @db.Real
   category  String
+  brand     String
   CartItems CartItems[]
 }
 

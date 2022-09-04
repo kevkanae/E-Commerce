@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import { compare, hash } from "bcrypt";
-import { intArg, mutationType, nonNull, stringArg } from "nexus";
+import { booleanArg, intArg, mutationType, nonNull, stringArg } from "nexus";
 import { prisma } from "../../index";
 import { IContext } from "../../interface/context";
 import { accessToken } from "../../utils/accessToken";
@@ -224,6 +224,96 @@ export const Mutation = mutationType({
               return {
                 message: "Added to Cart Successfully",
                 error: false,
+              };
+            }
+          } else {
+            if (product.length <= 0) {
+              return {
+                message: "Product doesn't Exist in DB",
+                error: true,
+              };
+            } else {
+              return {
+                message: "Server Error",
+                error: true,
+              };
+            }
+          }
+        }
+      },
+    });
+
+    t.field("modifyQuantity", {
+      type: CartResponse,
+      args: {
+        productID: nonNull(intArg()),
+        isInc: nonNull(booleanArg()),
+      },
+
+      resolve: async (_parent, args, ctx: IContext) => {
+        const isAuth = AuthMiddleware(ctx);
+        if (isAuth) {
+          return { ...isAuth, data: [] };
+        } else {
+          // Get Product ID
+          const product = await prisma.products.findMany({
+            where: {
+              id: args.productID,
+            },
+          });
+
+          //Get User ID
+          const user = await prisma.user.findMany({
+            where: {
+              email: ctx.payload!.email,
+            },
+          });
+
+          if (product.length > 0 && user.length > 0) {
+            //Check if Cart Exists for the User
+            const cartExists = await prisma.shoppingCart.findMany({
+              where: {
+                userID: user[0].id,
+              },
+            });
+
+            if (cartExists.length > 0) {
+              //Check if Product Exists in Cart Items
+              const productExists = await prisma.cartItems.findMany({
+                where: {
+                  productID: product[0].id,
+                },
+              });
+
+              if (productExists.length > 0) {
+                //Increment Quantity
+                const oldCartItem = await prisma.cartItems.update({
+                  where: {
+                    id: productExists[0].id,
+                  },
+                  data: {
+                    quantity: args.isInc
+                      ? productExists[0].quantity + 1
+                      : productExists[0].quantity - 1,
+                  },
+                });
+
+                return {
+                  message: "Updated Cart Successfully",
+                  error: false,
+                };
+              } else {
+                //No Cart Found
+                return {
+                  message: "Product not Found in Cart",
+                  error: true,
+                };
+              }
+            } else {
+              //No Cart Found
+              return {
+                message: "No Cart Found",
+                error: true,
               };
             }
           } else {

@@ -39,12 +39,28 @@ export interface NexusGenObjects {
     error: boolean; // Boolean!
     message: string; // String!
   }
+  CartProductData: { // root type
+    brand?: string | null; // String
+    category?: string | null; // String
+    id?: number | null; // Int
+    image_url?: string | null; // String
+    name?: string | null; // String
+    price?: number | null; // Int
+    quantity?: number | null; // Int
+    rating?: number | null; // Float
+  }
   CartResponse: { // root type
+    error: boolean; // Boolean!
+    message: string; // String!
+  }
+  GetCartResponse: { // root type
+    data?: Array<NexusGenRootTypes['CartProductData'] | null> | null; // [CartProductData]
     error: boolean; // Boolean!
     message: string; // String!
   }
   Mutation: {};
   ProductData: { // root type
+    brand?: string | null; // String
     category?: string | null; // String
     id?: number | null; // Int
     image_url?: string | null; // String
@@ -89,16 +105,33 @@ export interface NexusGenFieldTypes {
     error: boolean; // Boolean!
     message: string; // String!
   }
+  CartProductData: { // field return type
+    brand: string | null; // String
+    category: string | null; // String
+    id: number | null; // Int
+    image_url: string | null; // String
+    name: string | null; // String
+    price: number | null; // Int
+    quantity: number | null; // Int
+    rating: number | null; // Float
+  }
   CartResponse: { // field return type
+    error: boolean; // Boolean!
+    message: string; // String!
+  }
+  GetCartResponse: { // field return type
+    data: Array<NexusGenRootTypes['CartProductData'] | null> | null; // [CartProductData]
     error: boolean; // Boolean!
     message: string; // String!
   }
   Mutation: { // field return type
     addToCart: NexusGenRootTypes['CartResponse'] | null; // CartResponse
     login: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
+    modifyQuantity: NexusGenRootTypes['CartResponse'] | null; // CartResponse
     signup: NexusGenRootTypes['AuthResponse'] | null; // AuthResponse
   }
   ProductData: { // field return type
+    brand: string | null; // String
     category: string | null; // String
     id: number | null; // Int
     image_url: string | null; // String
@@ -114,6 +147,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     getAllProducts: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
     getAllUsers: Array<NexusGenRootTypes['User'] | null>; // [User]!
+    getCartByID: NexusGenRootTypes['GetCartResponse'] | null; // GetCartResponse
     getOneProduct: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
     getSomeProducts: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
   }
@@ -138,16 +172,33 @@ export interface NexusGenFieldTypeNames {
     error: 'Boolean'
     message: 'String'
   }
+  CartProductData: { // field return type name
+    brand: 'String'
+    category: 'String'
+    id: 'Int'
+    image_url: 'String'
+    name: 'String'
+    price: 'Int'
+    quantity: 'Int'
+    rating: 'Float'
+  }
   CartResponse: { // field return type name
+    error: 'Boolean'
+    message: 'String'
+  }
+  GetCartResponse: { // field return type name
+    data: 'CartProductData'
     error: 'Boolean'
     message: 'String'
   }
   Mutation: { // field return type name
     addToCart: 'CartResponse'
     login: 'AuthResponse'
+    modifyQuantity: 'CartResponse'
     signup: 'AuthResponse'
   }
   ProductData: { // field return type name
+    brand: 'String'
     category: 'String'
     id: 'Int'
     image_url: 'String'
@@ -163,6 +214,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     getAllProducts: 'ProductsResponse'
     getAllUsers: 'User'
+    getCartByID: 'GetCartResponse'
     getOneProduct: 'ProductsResponse'
     getSomeProducts: 'ProductsResponse'
   }
@@ -183,6 +235,10 @@ export interface NexusGenArgTypes {
     login: { // args
       email: string; // String!
       password: string; // String!
+    }
+    modifyQuantity: { // args
+      isInc: boolean; // Boolean!
+      productID: number; // Int!
     }
     signup: { // args
       email: string; // String!

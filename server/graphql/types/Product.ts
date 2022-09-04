@@ -9,6 +9,7 @@ export const ProductData = objectType({
     t.int("price");
     t.float("rating");
     t.string("category");
+    t.string("brand");
   },
 });
 
