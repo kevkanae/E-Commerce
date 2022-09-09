@@ -1,14 +1,62 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { BsBoxArrowInUpRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-
+import Img from "../../assets/auth/landing.png";
 const Landing = () => {
   const navigate = useNavigate();
 
   return (
     <>
       <Box w="full" position="relative" bg={"background.pri"} h="100vh">
-        <Image
+        <Flex
+          h={"100vh"}
+          justifyContent="space-between"
+          alignItems={"center"}
+          gap="2rem"
+        >
+          <Box
+            pb={"5rem"}
+            alignSelf={"flex-end"}
+            w={"40%"}
+            color="white"
+            pl="10"
+          >
+            <Text fontSize={"32px"} fontWeight="900">
+              Get all your dressing need at one stop
+            </Text>
+            <Box pt={7} pb="">
+              <Text lineHeight={"96px"} fontSize={"96px"} fontWeight="900">
+                SHOP
+              </Text>
+              <Text
+                display={"inline-block"}
+                lineHeight={"75px"}
+                bg={"button"}
+                fontSize={"96px"}
+                color="black"
+                fontWeight="900"
+              >
+                NOW
+              </Text>
+            </Box>
+            <Button
+              rightIcon={<ArrowForwardIcon />}
+              colorScheme="teal"
+              variant="outline"
+              mt={"2"}
+            >
+              Take me there
+            </Button>
+            {/* <Text textDecor={"underline"} color={"button"} mt={"4"}>
+              {"take me there -> "}
+            </Text> */}
+          </Box>
+          <Flex justifyContent={"flex-end"} alignSelf={"flex-end"} w={"60%"}>
+            <Image w="90%" src={Img} />
+          </Flex>
+        </Flex>
+        {/* <Image
           src="https://ucarecdn.com/80a5fddd-1f17-442f-8d8b-7c5fe06bfbc3/-/preview/-/quality/smart/"
           alt="Background"
           h="77vh"
@@ -85,7 +133,7 @@ const Landing = () => {
             </Text>
             <BsBoxArrowInUpRight size={20} />
           </Flex>
-        </Flex>
+        </Flex> */}
       </Box>
     </>
   );

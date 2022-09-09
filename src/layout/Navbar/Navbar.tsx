@@ -25,6 +25,7 @@ const Navbar = () => {
       px={5}
       zIndex={777}
       //Glassmorphism
+      color={"white"}
       {...FlexboxProps}
     >
       <Text

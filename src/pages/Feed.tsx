@@ -4,7 +4,7 @@ import Carousel from "../components/Feed/Carousel";
 const Feed = () => {
   return (
     <>
-      <Box w="full" h="100vh">
+      <Box w="full" h="100vh" bg={"background.sec"}>
         <Carousel />
       </Box>
     </>
