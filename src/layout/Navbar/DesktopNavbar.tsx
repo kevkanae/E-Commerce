@@ -1,5 +1,7 @@
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   Avatar,
+  Button,
   HStack,
   Menu,
   MenuButton,
@@ -27,9 +29,17 @@ const DesktopNavbar = () => {
         {token && (
           <Menu>
             <MenuButton>
-              <Avatar name="My Name" src="https://picsum.photos/777" />
+              {/* <Avatar name="My Name" src="https://picsum.photos/777" /> */}
+              <Button
+                rightIcon={<ArrowForwardIcon color={"button"} />}
+                borderColor="button"
+                color={"white"}
+                variant="outline"
+              >
+                Login
+              </Button>
             </MenuButton>
-            <MenuList>
+            <MenuList color={"black"}>
               <MenuItem>A</MenuItem>
               <MenuItem>B</MenuItem>
               <MenuItem>C</MenuItem>

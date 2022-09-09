@@ -1,8 +1,18 @@
-import { Box, Button, Flex, Grid, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ChakraProps,
+  Container,
+  Flex,
+  Grid,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import { useQuery } from "urql";
 import { IGetSomeProductsQuery } from "../../interfaces/Product/IGetSomeProducts";
 import Loader from "../../layout/Loader";
 import { BsChevronCompactDown } from "react-icons/bs";
+import { CSSProperties } from "react";
 
 const GetSomeProductsQuery = `
   query{
@@ -16,7 +26,6 @@ const GetSomeProductsQuery = `
     }
   }
 `;
-
 const ImageGrid = () => {
   const [{ data, error, fetching }, reexecuteQuery] =
     useQuery<IGetSomeProductsQuery>({
@@ -25,11 +34,39 @@ const ImageGrid = () => {
 
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Oh no... {error.message}</p>;
-
+  const style: ChakraProps = {
+    position: "relative",
+    _after: {
+      content: `""`,
+      position: "absolute",
+      bottom: "0",
+      left: 0,
+      height: "10px",
+      width: "100%",
+      backgroundColor: "button",
+      border: "solid 5px #000",
+      borderColor: "#000 transparent transparent transparent",
+      borderRadius: "50%/100px 100px 0 0",
+    },
+  };
   return (
     <>
       {data ? (
-        <>
+        <Box pt="36" bg={"background.sec"}>
+          <Text
+            fontSize={"5rem"}
+            fontWeight="900"
+            textAlign={"center"}
+            color={"white"}
+            pb="10"
+          >
+            Find your{" "}
+            <Box {...style} display={"inline-block"}>
+              {" "}
+              style
+            </Box>
+          </Text>
+
           <Grid
             h="100vh"
             w="full"
@@ -102,7 +139,7 @@ const ImageGrid = () => {
               </Text>
             </Flex>
           </Grid>
-        </>
+        </Box>
       ) : (
         <Loader />
       )}
