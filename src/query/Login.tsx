@@ -1,4 +1,4 @@
-export const Loginquery = ` mutation Mutation($email: String!, $password: String!) {
+export const LoginQuery = ` mutation Mutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       message
       data {

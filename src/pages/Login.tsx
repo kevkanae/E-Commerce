@@ -15,45 +15,52 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import Card from "../assets/auth/laptop-gift.png";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Loginquery } from "../query/Login";
+import { LoginQuery } from "../query/Login";
 import { useMutation } from "urql";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ILogin } from "../interfaces/Auth";
 
 interface IFormData {
   email: string;
   password: string;
 }
+
 const Login = () => {
   const toast = useToast();
   const navigate = useNavigate();
+
   const [form, setForm] = useState<IFormData>({
     email: "",
     password: "",
   });
 
-  const [loginRes, login] = useMutation<ILogin>(Loginquery);
-  const { data, fetching, error } = loginRes;
-  const handleLogin = async () => {
-    login(form).then((_) => {
-      if (data?.login.error) {
-        toast({
-          title: data?.login.message,
-          status: "warning",
-          duration: 9000,
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: data?.login.message,
-          status: "success",
-          duration: 9000,
-          isClosable: true,
-        });
-        localStorage.setItem("ACCESS_KEY", data?.login.data.token as string);
+  const [loginState, loginHandler] = useMutation<ILogin>(LoginQuery);
+  const { fetching } = loginState;
+
+  const handleLogin = () => {
+    loginHandler(form).then(({ data }) => {
+      if (data) {
+        if (data.login.error) {
+          toast({
+            title: data.login.message,
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+          });
+        } else {
+          localStorage.setItem("ACCESS_KEY", data.login.data.token);
+          localStorage.setItem("USER_EMAIL", data.login.data.email);
+          toast({
+            title: data.login.message,
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
       }
     });
   };
+
   return (
     <Flex w="100vw" h={["100%", "100%", "100%", "100vh"]} overflowY="auto">
       <Flex
