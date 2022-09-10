@@ -19,8 +19,12 @@ function Router() {
           <Route element={<ProtectedRoutes />}>
             <Route path="/contact" element={<Contact />} />
           </Route>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Feed />} />
+
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Feed />} />
+          </Route>
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

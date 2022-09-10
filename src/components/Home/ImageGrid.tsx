@@ -51,7 +51,6 @@ const ImageGrid = () => {
           >
             Find your{" "}
             <Box {...style} display={"inline-block"}>
-              {" "}
               style
             </Box>
           </Text>
@@ -110,15 +109,6 @@ const ImageGrid = () => {
               bottom="6vh"
               left={0}
               bg="linear-gradient(178.6deg, rgba(20, 36, 50, 0.017) 11.8%,rgba(35, 37, 38, 0.785) 41.8%, #242629 83.8%)"
-
-              // bg={`linear-gradient(to bottom,
-              //   rgba(255,255,255,0),
-              //   rgba(255,255,255,0.1),
-              //   rgba(255,255,255,0.2),
-              //   rgba(255,255,255,0.4),
-              //   rgba(255,255,255,0.6),
-              //   rgba(255,255,255,0.8),
-              //   rgba(255,255,255,1))`}
             >
               <Button bg={"button"} color="buttonText">
                 View More

@@ -1,13 +1,20 @@
-import { Box } from "@chakra-ui/react";
-import Carousel from "../components/Feed/Carousel";
+import { Button, Flex, Input } from "@chakra-ui/react";
+import ProductGrid from "../components/Feed/ProductGrid";
+import Search from "../components/Feed/Search";
 
 const Feed = () => {
   return (
-    <>
-      <Box w="full" h="100vh" bg={"background.sec"}>
-        <Carousel />
-      </Box>
-    </>
+    <Flex
+      w="full"
+      minH="100vh"
+      position="relative"
+      bg="background.sec"
+      direction="column"
+      align="center"
+    >
+      <Search />
+      <ProductGrid />
+    </Flex>
   );
 };
 

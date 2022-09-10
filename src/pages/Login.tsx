@@ -15,7 +15,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import Card from "../assets/auth/laptop-gift.png";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { LoginMutation } from "../query/auth/Login";
+import { LoginMutation } from "../query/auth/Login.mutation";
 import { useMutation } from "urql";
 import { useCallback, useState } from "react";
 import { ILogin } from "../interfaces/Auth";

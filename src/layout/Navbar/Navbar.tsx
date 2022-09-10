@@ -10,7 +10,7 @@ const Navbar = () => {
   const path = usePathName();
 
   const FlexboxProps: FlexProps = {
-    position: path === "/" ? "absolute" : "static",
+    position: path === "/" || path === "/home" ? "absolute" : "static",
     bg: path === "/" ? "white.50" : "white.100",
     backdropFilter: path === "/" ? "blur(0.2rem)" : "none",
   };

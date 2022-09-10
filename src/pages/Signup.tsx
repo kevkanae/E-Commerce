@@ -18,7 +18,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useMutation } from "urql";
 import { ISignUp } from "../interfaces/Auth";
-import { SignupMutation } from "../query/auth/SignUp";
+import { SignupMutation } from "../query/auth/SignUp.mutation";
 
 interface IFormData {
   name: string;
