@@ -17,11 +17,10 @@ function Router() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<ProtectedRoutes />}>
-            <Route path="/feed" element={<Feed />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/" element={<Contact />} />
           </Route>
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Feed />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

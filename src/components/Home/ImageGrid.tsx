@@ -1,8 +1,7 @@
 import {
   Box,
+  BoxProps,
   Button,
-  ChakraProps,
-  Container,
   Flex,
   Grid,
   Image,
@@ -12,29 +11,18 @@ import { useQuery } from "urql";
 import { IGetSomeProductsQuery } from "../../interfaces/Product/IGetSomeProducts";
 import Loader from "../../layout/Loader";
 import { BsChevronCompactDown } from "react-icons/bs";
-import { CSSProperties } from "react";
+import { GetSomeProductsQuery } from "../../query/products/GetSomeProducts.query";
 
-const GetSomeProductsQuery = `
-  query{
-    getSomeProducts {
-      data {
-        name
-        image_url
-      } 
-      error
-      message
-    }
-  }
-`;
 const ImageGrid = () => {
-  const [{ data, error, fetching }, reexecuteQuery] =
+  const [{ data, error, fetching }, handleQuery] =
     useQuery<IGetSomeProductsQuery>({
       query: GetSomeProductsQuery,
     });
 
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Oh no... {error.message}</p>;
-  const style: ChakraProps = {
+
+  const style: BoxProps = {
     position: "relative",
     _after: {
       content: `""`,
@@ -49,6 +37,7 @@ const ImageGrid = () => {
       borderRadius: "50%/100px 100px 0 0",
     },
   };
+
   return (
     <>
       {data ? (

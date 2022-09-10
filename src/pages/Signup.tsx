@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import Forms from "../components/Auth/Forms";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineUser, AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { CustomDivider } from "../components/Auth/Divider";
 import Card from "../assets/auth/addtocart.png";
@@ -18,7 +18,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useMutation } from "urql";
 import { ISignUp } from "../interfaces/Auth";
-import { SignUpQuery } from "../query/SignUp";
+import { SignupMutation } from "../query/auth/SignUp";
 
 interface IFormData {
   name: string;
@@ -34,38 +34,29 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  /*
-  code for Signup
-  */
-  const [signInRes, signIn] = useMutation<ISignUp>(SignUpQuery);
-  const { data, fetching, error } = signInRes;
-  const handleSignUp = async () => {
-    signIn(form).then((_) => {
-      if (error) {
-        toast({
-          title: "Something went wrong..",
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
-      } else {
-        if (data?.signup.message === "User Exists") {
+
+  const [signupState, signupHandler] = useMutation<ISignUp>(SignupMutation);
+  const { fetching } = signupState;
+
+  const handleSignUp = () => {
+    signupHandler(form).then(({ data }) => {
+      if (data) {
+        if (data.signup.error) {
           toast({
-            title: "User Exists",
-            description: "Please login using password",
+            title: data.signup.message,
             status: "warning",
-            duration: 9000,
+            duration: 5000,
             isClosable: true,
           });
         } else {
+          localStorage.setItem("ACCESS_KEY", data.signup.data.token);
+          localStorage.setItem("USER_EMAIL", data.signup.data.email);
           toast({
-            title: "Account created.",
-            description: "We've created your account for you.",
+            title: data.signup.message,
             status: "success",
-            duration: 9000,
+            duration: 5000,
             isClosable: true,
           });
-          localStorage.setItem("ACCESS_KEY", data?.signup.data.token as string);
         }
       }
     });

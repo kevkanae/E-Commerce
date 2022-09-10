@@ -15,7 +15,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import Card from "../assets/auth/laptop-gift.png";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { LoginQuery } from "../query/Login";
+import { LoginMutation } from "../query/auth/Login";
 import { useMutation } from "urql";
 import { useCallback, useState } from "react";
 import { ILogin } from "../interfaces/Auth";
@@ -34,7 +34,7 @@ const Login = () => {
     password: "",
   });
 
-  const [loginState, loginHandler] = useMutation<ILogin>(LoginQuery);
+  const [loginState, loginHandler] = useMutation<ILogin>(LoginMutation);
   const { fetching } = loginState;
 
   const handleLogin = () => {
