@@ -66,7 +66,7 @@ export const Mutation = mutationType({
         } else {
           return {
             message: "User Exists",
-            error: false,
+            error: true,
             data: {
               email: args.email,
               name: args.name,

@@ -6,7 +6,6 @@ import { refreshToken } from "./refreshToken";
 
 export const refreshRoute = async (req: Request, res: Response) => {
   const cookie = req.cookies.yum;
-  console.log(req.headers);
 
   if (!cookie) {
     return res.send({
