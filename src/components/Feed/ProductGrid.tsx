@@ -16,7 +16,7 @@ const ProductGrid = () => {
 
   return (
     <SimpleGrid
-      columns={[3, null, 3]}
+      columns={[1, 2, 3]}
       placeItems="center"
       spacing="2rem"
       w="full"

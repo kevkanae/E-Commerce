@@ -14,31 +14,35 @@ const ProductCard = ({
       direction="column"
       justifyContent="center"
       alignItems="center"
-      w="sm"
-      mx="auto"
+      w={["77vw", "42vw", "25vw"]}
+      h="45vh"
       _hover={{
         cursor: "pointer",
-        filter: `drop-shadow(0 0.1rem 0.4rem #153126)`,
+        filter: `drop-shadow(0 0.1rem 0.6rem #153126)`,
       }}
     >
       <Box
         bg="gray.300"
-        h={64}
+        h="84%"
         w="full"
         rounded="lg"
         shadow="md"
         bgSize="cover"
         bgPos="center"
-        style={{
-          backgroundImage: `url(${image})`,
-        }}
-      />
+      >
+        <Image
+          src={image}
+          alt={title}
+          rounded="lg"
+          objectFit="cover"
+          loading="lazy"
+          h="100%"
+          w="100%"
+        />
+      </Box>
 
       <Box
-        w={{
-          base: 56,
-          md: 64,
-        }}
+        w="77%"
         bg="white"
         _dark={{
           bg: "gray.800",
