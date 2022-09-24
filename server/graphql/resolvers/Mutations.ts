@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import { compare, hash } from "bcrypt";
+import { CookieOptions } from "express";
 import { booleanArg, intArg, mutationType, nonNull, stringArg } from "nexus";
 import { prisma } from "../../index";
 import { IContext } from "../../interface/context";
@@ -8,6 +9,15 @@ import { AuthMiddleware } from "../../utils/middlewareAuth";
 import { refreshToken } from "../../utils/refreshToken";
 import { CartResponse } from "../rootSchema";
 import { AuthResponse } from "../types/Auth";
+
+let cookieSettings: CookieOptions = {
+  httpOnly: true,
+};
+
+if (process.env.NODE_ENV === "PROD") {
+  cookieSettings["sameSite"] = "none";
+  cookieSettings["secure"] = true;
+}
 
 export const Mutation = mutationType({
   definition(t) {
@@ -51,7 +61,7 @@ export const Mutation = mutationType({
           const token = accessToken(args.email);
 
           //Refresh Token
-          ctx.res.cookie("yum", refreshToken(args.email), { httpOnly: true });
+          ctx.res.cookie("yum", refreshToken(args.email), cookieSettings);
 
           return {
             message: "Signup Successful",
@@ -103,7 +113,7 @@ export const Mutation = mutationType({
             const token = accessToken(args.email);
 
             //Refresh Token
-            ctx.res.cookie("yum", refreshToken(args.email), { httpOnly: true });
+            ctx.res.cookie("yum", refreshToken(args.email), cookieSettings);
 
             return {
               message: "Login Successful",

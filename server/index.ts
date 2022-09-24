@@ -12,6 +12,7 @@ const corsOptions: cors.CorsOptions = {
   credentials: true,
   origin: [
     "https://studio.apollographql.com",
+    "https://xkart.vercel.app/",
     "http://127.0.0.1:5173",
     "http://localhost:5173",
   ],
