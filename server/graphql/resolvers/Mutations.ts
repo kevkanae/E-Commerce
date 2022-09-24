@@ -189,7 +189,7 @@ export const Mutation = mutationType({
                 const cartItem = await prisma.cartItems.create({
                   data: {
                     quantity: 1,
-                    createdDate: new Date().toISOString(),
+                    createdAt: new Date().toISOString(),
                     productID: product[0].id,
                     shoppingCartID: cartExists[0].id,
                   },
@@ -215,7 +215,7 @@ export const Mutation = mutationType({
               const cartItem = await prisma.cartItems.create({
                 data: {
                   quantity: 1,
-                  createdDate: new Date().toISOString(),
+                  createdAt: new Date().toISOString(),
                   productID: product[0].id,
                   shoppingCartID: newCart.id,
                 },

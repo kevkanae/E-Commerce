@@ -62,13 +62,12 @@ type ProductsResponse {
 
 type Query {
   getAllProducts: ProductsResponse
-  getAllUsers: [User]!
   getCartByID: GetCartResponse
   getOneProduct(productID: Int!): ProductsResponse
-  getSomeProducts: ProductsResponse
 }
 
 type User {
+  createdAt: String
   email: String
   id: Int
   name: String

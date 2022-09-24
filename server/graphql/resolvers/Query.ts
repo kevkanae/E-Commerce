@@ -3,44 +3,29 @@ import { IContext } from "../../interface/context";
 import { ProductsResponse } from "../types/Product";
 import { AuthMiddleware } from "../../utils/middlewareAuth";
 import { intArg, list, nonNull, queryType, stringArg } from "nexus";
-import { GetCartResponse } from "../rootSchema";
+import { GetCartResponse, User } from "../rootSchema";
 
 export const Query = queryType({
   definition(t) {
-    t.field("getAllUsers", {
-      type: nonNull(list("User")),
-      resolve: (parent, args) => {
-        return prisma.user.findMany();
-      },
-    });
-
-    t.field("getSomeProducts", {
-      type: ProductsResponse,
-      resolve: async (parent, args) => {
-        const data = await prisma.products.findMany({
-          where: {
-            id: { in: [1, 13, 11, 15, 2, 16] },
-          },
-        });
-
-        return {
-          message: "SUCCESS",
-          error: false,
-          data: [...data],
-        };
-      },
-    });
-
     t.field("getAllProducts", {
       type: ProductsResponse,
       resolve: async (parent, args, ctx: IContext) => {
         const data = await prisma.products.findMany();
+        console.log(data);
 
-        return {
-          message: "SUCCESS",
-          error: false,
-          data: data,
-        };
+        if (data) {
+          return {
+            message: "SUCCESS",
+            error: false,
+            data: data,
+          };
+        } else {
+          return {
+            message: "SUCCESS",
+            error: false,
+            data: [],
+          };
+        }
       },
     });
 

@@ -75,6 +75,7 @@ export interface NexusGenObjects {
   }
   Query: {};
   User: { // root type
+    createdAt?: string | null; // String
     email?: string | null; // String
     id?: number | null; // Int
     name?: string | null; // String
@@ -146,12 +147,11 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getAllProducts: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
-    getAllUsers: Array<NexusGenRootTypes['User'] | null>; // [User]!
     getCartByID: NexusGenRootTypes['GetCartResponse'] | null; // GetCartResponse
     getOneProduct: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
-    getSomeProducts: NexusGenRootTypes['ProductsResponse'] | null; // ProductsResponse
   }
   User: { // field return type
+    createdAt: string | null; // String
     email: string | null; // String
     id: number | null; // Int
     name: string | null; // String
@@ -213,12 +213,11 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     getAllProducts: 'ProductsResponse'
-    getAllUsers: 'User'
     getCartByID: 'GetCartResponse'
     getOneProduct: 'ProductsResponse'
-    getSomeProducts: 'ProductsResponse'
   }
   User: { // field return type name
+    createdAt: 'String'
     email: 'String'
     id: 'Int'
     name: 'String'
