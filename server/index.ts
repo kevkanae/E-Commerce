@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import { PrismaClient } from "@prisma/client";
 import { refreshRoute } from "./utils/refreshRoute";
 import { defaultRoute } from "./utils/defaultRoute";
+import { healthRoute } from "./utils/healthRoute";
 
 export const prisma = new PrismaClient();
 const corsOptions: cors.CorsOptions = {
@@ -27,6 +28,7 @@ async function main() {
 
   app.get("/", defaultRoute);
   app.post("/refresh", refreshRoute);
+  app.post("/health", healthRoute);
 
   await apolloServer.start();
   apolloServer.applyMiddleware({

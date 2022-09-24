@@ -11,7 +11,6 @@ const client = createClient({
   url: "http://localhost:8080/graphql",
   fetchOptions: () => {
     const token = useToken();
-
     return {
       credentials: "include",
       headers: { authorization: token ? `Bearer ${token}` : "" },
