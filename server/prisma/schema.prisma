@@ -32,22 +32,16 @@ model ShoppingCart {
   id        Int         @id @default(autoincrement()) @map("_id")
   userID    Int
   createdAt DateTime    @db.Date
-  User      User        @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "UserID_FK")
+  User      User        @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction)
   CartItems CartItems[]
-
-  @@index([id], map: "fki_ShoppingCartUserID")
-  @@index([userID], map: "fki_S")
 }
 
 model CartItems {
-  createdDate    DateTime     @db.Date
+  id             Int          @id @default(autoincrement()) @map("_id")
+  createdAt      DateTime     @db.Date
   quantity       Int
   productID      Int
   shoppingCartID Int
-  id             Int          @id @default(autoincrement()) @map("_id")
-  Products       Products     @relation(fields: [productID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CartItemsProductID")
-  ShoppingCart   ShoppingCart @relation(fields: [shoppingCartID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CartItemsShoppingCartID")
-
-  @@index([productID], map: "fki_CartItemsProductID")
-  @@index([shoppingCartID], map: "fki_CartItemsShoppingCartID")
+  Products       Products     @relation(fields: [productID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ShoppingCart   ShoppingCart @relation(fields: [shoppingCartID], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
