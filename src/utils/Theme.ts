@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { ButtonStyles as Button } from "../shared/Button";
 
 export const scrollBarStyles = {
   "&::-webkit-scrollbar": {
@@ -30,18 +31,26 @@ export const theme = extendTheme({
     body: `'Poppins', sans-serif`,
   },
   breakpoints,
-  colors:{
-    lightback:"#242629",
-    background:{
-      pri:"#16161a",
-      sec:"#242629"
+  components: {
+    Button,
+  },
+  colors: {
+    bg: {
+      main: "#16161A", //Dark Black
+      primary: "#242629", //Light Black
+      secondary: "#010101", //Darker Black
     },
-    heading:"#fffffe",
-    text:"#94a1b2",
-    button:"#2cb67d",
-    buttonText:"#fffffe",
-    main:"#fffffe",
-    secondary:"#72757e",
-    stroke:'#010101',
+    teal: {
+      dark: "#234E52", //Teal.800
+      main: "#319795", //Teal.500
+      primary: "#38B2AC", //Teal.400
+      secondary: "#4FD1C5", //Teal.300
+    },
+    text: {
+      main: "#FFFFFE", //White
+      primary: "#94A1B2", //Gray
+      secondary: "#72757E", //Dim Gray
+      light: "#E6FFFA", //Teal.50
+    },
   },
 });
