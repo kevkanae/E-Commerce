@@ -11,7 +11,6 @@ export const Query = queryType({
       type: ProductsResponse,
       resolve: async (parent, args, ctx: IContext) => {
         const data = await prisma.products.findMany();
-        console.log(data);
 
         if (data) {
           return {
