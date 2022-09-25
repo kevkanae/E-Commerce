@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import Layout from "../layout/Layout";
 import Loader from "../layout/Loader";
+import Navbar from "../layout/Navbar/Navbar";
 import { useToken } from "../services/useToken.Hook";
 
 const ProtectedRoutes = () => {
@@ -28,9 +28,10 @@ const ProtectedRoutes = () => {
   return (
     <>
       {auth ? (
-        <Layout>
+        <>
+          <Navbar />
           <Outlet />
-        </Layout>
+        </>
       ) : (
         <Navigate to="/login" />
       )}

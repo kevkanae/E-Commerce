@@ -86,7 +86,7 @@ const Login = () => {
         >
           <IconButton
             borderRadius="50%"
-            variant="AuthButton"
+            variant="PrimaryButton"
             aria-label="Back to Home"
             fontSize="1.4rem"
             icon={<ArrowBackIcon color={"text.main"} />}

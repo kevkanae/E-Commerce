@@ -1,6 +1,6 @@
 export const ButtonStyles = {
   variants: {
-    AuthButton: {
+    PrimaryButton: {
       bg: "teal.secondary",
       boxShadow: "md",
       _hover: {

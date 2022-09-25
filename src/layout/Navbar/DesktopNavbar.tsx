@@ -9,11 +9,14 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { useToken } from "../../services/useToken.Hook";
 import NavLinks from "./NavLinks";
 
 const DesktopNavbar = () => {
-  const token: string | null = useToken();
+  const token = useToken();
+  const navigate = useNavigate();
+  console.log(token);
 
   return (
     <>
@@ -26,25 +29,37 @@ const DesktopNavbar = () => {
         }}
       >
         <NavLinks />
+        {!token && (
+          <Button
+            variant="PrimaryButton"
+            bg="teal.primary"
+            onClick={() => navigate("/login")}
+          >
+            LOGIN
+          </Button>
+        )}
         {token && (
           <Menu>
             <MenuButton>
-              {/* <Avatar name="My Name" src="https://picsum.photos/777" /> */}
-              <Button
-                rightIcon={<ArrowForwardIcon color={"button"} />}
-                borderColor="button"
-                color={"white"}
-                variant="outline"
-              >
-                Login
-              </Button>
+              <Avatar
+                name="My Name"
+                size="sm"
+                src="https://picsum.photos/777"
+              />
             </MenuButton>
             <MenuList color={"black"}>
               <MenuItem>A</MenuItem>
               <MenuItem>B</MenuItem>
               <MenuItem>C</MenuItem>
               <MenuDivider />
-              <MenuItem>Logout</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  localStorage.clear();
+                  navigate("/");
+                }}
+              >
+                Logout
+              </MenuItem>
             </MenuList>
           </Menu>
         )}

@@ -1,11 +1,12 @@
 import {
   Box,
-  BoxProps,
   Button,
+  chakra,
   Flex,
   Grid,
   Image,
   Text,
+  TextProps,
 } from "@chakra-ui/react";
 import { useQuery } from "urql";
 import Loader from "../../layout/Loader";
@@ -25,7 +26,7 @@ const ImageGrid = () => {
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Oh no... {error.message}</p>;
 
-  const style: BoxProps = {
+  const style: TextProps = {
     position: "relative",
     _after: {
       content: `""`,
@@ -53,9 +54,9 @@ const ImageGrid = () => {
             pb="10"
           >
             Find your{" "}
-            <Box {...style} display={"inline-block"}>
+            <chakra.span {...style} display={"inline-block"}>
               style
-            </Box>
+            </chakra.span>
           </Text>
 
           <Grid

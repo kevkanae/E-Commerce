@@ -8,11 +8,13 @@ interface IForms<T> {
   authHandler: any;
   fetching: boolean;
 }
+
 interface IFormData {
   name?: string;
   email: string;
   password: string;
 }
+
 const Forms = <T,>({
   isSignup,
   setForm,
@@ -75,7 +77,7 @@ const Forms = <T,>({
         />
         <Button
           rightIcon={<ArrowForwardIcon />}
-          variant="AuthButton"
+          variant="PrimaryButton"
           onClick={authHandler}
           isLoading={fetching}
           textTransform="uppercase"
