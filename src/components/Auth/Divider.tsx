@@ -3,11 +3,11 @@ import React from "react";
 
 export const CustomDivider = () => {
   return (
-    <Box position={"relative"} w="full" mb={"10"}>
+    <Box position={"relative"} w="full" my={2}>
       <Divider />
       <Box
         p={1}
-        bg="background.sec"
+        bg="bg.primary"
         color={"heading"}
         position={"absolute"}
         top="-15px"

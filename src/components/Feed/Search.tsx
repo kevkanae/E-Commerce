@@ -3,7 +3,7 @@ import { BsSearch } from "react-icons/bs";
 
 const Search = () => {
   return (
-    <Flex bg="background.pri" w="77%" mt="14vh" align="center" justify="center">
+    <Flex bg="bg.main" w="77%" mt="14vh" align="center" justify="center">
       <Flex h="12vh" align="center" justify="center" py={2} px={4}>
         <BsSearch size={28} color="white" />
       </Flex>

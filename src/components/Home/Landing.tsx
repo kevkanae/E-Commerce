@@ -8,7 +8,7 @@ const Landing = () => {
 
   return (
     <>
-      <Box w="full" position="relative" bg={"background.pri"} h="100vh">
+      <Box w="full" position="relative" bg={"bg.main"} h="100vh">
         <Flex
           h={"100vh"}
           justifyContent="space-between"

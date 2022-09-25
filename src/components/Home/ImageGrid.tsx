@@ -44,7 +44,7 @@ const ImageGrid = () => {
   return (
     <>
       {data ? (
-        <Box pt="36" bg={"background.sec"}>
+        <Box pt="36" bg={"bg.primary"}>
           <Text
             fontSize={"5rem"}
             fontWeight="900"
@@ -68,7 +68,7 @@ const ImageGrid = () => {
             px={14}
             alignItems="center"
             justifyContent="center"
-            bg={"background.sec"}
+            bg={"bg.primary"}
           >
             {data.getAllProducts.data.map(
               (x, i) =>

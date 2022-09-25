@@ -33,51 +33,55 @@ const Forms = <T,>({
       <chakra.form>
         {isSignup && (
           <>
-            <chakra.label color={"text"} htmlFor="name" fontWeight={600}>
+            <chakra.label color="text.main" htmlFor="name" fontWeight={600}>
               Name
             </chakra.label>
             <Input
-              borderWidth={"2px"}
-              color={"heading"}
-              mb={4}
               name="name"
+              color="text.light"
               type="text"
+              placeholder="Enter Name"
+              mb={4}
+              borderWidth="1px"
               onChange={onChange}
             />
           </>
         )}
 
-        <chakra.label color={"text"} htmlFor="email" fontWeight={600}>
+        <chakra.label color="text.main" htmlFor="email" fontWeight={600}>
           Email
         </chakra.label>
         <Input
-          borderWidth={"2px"}
-          color={"heading"}
-          mb={4}
           name="email"
+          color="text.light"
           type="email"
+          placeholder="Enter Email"
+          mb={4}
+          borderWidth="1px"
           onChange={onChange}
         />
 
-        <chakra.label color={"text"} htmlFor="password" fontWeight={600}>
+        <chakra.label color="text.main" htmlFor="password" fontWeight={600}>
           Password
         </chakra.label>
         <Input
-          borderWidth={"2px"}
-          color={"heading"}
-          mb={4}
           name="password"
+          color="text.light"
           type="password"
+          placeholder="Enter Password"
+          mb={4}
+          borderWidth="1px"
           onChange={onChange}
         />
         <Button
           rightIcon={<ArrowForwardIcon />}
-          bg={"button"}
-          textColor={"buttonText"}
+          variant="AuthButton"
           onClick={authHandler}
           isLoading={fetching}
+          textTransform="uppercase"
+          letterSpacing={2}
         >
-          {isSignup ? "Signup" : "Login"}
+          {isSignup ? "SIGN UP" : "LOGIN"}
         </Button>
       </chakra.form>
     </>

@@ -7,6 +7,7 @@ import {
   Image,
   IconButton,
   useToast,
+  Box,
 } from "@chakra-ui/react";
 import Forms from "../components/Auth/Forms";
 import { useNavigate } from "react-router-dom";
@@ -70,25 +71,25 @@ const Login = () => {
         justify="flex-start"
         direction="column"
         p={[1, 1, 3]}
-        bg="background.sec"
+        bg="bg.primary"
       >
         <Flex
-          alignSelf="flex-start"
-          onClick={() => navigate(-1)}
           align="center"
+          alignSelf="flex-start"
           justify="space-evenly"
-          color="teal.800"
+          color="teal.dark"
           _hover={{
-            color: "teal.600",
+            color: "teal.main",
             cursor: "pointer",
           }}
+          onClick={() => navigate("/")}
         >
           <IconButton
-            borderRadius={"100%"}
-            bg="button"
-            aria-label="Call Sage"
-            fontSize="20px"
-            icon={<ArrowBackIcon color={"buttonText"} />}
+            borderRadius="50%"
+            variant="AuthButton"
+            aria-label="Back to Home"
+            fontSize="1.4rem"
+            icon={<ArrowBackIcon color={"text.main"} />}
           />
         </Flex>
         <Flex
@@ -101,17 +102,17 @@ const Login = () => {
           <Text
             fontWeight={600}
             fontSize="1.8rem"
-            color={"heading"}
-            letterSpacing={"2px"}
+            color="text.main"
+            letterSpacing={1}
             textTransform="uppercase"
             mb={5}
           >
             Welcome Back
           </Text>
-          <Text mb={5} color={"text"}>
-            If you are already a member you can login here
+          <Text mb={5} color="text.light">
+            If You are Already a Member, You can Login Here
           </Text>
-          <chakra.div mb={"1rem"}>
+          <Box mb={3}>
             <Forms<IFormData>
               fetching={fetching}
               form={form}
@@ -119,38 +120,19 @@ const Login = () => {
               authHandler={handleLogin}
               isSignup={false}
             />
-          </chakra.div>
+          </Box>
           <CustomDivider />
-          <Button
-            w={"full"}
-            leftIcon={<FcGoogle />}
-            bg="heading"
-            variant="solid"
-          >
-            Login with Google
-          </Button>
-
-          <Divider my={5} />
-          <Flex w="full" justifyContent={"space-between"} alignItems="center">
+          <Flex w="full" align="center" justify="center" my={2}>
             <Text
-              color={"text"}
+              onClick={() => navigate("/signup")}
+              color="teal.main"
               _hover={{
-                color: "teal.600",
+                color: "teal.secondary",
                 cursor: "pointer",
               }}
-              onClick={() => navigate("/signup")}
             >
-              Don't have an Account?
+              Don't Have an Account? Sign Up!
             </Text>
-            <Button
-              bg="button"
-              fontSize={"sm"}
-              color={"buttonText"}
-              leftIcon={<AiOutlineUserAdd />}
-              onClick={() => navigate("/signup")}
-            >
-              Register
-            </Button>
           </Flex>
         </Flex>
       </Flex>
@@ -160,7 +142,7 @@ const Login = () => {
         alignItems={"center"}
         justifyContent="center"
         w="48%"
-        bg="background.pri"
+        bg="bg.main"
       >
         <Image width={"80%"} height="80%" src={Card} />
       </Flex>

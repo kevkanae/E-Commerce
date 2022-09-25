@@ -8,7 +8,7 @@ const Feed = () => {
       w="full"
       minH="100vh"
       position="relative"
-      bg="background.sec"
+      bg="bg.primary"
       direction="column"
       align="center"
     >

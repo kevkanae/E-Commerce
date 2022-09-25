@@ -7,6 +7,7 @@ import {
   Image,
   IconButton,
   useToast,
+  Box,
 } from "@chakra-ui/react";
 import Forms from "../components/Auth/Forms";
 import { useNavigate } from "react-router-dom";
@@ -64,19 +65,14 @@ const Signup = () => {
 
   return (
     <>
-      <Flex
-        w="100vw"
-        minH={"100vh"}
-        h={["auto", "auto", "auto", "100vh"]}
-        overflowY="auto"
-      >
+      <Flex w="100vw" minH="100vh" h={["auto", "100vh"]} overflowY="auto">
         <Flex
           display={["none", "none", "none", "flex"]}
           h="full"
           alignItems={"center"}
           justifyContent="center"
           w="48%"
-          bg="background.pri"
+          bg="bg.main"
         >
           <Image width={"80%"} height="80%" src={Card} />
         </Flex>
@@ -87,25 +83,25 @@ const Signup = () => {
           justify="flex-start"
           direction="column"
           p={[1, 1, 3]}
-          bg="background.sec"
+          bg="bg.primary"
         >
           <Flex
-            alignSelf="flex-start"
-            onClick={() => navigate(-1)}
             align="center"
+            alignSelf="flex-start"
             justify="space-evenly"
-            color="teal.800"
+            color="teal.dark"
             _hover={{
-              color: "teal.600",
+              color: "teal.main",
               cursor: "pointer",
             }}
+            onClick={() => navigate("/")}
           >
             <IconButton
-              borderRadius={"100%"}
-              bg="button"
-              aria-label="Call Sage"
-              fontSize="20px"
-              icon={<ArrowBackIcon color={"buttonText"} />}
+              borderRadius="50%"
+              variant="AuthButton"
+              aria-label="Back to Home"
+              fontSize="1.4rem"
+              icon={<ArrowBackIcon color={"text.main"} />}
             />
           </Flex>
           <Flex
@@ -113,22 +109,22 @@ const Signup = () => {
             align="flex-start"
             justify="space-evenly"
             w="63%"
-            mt="17vh"
+            mt="10vh"
           >
             <Text
               fontWeight={600}
               fontSize="1.8rem"
-              color={"heading"}
-              letterSpacing={"2px"}
+              color="text.main"
+              letterSpacing={1}
               textTransform="uppercase"
               mb={5}
             >
               Welcome
             </Text>
-            <Text mb={5} color={"text"}>
-              If you are not a member you can signup here
+            <Text mb={5} color="text.light">
+              If You are not a Member, You can Sign Up Here
             </Text>
-            <chakra.div mb={"1rem"}>
+            <Box mb={3}>
               <Forms<IFormData>
                 fetching={fetching}
                 authHandler={handleSignUp}
@@ -136,38 +132,19 @@ const Signup = () => {
                 setForm={setForm}
                 isSignup={true}
               />
-            </chakra.div>
+            </Box>
             <CustomDivider />
-            <Button
-              w={"full"}
-              leftIcon={<FcGoogle />}
-              bg="heading"
-              variant="solid"
-            >
-              Signin with Google
-            </Button>
-
-            <Divider my={5} />
-            <Flex w="full" justifyContent={"space-between"} alignItems="center">
+            <Flex w="full" align="center" justify="center" mt={2}>
               <Text
-                color={"text"}
+                onClick={() => navigate("/login")}
+                color="teal.main"
                 _hover={{
-                  color: "teal.600",
+                  color: "teal.secondary",
                   cursor: "pointer",
                 }}
-                onClick={() => navigate("/login")}
               >
-                Already have an account
+                Already Have an Account? Login!
               </Text>
-              <Button
-                bg="button"
-                fontSize={"sm"}
-                color={"buttonText"}
-                leftIcon={<AiOutlineUser />}
-                onClick={() => navigate("/login")}
-              >
-                Login
-              </Button>
             </Flex>
           </Flex>
         </Flex>
