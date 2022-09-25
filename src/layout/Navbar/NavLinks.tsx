@@ -5,11 +5,11 @@ import CategoryMenuList from "./CategoryMenuList";
 
 const NavLinkData = [
   {
-    title: "Shop",
+    title: "SHOP",
     path: "/feed",
   },
   {
-    title: "Contact Us",
+    title: "CONTACT US",
     path: "/contact",
   },
 ];
@@ -29,7 +29,7 @@ const NavLinks = () => {
             color: "teal.600",
           }}
         >
-          Category
+          CATEGORY
         </MenuButton>
         <CategoryMenuList />
       </Menu>

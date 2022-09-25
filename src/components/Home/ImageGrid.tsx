@@ -8,15 +8,18 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useQuery } from "urql";
-import { IGetSomeProductsQuery } from "../../interfaces/Product/IGetSomeProducts";
 import Loader from "../../layout/Loader";
 import { BsChevronCompactDown } from "react-icons/bs";
-import { GetSomeProductsQuery } from "../../query/products/GetSomeProducts.query";
+import { IGetAllProductsQuery } from "../../interfaces/Product/IGetAllProducts";
+import { GetAllProductsQuery } from "../../query/products/GetAllProducts.query";
+import { useNavigate } from "react-router-dom";
 
 const ImageGrid = () => {
+  const navigate = useNavigate();
+
   const [{ data, error, fetching }, handleQuery] =
-    useQuery<IGetSomeProductsQuery>({
-      query: GetSomeProductsQuery,
+    useQuery<IGetAllProductsQuery>({
+      query: GetAllProductsQuery,
     });
 
   if (fetching) return <p>Loading...</p>;
@@ -67,38 +70,41 @@ const ImageGrid = () => {
             justifyContent="center"
             bg={"background.sec"}
           >
-            {data.getSomeProducts.data.map((x, i) => (
-              <Flex
-                key={i}
-                direction="column"
-                align="center"
-                justify="center"
-                h="42vh"
-                w="25vw"
-              >
-                <Box
-                  h="84%"
-                  w="full"
-                  _hover={{
-                    cursor: "pointer",
-                    filter: "drop-shadow(0 0 0.4rem #aaa)",
-                  }}
-                >
-                  <Image
-                    src={x.image_url}
-                    fallbackSrc="https://via.placeholder.com/150"
-                    alt={x.name}
-                    borderRadius="md"
-                    objectFit="cover"
-                    h="full"
-                    w="full"
-                  />
-                </Box>
-                <Text fontWeight={600} mt={1}>
-                  {x.name}
-                </Text>
-              </Flex>
-            ))}
+            {data.getAllProducts.data.map(
+              (x, i) =>
+                i <= 5 && (
+                  <Flex
+                    key={i}
+                    direction="column"
+                    align="center"
+                    justify="center"
+                    h="42vh"
+                    w="25vw"
+                  >
+                    <Box
+                      h="84%"
+                      w="full"
+                      _hover={{
+                        cursor: "pointer",
+                        filter: "drop-shadow(0 0 0.4rem #aaa)",
+                      }}
+                    >
+                      <Image
+                        src={x.image_url}
+                        fallbackSrc="https://via.placeholder.com/150"
+                        alt={x.name}
+                        borderRadius="md"
+                        objectFit="cover"
+                        h="full"
+                        w="full"
+                      />
+                    </Box>
+                    <Text fontWeight={600} mt={1}>
+                      {x.name}
+                    </Text>
+                  </Flex>
+                )
+            )}
             <Flex
               w="full"
               h="21vh"
@@ -110,7 +116,11 @@ const ImageGrid = () => {
               left={0}
               bg="linear-gradient(178.6deg, rgba(20, 36, 50, 0.017) 11.8%,rgba(35, 37, 38, 0.785) 41.8%, #242629 83.8%)"
             >
-              <Button bg={"button"} color="buttonText">
+              <Button
+                bg={"button"}
+                color="buttonText"
+                onClick={() => navigate("/home")}
+              >
                 View More
               </Button>
               <Text>
