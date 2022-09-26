@@ -1,16 +1,23 @@
-import React from "react";
-import Landing from "../components/Home/Landing";
-
-const ImageGrid = React.lazy(() => import("../components/Home/ImageGrid"));
-const Footer = React.lazy(() => import("../components/Home/Footer"));
+import { Flex } from "@chakra-ui/react";
+import { useState } from "react";
+import ProductGrid from "../components/Home/ProductGrid";
+import Search from "../components/Home/Search";
 
 const Home = () => {
+  const [searchVal, setSearchVal] = useState<string>("");
+
   return (
-    <>
-      <Landing />
-      <ImageGrid />
-      <Footer />
-    </>
+    <Flex
+      w="full"
+      minH="100vh"
+      position="relative"
+      bg="bg.primary"
+      direction="column"
+      align="center"
+    >
+      <Search setSearchVal={setSearchVal} searchVal={searchVal} />
+      <ProductGrid />
+    </Flex>
   );
 };
 

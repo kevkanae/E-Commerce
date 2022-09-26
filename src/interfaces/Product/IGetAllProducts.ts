@@ -1,4 +1,5 @@
 export interface IGetAllProductsData {
+  id: number;
   name: string;
   image_url: string;
   brand: string;

@@ -3,38 +3,32 @@ import Img from "../../assets/auth/landing.png";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 
-const Landing = () => {
+const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <Box w="full" position="relative" bg={"bg.main"} h="100vh">
+      <Box w="full" position="relative" bg="bg.main" h="100vh">
         <Flex
-          h={"100vh"}
+          h="100vh"
           justifyContent="space-between"
-          alignItems={"center"}
+          alignItems="center"
           gap="2rem"
         >
-          <Box
-            pb={"5rem"}
-            alignSelf={"flex-end"}
-            w={"40%"}
-            color="white"
-            pl="10"
-          >
-            <Text fontSize={"2rem"} fontWeight="900">
-              Get all your dressing needs at one stop
+          <Box pb="5rem" alignSelf="flex-end" w="40%" color="text.main" pl="10">
+            <Text fontSize="2rem" fontWeight={900} color="text.light">
+              Get All Your Dressing Needs At One Stop
             </Text>
             <Box pt={7}>
-              <Text lineHeight={"6rem"} fontSize={"6rem"} fontWeight="900">
+              <Text lineHeight="6rem" fontSize="6rem" fontWeight={900}>
                 SHOP
               </Text>
               <Text
-                display={"inline-block"}
-                lineHeight={"4.6875rem"}
-                bg={"button"}
-                fontSize={"6rem"}
-                color="black"
+                display="inline-block"
+                lineHeight="4.6875rem"
+                bg="teal.main"
+                fontSize="6rem"
+                color="bg.secondary"
                 fontWeight="900"
               >
                 NOW
@@ -47,10 +41,10 @@ const Landing = () => {
               mt={2}
               onClick={() => navigate("/home")}
             >
-              Take me there
+              Take Me There
             </Button>
           </Box>
-          <Flex justifyContent={"flex-end"} alignSelf={"flex-end"} w={"60%"}>
+          <Flex justifyContent="flex-end" alignSelf="flex-end" w="60%">
             <Image w="90%" src={Img} />
           </Flex>
         </Flex>
@@ -59,4 +53,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default HeroSection;

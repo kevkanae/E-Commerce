@@ -1,14 +1,17 @@
 import { Flex, chakra, Box, Image } from "@chakra-ui/react";
+import Loader from "../layout/Loader";
+import { useNavigate } from "react-router-dom";
 
-const ProductCard = ({
-  image,
-  title,
-  price,
-}: {
+interface IProductCardProps {
   image: string;
   title: string;
   price: number;
-}) => {
+  id: number;
+}
+
+const ProductCard = ({ image, title, price, id }: IProductCardProps) => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       direction="column"
@@ -22,22 +25,24 @@ const ProductCard = ({
       }}
     >
       <Box
-        bg="gray.300"
+        bg="text.secondary"
         h="84%"
         w="full"
         rounded="lg"
         shadow="md"
         bgSize="cover"
         bgPos="center"
+        onClick={() => navigate(`/home/${id}`)}
       >
         <Image
           src={image}
           alt={title}
           rounded="lg"
           objectFit="cover"
-          loading="lazy"
+          // loading="lazy"
           h="100%"
           w="100%"
+          fallback={<Loader />}
         />
       </Box>
 
@@ -57,10 +62,7 @@ const ProductCard = ({
           textAlign="center"
           fontWeight="bold"
           textTransform="uppercase"
-          color="gray.800"
-          _dark={{
-            color: "white",
-          }}
+          color="teal.dark"
           letterSpacing={1}
         >
           {title}
@@ -71,22 +73,14 @@ const ProductCard = ({
           justifyContent="space-between"
           py={2}
           px={3}
-          bg="gray.200"
-          _dark={{
-            bg: "gray.700",
-          }}
+          bg="text.light"
         >
-          <chakra.span
-            fontWeight="bold"
-            color="gray.800"
-            _dark={{
-              color: "gray.200",
-            }}
-          >
+          <chakra.span fontWeight="bold" color="bg.primary">
             ₹{price}
           </chakra.span>
+
           <chakra.button
-            bg="button"
+            bg="teal.main"
             fontSize="xs"
             fontWeight="bold"
             color="white"
@@ -95,16 +89,9 @@ const ProductCard = ({
             rounded="lg"
             textTransform="uppercase"
             _hover={{
-              bg: "gray.700",
-              _dark: {
-                bg: "gray.600",
-              },
+              bg: "bg.secondary",
             }}
             _focus={{
-              bg: "gray.700",
-              _dark: {
-                bg: "gray.600",
-              },
               outline: "none",
             }}
           >

@@ -29,7 +29,8 @@ const ProductGrid = () => {
             image={x.image_url}
             title={x.name}
             price={x.price}
-            key={i}
+            id={x.id}
+            key={x.id}
           />
         ))
       ) : (

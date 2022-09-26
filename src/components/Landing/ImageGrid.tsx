@@ -45,17 +45,21 @@ const ImageGrid = () => {
   return (
     <>
       {data ? (
-        <Box pt="36" bg={"bg.primary"}>
+        <Box pt="36" bg="bg.primary">
           <Text
-            fontSize={"5rem"}
+            fontSize="5rem"
             fontWeight="900"
-            textAlign={"center"}
-            color={"white"}
+            textAlign="center"
+            color="white"
             pb="10"
           >
-            Find your{" "}
-            <chakra.span {...style} display={"inline-block"}>
-              style
+            Find Your{" "}
+            <chakra.span
+              borderBottom="2px solid"
+              borderBottomColor="teal.main"
+              color="teal.secondary"
+            >
+              Style
             </chakra.span>
           </Text>
 
@@ -75,7 +79,7 @@ const ImageGrid = () => {
               (x, i) =>
                 i <= 5 && (
                   <Flex
-                    key={i}
+                    key={x.name}
                     direction="column"
                     align="center"
                     justify="center"
@@ -117,11 +121,7 @@ const ImageGrid = () => {
               left={0}
               bg="linear-gradient(178.6deg, rgba(20, 36, 50, 0.017) 11.8%,rgba(35, 37, 38, 0.785) 41.8%, #242629 83.8%)"
             >
-              <Button
-                bg={"button"}
-                color="buttonText"
-                onClick={() => navigate("/home")}
-              >
+              <Button variant="PrimaryButton" onClick={() => navigate("/home")}>
                 View More
               </Button>
               <Text>

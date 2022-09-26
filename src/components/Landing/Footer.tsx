@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <>
       <Flex
-        h="63vh"
+        h="49vh"
         w="full"
         direction="column"
         align="center"
@@ -18,7 +18,6 @@ const Footer = () => {
         bg="black"
       >
         <Text
-          mt="24vh"
           fontWeight={600}
           fontSize={{
             base: "1.4rem",
