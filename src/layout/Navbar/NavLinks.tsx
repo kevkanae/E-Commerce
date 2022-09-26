@@ -39,7 +39,7 @@ const NavLinks = () => {
           fontWeight={800}
           fontSize=".9rem"
           cursor="pointer"
-          onClick={() => navigate(`${obj.path}`, { replace: true })}
+          onClick={() => navigate(`${obj.path}`)}
           transition="0.2s cubic-bezier(0.47, 0, 0.745, 0.715)"
           _hover={{
             color: "teal.600",

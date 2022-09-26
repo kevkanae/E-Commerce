@@ -32,7 +32,7 @@ const Navbar = () => {
         fontWeight={600}
         fontSize={"1.4rem"}
         cursor="pointer"
-        onClick={() => navigate("/", { replace: true })}
+        onClick={() => navigate("/")}
         letterSpacing={2}
         transition="0.3s cubic-bezier(0.47, 0, 0.745, 0.715)"
         _hover={{
