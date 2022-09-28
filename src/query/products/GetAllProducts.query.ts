@@ -1,6 +1,6 @@
 export const GetAllProductsQuery = `
-  query{
-    getAllProducts {
+  query($search: String!){
+    getAllProducts(search: $search) {
       data {
         id
         name

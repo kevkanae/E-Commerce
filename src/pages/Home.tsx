@@ -16,7 +16,7 @@ const Home = () => {
       align="center"
     >
       <Search setSearchVal={setSearchVal} searchVal={searchVal} />
-      <ProductGrid />
+      <ProductGrid search={searchVal} />
     </Flex>
   );
 };

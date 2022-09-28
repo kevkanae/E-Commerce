@@ -5,10 +5,11 @@ import Loader from "../../layout/Loader";
 import { GetAllProductsQuery } from "../../query/products/GetAllProducts.query";
 import ProductCard from "../../shared/ProductCard";
 
-const ProductGrid = () => {
+const ProductGrid = ({ search }: { search: string }) => {
   const [{ data, error, fetching }, handleQuery] =
     useQuery<IGetAllProductsQuery>({
       query: GetAllProductsQuery,
+      variables: { search },
     });
 
   if (fetching) return <p>Loading...</p>;

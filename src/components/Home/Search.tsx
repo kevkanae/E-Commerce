@@ -30,14 +30,15 @@ const Search = ({ setSearchVal, searchVal }: ISearchProps) => {
         value={searchVal}
       />
 
-      <Button
+      {/* <Button
         h="12vh"
         variant="PrimaryButton"
         color="text.main"
         borderRadius={0}
+        disabled
       >
         Search
-      </Button>
+      </Button> */}
     </Flex>
   );
 };
