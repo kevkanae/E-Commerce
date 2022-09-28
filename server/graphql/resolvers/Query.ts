@@ -9,21 +9,47 @@ export const Query = queryType({
   definition(t) {
     t.field("getAllProducts", {
       type: ProductsResponse,
+      args: {
+        search: nonNull(stringArg()),
+      },
       resolve: async (parent, args, ctx: IContext) => {
-        const data = await prisma.products.findMany();
-
-        if (data) {
-          return {
-            message: "SUCCESS",
-            error: false,
-            data: data,
-          };
+        if (args.search === "") {
+          const data = await prisma.products.findMany();
+          if (data) {
+            return {
+              message: "SUCCESS",
+              error: false,
+              data: data,
+            };
+          } else {
+            return {
+              message: "SUCCESS",
+              error: false,
+              data: [],
+            };
+          }
         } else {
-          return {
-            message: "SUCCESS",
-            error: false,
-            data: [],
-          };
+          const data = await prisma.products.findMany({
+            where: {
+              name: {
+                startsWith: args.search,
+              },
+            },
+          });
+
+          if (data) {
+            return {
+              message: "SUCCESS",
+              error: false,
+              data: data,
+            };
+          } else {
+            return {
+              message: "SUCCESS",
+              error: false,
+              data: [],
+            };
+          }
         }
       },
     });

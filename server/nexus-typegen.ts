@@ -246,6 +246,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getAllProducts: { // args
+      search: string; // String!
+    }
     getOneProduct: { // args
       productID: number; // Int!
     }

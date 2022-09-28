@@ -61,7 +61,7 @@ type ProductsResponse {
 }
 
 type Query {
-  getAllProducts: ProductsResponse
+  getAllProducts(search: String!): ProductsResponse
   getCartByID: GetCartResponse
   getOneProduct(productID: Int!): ProductsResponse
 }
