@@ -20,6 +20,7 @@ import { useState } from "react";
 import { useMutation } from "urql";
 import { ISignUp } from "../interfaces/Auth";
 import { SignupMutation } from "../query/auth/SignUp.mutation";
+import { MotionImg } from "../shared/Motion";
 
 interface IFormData {
   name: string;
@@ -74,7 +75,19 @@ const Signup = () => {
           w="48%"
           bg="bg.main"
         >
-          <Image width={"80%"} height="80%" src={Card} />
+          <MotionImg
+            width={"80%"}
+            height="80%"
+            src={Card}
+            animate={{ y: [-7, 7] }}
+            // @ts-ignore
+            transition={{
+              duration: 3,
+              type: "ease-in-out",
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
         </Flex>
         <Flex
           h="full"

@@ -11,14 +11,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { isValidMotionProp, motion } from "framer-motion";
+import { MotionBox } from "../../shared/Motion";
 
 const HeroSection = () => {
   const navigate = useNavigate();
-
-  const ChakraBox = chakra(motion.div, {
-    shouldForwardProp: (prop) =>
-      isValidMotionProp(prop) || shouldForwardProp(prop),
-  });
 
   return (
     <>
@@ -97,7 +93,7 @@ const HeroSection = () => {
             Take Me There
           </Button>
         </Box>
-        <ChakraBox
+        <MotionBox
           display={{
             sm: "none",
             md: "flex",
@@ -115,7 +111,7 @@ const HeroSection = () => {
           }}
         >
           <Image w="90%" src={Img} />
-        </ChakraBox>
+        </MotionBox>
       </Flex>
     </>
   );

@@ -20,6 +20,7 @@ import { LoginMutation } from "../query/auth/Login.mutation";
 import { useMutation } from "urql";
 import { useCallback, useState } from "react";
 import { ILogin } from "../interfaces/Auth";
+import { MotionImg } from "../shared/Motion";
 
 interface IFormData {
   email: string;
@@ -144,7 +145,19 @@ const Login = () => {
         w="48%"
         bg="bg.main"
       >
-        <Image width={"80%"} height="80%" src={Card} />
+        <MotionImg
+          width={"80%"}
+          height="80%"
+          src={Card}
+          animate={{ y: [-7, 7] }}
+          // @ts-ignore
+          transition={{
+            duration: 3,
+            type: "ease-in-out",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
       </Flex>
     </Flex>
   );
