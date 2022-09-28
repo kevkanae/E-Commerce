@@ -16,7 +16,7 @@
     "@fontsource/poppins": "^4.5.9",
     "@uiball/loaders": "^1.2.6",
     "axios": "^0.27.2",
-    "framer-motion": "^7.3.6",
+    "framer-motion": "^7.4.0",
     "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
